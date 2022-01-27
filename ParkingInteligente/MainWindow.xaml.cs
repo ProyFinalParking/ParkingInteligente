@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingInteligente.mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace ParkingInteligente
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowVM vm;
+
         public MainWindow()
         {
             InitializeComponent();
+            vm = new MainWindowVM();
+            this.DataContext = vm;
         }
     }
 }
