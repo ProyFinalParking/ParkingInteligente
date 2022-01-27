@@ -96,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="mvvm\ControlAparcamientosVM.cs" />
+    <Compile Include="mvvm\ControlClientesVM.cs" />
+    <Compile Include="mvvm\ControlVehiculosVM.cs" />
+    <Compile Include="mvvm\InicioVM.cs" />
     <Compile Include="ventanas\ControlAparcamientos.xaml.cs">
       <DependentUpon>ControlAparcamientos.xaml</DependentUpon>
     </Compile>

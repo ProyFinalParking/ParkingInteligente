@@ -11,5 +11,25 @@ namespace ParkingInteligente.mvvm
     {
 
 
+        public void AbrirInicio()
+        {
+
+        }
+
+        public void AbrirControlClientes()
+        {
+
+        }
+
+        public void AbrirControlVehiculos()
+        {
+
+        }
+
+        public void AbrirControlEstacionamientos()
+        {
+
+        }
+
     }
 }
