@@ -9,7 +9,22 @@
       Title="Inicio"
       Background="White">
 
-    <DockPanel>
+    <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Right">
+            <TextBlock  x:Name="FechaTextBlock"
+                        Text="Martes 26-Enero-2022" 
+                        HorizontalAlignment="Right"
+                        Margin="5"/>
+            <TextBox x:Name="NotasTextBox"
+                     Height="400" 
+                     Width="250"
+                     Margin="3"/>
+            <TextBlock Text="© Copyright Licensed"
+                       HorizontalAlignment="Right"/>
+        </StackPanel>
         
+        <Image Source="/assets/IconoEmpresa.jpg" 
+               DockPanel.Dock="Top" 
+               HorizontalAlignment="Left"/>
     </DockPanel>
 </Page>
