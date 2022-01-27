@@ -96,6 +96,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ventanas\ControlAparcamientos.xaml.cs">
+      <DependentUpon>ControlAparcamientos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ventanas\ControlClientes.xaml.cs">
+      <DependentUpon>ControlClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ventanas\ControlVehiculos.xaml.cs">
+      <DependentUpon>ControlVehiculos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ventanas\Inicio.xaml.cs">
       <DependentUpon>Inicio.xaml</DependentUpon>
     </Compile>
@@ -111,6 +120,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ventanas\ControlAparcamientos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ventanas\ControlClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ventanas\ControlVehiculos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ventanas\Inicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
