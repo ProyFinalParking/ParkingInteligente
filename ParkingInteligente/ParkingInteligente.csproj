@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>assets\128.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -43,6 +46,9 @@
     </Reference>
     <Reference Include="Syncfusion.Licensing, Version=19.4460.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Licensing.19.4.0.47\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfNavigationDrawer.WPF, Version=19.4460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfNavigationDrawer.WPF.19.4.0.47\lib\net46\Syncfusion.SfNavigationDrawer.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfTextInputLayout.WPF, Version=19.4460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfTextInputLayout.WPF.19.4.0.47\lib\net46\Syncfusion.SfTextInputLayout.WPF.dll</HintPath>
@@ -90,6 +96,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ventanas\Inicio.xaml.cs">
+      <DependentUpon>Inicio.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ventanas\Inicio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="mvvm\MainWindowVM.cs" />
@@ -132,10 +145,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\hola.txt" />
+    <Resource Include="servicios\hola3.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="servicios\hola3.txt" />
+    <Resource Include="assets\128.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Client.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Parking.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

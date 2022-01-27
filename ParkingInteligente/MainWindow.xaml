@@ -3,10 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:local="clr-namespace:ParkingInteligente"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="ParkingInteligente"
+        Height="450"
+        Width="800"
+        Icon="assets/128.ico">
+    <DockPanel>
+        <syncfusion:SfNavigationDrawer x:Name="navigationDrawer"
+                                       DisplayMode="Expanded">
+
+            <syncfusion:NavigationItem Header="Inicio"
+                                       IsExpanded="True"
+                                       IsSelected="True">
+
+            </syncfusion:NavigationItem>
+            
+            <syncfusion:NavigationItem Header="Control de Clientes"
+                                       IsExpanded="True"
+                                       IsSelected="False">
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="assets/Client.png" />
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            
+            <syncfusion:NavigationItem Header="Control de Vehiculos"
+                                       IsExpanded="True"
+                                       IsSelected="False">
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="assets/Car.png" />
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            
+            <syncfusion:NavigationItem Header="Control de Aparcamientos"
+                                       IsExpanded="True"
+                                       IsSelected="False">
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="assets/Parking.png" />
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+        <syncfusion:NavigationItem ItemType="Separator" />
+        </syncfusion:SfNavigationDrawer>
+    </DockPanel>
 </Window>
