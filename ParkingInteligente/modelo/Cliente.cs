@@ -17,6 +17,12 @@ namespace ParkingInteligente.modelo
 
         public Cliente()
         {
+            // Se asigna una cadena vacía, para evitar Errores de Nulos
+            nombre = "";
+            documento = "";
+            foto = "";
+            genero = "";
+            telefono = "";
         }
 
         // Al insertar un Cliente en la BBDD, no se tiene en cuenta la ID del objeto

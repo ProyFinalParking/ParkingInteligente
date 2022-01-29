@@ -17,6 +17,7 @@ namespace ParkingInteligente.servicios
         /**************************************************************************************************************************** 
          * Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
          * **************************************************************************************************************************/
+
         public void InsertCliente(Cliente c)
         {
             using (SqliteConnection conn = new SqliteConnection("Data Source=" + nombreBD))
