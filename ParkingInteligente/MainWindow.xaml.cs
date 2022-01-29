@@ -1,4 +1,6 @@
-﻿using ParkingInteligente.mvvm;
+﻿using ParkingInteligente.modelo;
+using ParkingInteligente.mvvm;
+using ParkingInteligente.servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace ParkingInteligente
             InitializeComponent();
             vm = new MainWindowVM();
             this.DataContext = vm;
+
         }
     }
 }
