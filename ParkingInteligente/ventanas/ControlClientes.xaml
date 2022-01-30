@@ -6,9 +6,41 @@
       xmlns:local="clr-namespace:ParkingInteligente.ventanas"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ControlClientes">
+      Title="ControlClientes"
+      Background="White">
 
     <Grid>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="1">
+            
+            <TextBox x:Name="DNISearchTextBox" 
+                     Margin="5"
+                     Text="Buscar Por DNI"/>
+            
+            <TextBox x:Name="MatriculaSearchTextBox"
+                     Margin="5"
+                     Text="Buscar Por Matricula" />
+            
+            <Button x:Name="DeleteClientButton"
+                    Margin="5" 
+                    Content="Eliminar Cliente"/>
+            
+            <Button x:Name="AddClientButton"
+                    Margin="5"
+                    Content="Añadir Cliente" />
+            
+            <Button x:Name="ModifyClientButton"
+                    Margin="5"
+                    Content="Modificar Cliente" />
+
+            <Image VerticalAlignment="Center"
+                   Margin="5"
+                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg" />
+        </StackPanel>
     </Grid>
 </Page>
