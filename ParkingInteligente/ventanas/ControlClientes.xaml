@@ -39,6 +39,7 @@
                     Content="Modificar Cliente" />
 
             <Image VerticalAlignment="Center"
+                   x:Name="ClientImage"
                    Margin="5"
                    Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg" />
         </StackPanel>
