@@ -19,7 +19,10 @@
                                        IsSelected="True"
                                        x:Name="InicioNavigationItem"
                                        Command="{Binding Path=Inicio}">
-
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="assets/IconoEmpresa.jpg"
+                           Stretch="Fill" />
+                </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
 
             <syncfusion:NavigationItem Header="Control de Clientes"
