@@ -149,7 +149,11 @@
                                AllowFiltering="True"
                                SelectionMode="Extended"
                                SelectionUnit="Cell"
-                               Margin="5" />
+                               Margin="5">
+            <syncfusion:SfDataGrid.Effect>
+                <DropShadowEffect Opacity="0.5" />
+            </syncfusion:SfDataGrid.Effect>
+        </syncfusion:SfDataGrid>
 
         <StackPanel Grid.Column="1">
 
