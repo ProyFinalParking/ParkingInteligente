@@ -19,7 +19,7 @@ namespace ParkingInteligente.ventanas
     /// <summary>
     /// Lógica de interacción para Inicio.xaml
     /// </summary>
-    public partial class Inicio : Page
+    public partial class Inicio : UserControl
     {
         private InicioVM vm;
 

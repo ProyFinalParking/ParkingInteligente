@@ -16,13 +16,16 @@
 
             <syncfusion:NavigationItem Header="Inicio"
                                        IsExpanded="True"
-                                       IsSelected="True">
+                                       IsSelected="True"
+                                       x:Name="InicioNavigationItem"
+                                       Command="{Binding Path=Inicio}">
 
             </syncfusion:NavigationItem>
 
             <syncfusion:NavigationItem Header="Control de Clientes"
                                        IsExpanded="True"
-                                       IsSelected="False">
+                                       IsSelected="False"
+                                       Command="{Binding Path=ControlClientes}">
                 <syncfusion:NavigationItem.Icon>
                     <Image Source="assets/Client.png" />
                 </syncfusion:NavigationItem.Icon>
@@ -30,7 +33,8 @@
 
             <syncfusion:NavigationItem Header="Control de Vehiculos"
                                        IsExpanded="True"
-                                       IsSelected="False">
+                                       IsSelected="False"
+                                       Command="{Binding Path=ControlVehiculos}">
                 <syncfusion:NavigationItem.Icon>
                     <Image Source="assets/Car.png" />
                 </syncfusion:NavigationItem.Icon>
@@ -38,12 +42,18 @@
 
             <syncfusion:NavigationItem Header="Control de Aparcamientos"
                                        IsExpanded="True"
-                                       IsSelected="False">
+                                       IsSelected="False"
+                                       Command="{Binding Path=ControlAparcamientos}">
                 <syncfusion:NavigationItem.Icon>
                     <Image Source="assets/Parking.png" />
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
             <syncfusion:NavigationItem ItemType="Separator" />
+            
+            <syncfusion:SfNavigationDrawer.ContentView>
+                <ContentControl Content="{Binding Path=Contenido}"></ContentControl>
+            </syncfusion:SfNavigationDrawer.ContentView>
+            
         </syncfusion:SfNavigationDrawer>
     </DockPanel>
 </Window>

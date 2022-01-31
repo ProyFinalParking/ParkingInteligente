@@ -19,7 +19,7 @@ namespace ParkingInteligente.ventanas
     /// <summary>
     /// Lógica de interacción para ControlVehiculos.xaml
     /// </summary>
-    public partial class ControlVehiculos : Page
+    public partial class ControlVehiculos : UserControl
     {
         private ControlVehiculosVM vm;
 
