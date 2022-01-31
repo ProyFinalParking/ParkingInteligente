@@ -12,7 +12,7 @@
         Icon="assets/128.ico">
     <DockPanel>
         <syncfusion:SfNavigationDrawer x:Name="navigationDrawer"
-                                       DisplayMode="Expanded">
+                                       DisplayMode="Compact">
 
             <syncfusion:NavigationItem Header="Inicio"
                                        IsExpanded="True"
