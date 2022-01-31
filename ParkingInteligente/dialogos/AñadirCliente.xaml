@@ -5,8 +5,154 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
-        Title="AñadirCliente" Height="450" Width="800">
+        Title="AñadirCliente"
+        Height="526"
+        Width="487">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxControlTemplate1"
+                         TargetType="{x:Type TextBox}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="5"
+                    Margin="5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.3" />
+                </Border.Effect>
+                <ScrollViewer x:Name="PART_ContentHost"
+                              Focusable="False"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Opacity"
+                            TargetName="border"
+                            Value="0.56" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF7EB4EA" />
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF569DE5" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="260"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="1"
+                BorderBrush="Black"
+                CornerRadius="5"
+                Width="150"
+                Height="140">
+
+            <Image x:Name="FotoCliente"
+                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg" />
+        </Border>
+
+        <Grid Grid.Column="1"
+              Margin="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+
+            <TextBox x:Name="DNITextBox"
+                     Grid.Column="1"
+                     Margin="0,0,0,5"
+                     Text="DNI"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
+
+            <TextBox x:Name="NombreTextBox"
+                     Grid.Row="1"
+                     Margin="0,0,0,5"
+                     Text="Nombre"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
+            <TextBox x:Name="TelefonoTextBox"
+                     Grid.Row="2"
+                     Margin="0,0,0,5"
+                     Text="Telefono"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
+            <TextBox x:Name="EdadTextBox"
+                     Grid.Row="3"
+                     IsEnabled="False"
+                     Margin="0,0,0,5"
+                     Text="Edad"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
+
+            <TextBox x:Name="GeneroTextBox"
+                     Grid.Row="4"
+                     IsEnabled="False"
+                     Margin="0,0,0,5"
+                     Text="Genero"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
+            <TextBox x:Name="URLImagenTextBox"
+                     Grid.Row="5"
+                     Margin="0,0,0,5"
+                     Text="Imagen"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            
+            <Button x:Name="CancelarButton"
+                    Content="Cancelar"
+                    Height="20" 
+                    Width="150"
+                    Margin="5"/>
+            
+            <Button x:Name="AceptarButton"
+                    Content="Aceptar"
+                    Height="20"
+                    Width="150"
+                    Margin="5"/>
+        </StackPanel>
         
     </Grid>
 </Window>

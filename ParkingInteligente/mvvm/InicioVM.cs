@@ -9,5 +9,6 @@ namespace ParkingInteligente.mvvm
 {
     class InicioVM : ObservableObject
     {
+
     }
 }
