@@ -1,5 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using ParkingInteligente.modelo;
+using ParkingInteligente.servicios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +13,17 @@ namespace ParkingInteligente.mvvm
 {
     class ControlClientesVM : ObservableObject
     {
+        private NavigationService servicio;
+
+        private Cliente nuevoCliente;
+
+        public Cliente NuevoCliente
+        {
+            get { return nuevoCliente; }
+            set { SetProperty(ref nuevoCliente, value); }
+        }
+
+
         private ObservableCollection<Cliente> clientes;
         public ObservableCollection<Cliente> Clientes
         {
@@ -24,10 +37,26 @@ namespace ParkingInteligente.mvvm
             }
         }
 
+        public RelayCommand AñadirNuevoClienteCommand { get; }
+        public RelayCommand EditarClienteCommand { get; }
+
         public ControlClientesVM()
         {
             Clientes = new ObservableCollection<Cliente>();
             this.GenerateOrders();
+            servicio = new NavigationService();
+            AñadirNuevoClienteCommand = new RelayCommand(AbrirDialogoNuevoCliente);
+            EditarClienteCommand = new RelayCommand(AbrirDialogoEditarCliente);
+        }
+
+        private void AbrirDialogoNuevoCliente()
+        {
+            servicio.CargarDialogoAñadirCliente();
+        }
+
+        private void AbrirDialogoEditarCliente()
+        {
+            servicio.CargarDialogoEditarCliente();
         }
 
         private void GenerateOrders()

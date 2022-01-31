@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingInteligente.mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,19 @@ namespace ParkingInteligente.dialogos
     /// </summary>
     public partial class AñadirCliente : Window
     {
+        private AñadirClienteVM vm;
+
         public AñadirCliente()
         {
             InitializeComponent();
+            vm = new AñadirClienteVM();
+            this.DataContext = vm;
+        }
+
+        private void AceptarButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Aqui llamamos al método para grabarlo en BD
+            DialogResult = true;
         }
     }
 }
