@@ -6,8 +6,19 @@
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
         Title="AñadirCliente"
-        Height="526"
+        Height="358"
         Width="487">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1"
+                             StartPoint="0.5,0">
+            <GradientStop Color="Gainsboro"
+                          Offset="0.11" />
+            <GradientStop Color="#FF727272"
+                          Offset="0.747" />
+            <GradientStop Color="#FFA0A0A0"
+                          Offset="0.427" />
+        </LinearGradientBrush>
+    </Window.Background>
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxControlTemplate1"
                          TargetType="{x:Type TextBox}">
@@ -47,6 +58,75 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <ControlTemplate x:Key="ButtonControlTemplate1"
+                         TargetType="{x:Type Button}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.4" />
+                </Border.Effect>
+                <ContentPresenter x:Name="contentPresenter"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                  Focusable="False"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="{TemplateBinding Padding}"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFBEE6FD" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF3C7FB1" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFC4E5F6" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF2C628B" />
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFBCDDEE" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF245A83" />
+                </Trigger>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FFADB2B5" />
+                    <Setter Property="Foreground"
+                            Value="#FF838383" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -55,18 +135,20 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="260"/>
+            <RowDefinition Height="260" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="1"
+        <Border BorderThickness="3"
                 BorderBrush="Black"
-                CornerRadius="5"
+                CornerRadius="3"
                 Width="150"
                 Height="140">
 
             <Image x:Name="FotoCliente"
-                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg" />
+                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg"
+                   Stretch="Fill"
+                   RenderTransformOrigin="0.5,0.5" />
         </Border>
 
         <Grid Grid.Column="1"
@@ -102,7 +184,7 @@
             <TextBox x:Name="TelefonoTextBox"
                      Grid.Row="2"
                      Margin="0,0,0,5"
-                     Text="Telefono"
+                     Text="Teléfono"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -121,7 +203,7 @@
                      Grid.Row="4"
                      IsEnabled="False"
                      Margin="0,0,0,5"
-                     Text="Genero"
+                     Text="Género"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -140,19 +222,21 @@
                     Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            
+
             <Button x:Name="CancelarButton"
                     Content="Cancelar"
-                    Height="20" 
-                    Width="150"
-                    Margin="5"/>
-            
-            <Button x:Name="AceptarButton"
-                    Content="Aceptar"
                     Height="20"
                     Width="150"
-                    Margin="5"/>
+                    Margin="5"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
+
+            <Button x:Name="AceptarButton"
+                    Content="Añadir Cliente"
+                    Height="20"
+                    Width="150"
+                    Margin="5"
+                    Template="{DynamicResource ButtonControlTemplate1}"/>
         </StackPanel>
-        
+
     </Grid>
 </Window>
