@@ -1,42 +1,182 @@
 ﻿<Page x:Class="ParkingInteligente.ventanas.ControlClientes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ParkingInteligente.ventanas"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ControlClientes"
-      Background="White">
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:local1="clr-namespace:ParkingInteligente.mvvm"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="ControlClientes">
+    <Page.Resources>
+        <ControlTemplate x:Key="TextBoxControlTemplate1"
+                         TargetType="{x:Type TextBox}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" />
+                </Border.Effect>
+                <ScrollViewer x:Name="PART_ContentHost"
+                              Focusable="False"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Opacity"
+                            TargetName="border"
+                            Value="0.56" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF7EEAE5" />
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF666666" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonControlTemplate1"
+                         TargetType="{x:Type Button}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" />
+                </Border.Effect>
+                <ContentPresenter x:Name="contentPresenter"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                  Focusable="False"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="{TemplateBinding Padding}"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FF84D2FF" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF2C6691" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFC4E5F6" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF2C628B" />
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFBCDDEE" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF245A83" />
+                </Trigger>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FFADB2B5" />
+                    <Setter Property="Foreground"
+                            Value="#FF838383" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1"
+                             StartPoint="0.5,0">
+            <GradientStop Color="#FFC5C5C5"
+                          Offset="0" />
+            <GradientStop Color="#FFBBB9B9"
+                          Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Page.DataContext>
+        <local1:ControlClientesVM />
+    </Page.DataContext>
 
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
+
+        <syncfusion:SfDataGrid ItemsSource="{Binding Clientes}"
+                               Background="AntiqueWhite"
+                               ColumnSizer="Star"
+                               AllowSorting="True"
+                               AllowTriStateSorting="True"
+                               ShowSortNumbers="True"
+                               AllowFiltering="True"
+                               SelectionMode="Extended"
+                               SelectionUnit="Cell"
+                               Margin="5" />
+
         <StackPanel Grid.Column="1">
-            
-            <TextBox x:Name="DNISearchTextBox" 
+
+            <TextBox x:Name="DNISearchTextBox"
                      Margin="5"
-                     Text="Buscar Por DNI"/>
-            
+                     Text="Buscar Por DNI"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
             <TextBox x:Name="MatriculaSearchTextBox"
                      Margin="5"
-                     Text="Buscar Por Matricula" />
-            
+                     Text="Buscar Por Matricula"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+
             <Button x:Name="DeleteClientButton"
-                    Margin="5" 
-                    Content="Eliminar Cliente"/>
-            
+                    Margin="5"
+                    Content="Eliminar Cliente"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
+
             <Button x:Name="AddClientButton"
                     Margin="5"
-                    Content="Añadir Cliente" />
-            
+                    Content="Añadir Cliente"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
+
             <Button x:Name="ModifyClientButton"
                     Margin="5"
-                    Content="Modificar Cliente" />
+                    Content="Modificar Cliente"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Image VerticalAlignment="Center"
                    x:Name="ClientImage"
