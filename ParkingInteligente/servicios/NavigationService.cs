@@ -15,22 +15,22 @@ namespace ParkingInteligente.servicios
 
         }
 
-        public Page CargarInicio()
+        public UserControl CargarInicio()
         {
             return new Inicio();
         }
 
-        public Page CargarControlVehiculos()
+        public UserControl CargarControlVehiculos()
         {
             return new ControlVehiculos();
         }
 
-        public Page CargarControlClientes()
+        public UserControl CargarControlClientes()
         {
             return new ControlClientes();
         }
 
-        public Page CargarControlAparcamientos()
+        public UserControl CargarControlAparcamientos()
         {
             return new ControlAparcamientos();
         }

@@ -14,9 +14,9 @@ namespace ParkingInteligente.mvvm
     {
         private NavigationService servicio;
 
-        private Page contenido;
+        private UserControl contenido;
 
-        public Page Contenido
+        public UserControl Contenido
         {
             get { return contenido; }
             set { SetProperty(ref contenido, value); }
@@ -35,27 +35,28 @@ namespace ParkingInteligente.mvvm
             ControlVehiculos = new RelayCommand(AbrirControlVehiculos);
             ControlClientes = new RelayCommand(AbrirControlClientes);
             ControlAparcamientos = new RelayCommand(AbrirControlAparcamientos);
+            AbrirInicio();
         }
 
 
         public void AbrirInicio()
         {
-            contenido = servicio.CargarInicio();
+            Contenido = servicio.CargarInicio();
         }
 
         public void AbrirControlClientes()
         {
-            contenido = servicio.CargarControlClientes();
+            Contenido = servicio.CargarControlClientes();
         }
 
         public void AbrirControlVehiculos()
         {
-            contenido = servicio.CargarControlVehiculos();
+            Contenido = servicio.CargarControlVehiculos();
         }
 
         public void AbrirControlAparcamientos()
         {
-            contenido = servicio.CargarControlAparcamientos();
+            Contenido = servicio.CargarControlAparcamientos();
         }
 
     }

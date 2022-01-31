@@ -1,5 +1,4 @@
-﻿using ParkingInteligente.mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParkingInteligente.ventanas
+namespace ParkingInteligente.dialogos
 {
     /// <summary>
-    /// Lógica de interacción para ControlVehiculos.xaml
+    /// Lógica de interacción para EditarCliente.xaml
     /// </summary>
-    public partial class ControlVehiculos : UserControl
+    public partial class EditarCliente : Window
     {
-        private ControlVehiculosVM vm;
-
-        public ControlVehiculos()
+        public EditarCliente()
         {
             InitializeComponent();
-            vm = new ControlVehiculosVM();
-            this.DataContext = vm;
         }
     }
 }
