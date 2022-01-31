@@ -174,11 +174,13 @@
             <Button x:Name="AddClientButton"
                     Margin="5"
                     Content="Añadir Cliente"
+                    Command="{Binding Path=AñadirNuevoClienteCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Button x:Name="ModifyClientButton"
                     Margin="5"
                     Content="Modificar Cliente"
+                    Command="{Binding Path=EditarClienteCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Image VerticalAlignment="Center"

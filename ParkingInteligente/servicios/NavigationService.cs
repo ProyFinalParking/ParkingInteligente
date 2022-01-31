@@ -1,4 +1,5 @@
-﻿using ParkingInteligente.ventanas;
+﻿using ParkingInteligente.dialogos;
+using ParkingInteligente.ventanas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,18 @@ namespace ParkingInteligente.servicios
         public UserControl CargarControlAparcamientos()
         {
             return new ControlAparcamientos();
+        }
+
+        public bool? CargarDialogoAñadirCliente()
+        {
+            AñadirCliente dialogo = new AñadirCliente();
+            return dialogo.ShowDialog();
+        }
+
+        public bool? CargarDialogoEditarCliente()
+        {
+            EditarCliente dialogo = new EditarCliente();
+            return dialogo.ShowDialog();
         }
     }
 }
