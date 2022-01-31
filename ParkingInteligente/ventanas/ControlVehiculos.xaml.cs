@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingInteligente.mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace ParkingInteligente.ventanas
     /// </summary>
     public partial class ControlVehiculos : Page
     {
+        private ControlVehiculosVM vm;
+
         public ControlVehiculos()
         {
             InitializeComponent();
+            vm = new ControlVehiculosVM();
+            this.DataContext = vm;
         }
     }
 }

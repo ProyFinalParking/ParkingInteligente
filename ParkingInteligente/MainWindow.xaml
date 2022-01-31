@@ -19,7 +19,7 @@
                                        IsSelected="True">
 
             </syncfusion:NavigationItem>
-            
+
             <syncfusion:NavigationItem Header="Control de Clientes"
                                        IsExpanded="True"
                                        IsSelected="False">
@@ -27,7 +27,7 @@
                     <Image Source="assets/Client.png" />
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
-            
+
             <syncfusion:NavigationItem Header="Control de Vehiculos"
                                        IsExpanded="True"
                                        IsSelected="False">
@@ -35,7 +35,7 @@
                     <Image Source="assets/Car.png" />
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
-            
+
             <syncfusion:NavigationItem Header="Control de Aparcamientos"
                                        IsExpanded="True"
                                        IsSelected="False">
@@ -43,7 +43,7 @@
                     <Image Source="assets/Parking.png" />
                 </syncfusion:NavigationItem.Icon>
             </syncfusion:NavigationItem>
-        <syncfusion:NavigationItem ItemType="Separator" />
+            <syncfusion:NavigationItem ItemType="Separator" />
         </syncfusion:SfNavigationDrawer>
     </DockPanel>
 </Window>
