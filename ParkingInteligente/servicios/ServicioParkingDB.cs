@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using ParkingInteligente.modelo;
+using System;
 
 namespace ParkingInteligente.servicios
 {
@@ -45,12 +46,13 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@genero"].Value = c.Genero;
                 command.Parameters["@telefono"].Value = c.Telefono;
 
+                // Se ejecuta el INSERT
                 command.ExecuteNonQuery();
             }
         }
 
         // Recibe el Objeto Cliente con las propiedades editadas
-        // más el documento original, para buscar el registro.
+        // más el documento original , para buscar el registro.
         // Hay que hacer una copia del cliente original y editar
         // los datos necesario antes de llamar este metodo
         public void EditarCliente(Cliente c, string docOriginal)
@@ -88,8 +90,62 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@telefono"].Value = c.Telefono;
                 command.Parameters["@documentoOriginal"].Value = docOriginal;
 
+                // Se ejecuta el UPDATE
                 command.ExecuteNonQuery();
             }
+        }
+
+        // Comprobar antes de llamar el metodo, que el Cliente no tenga estacionamientos activos
+        public void EliminarCliente(Cliente c)
+        {
+            using (SqliteConnection conn = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                conn.Open();
+
+                SqliteCommand command = conn.CreateCommand();
+
+                // La ID se genera automaticamente (AUTOINCREMENT)
+                command.CommandText = @"DELETE FROM clientes 
+                                        WHERE documento = @documento";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@documento", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@documento"].Value = c.Documento;
+
+                // Se ejecuta el DELETE
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Comprueba si existe el documento en la BBDD
+        // y devuelve un numero de coincidencias
+        // 0 = False y Mayor que 0 = True
+        public int ExisteDocumento(string doc)
+        {
+            int valorDevuelto = 0;
+
+            using (SqliteConnection conn = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                conn.Open();
+
+                SqliteCommand command = conn.CreateCommand();
+
+                // La ID se genera automaticamente (AUTOINCREMENT)
+                command.CommandText = "SELECT COUNT(*) FROM clientes WHERE documento = @documento";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@documento", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@documento"].Value = doc;
+
+                // Se ejecuta el SELECT
+                valorDevuelto = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return valorDevuelto;
         }
 
         // Crea Las tablas de la BBDD 'parking.bd'
