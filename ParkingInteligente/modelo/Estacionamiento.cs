@@ -4,6 +4,24 @@ namespace ParkingInteligente.modelo
 {
     class Estacionamiento : ObservableObject
     {
+        public Estacionamiento(int idEstacionamiento, int idVehiculo, string matricula, string entrada, string salida, float importe, string tipo)
+        {
+            IdEstacionamiento = idEstacionamiento;
+            IdVehiculo = idVehiculo;
+            Matricula = matricula;
+            Entrada = entrada;
+            Salida = salida;
+            Importe = importe;
+            Tipo = tipo;
+        }
+
+        public Estacionamiento()
+        {
+            salida = "";
+        }
+
+        // Al insertar un Estacionamiento en la BBDD, no se tiene en cuenta la ID del objeto
+        // La ID es Autoincremental
         private int idEstacionamiento;
         public int IdEstacionamiento
         {
@@ -47,11 +65,17 @@ namespace ParkingInteligente.modelo
         }
 
         private string tipo;
+
         public string Tipo
         {
             get { return tipo; }
             set { SetProperty(ref tipo, value); }
         }
 
+        public override string ToString()
+        {
+            return "Estacionamiento{" + "idEstacionamiento=" + idEstacionamiento + ", matricula="
+                + matricula + ", entrada=" + entrada + ", salida=" + salida + ", importe=" + importe + ", tipo=" + tipo + '}';
+        }
     }
 }

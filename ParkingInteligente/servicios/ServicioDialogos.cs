@@ -8,7 +8,11 @@ namespace ParkingInteligente.servicios
         {
         }
 
-        // Dialogos Guardar Cliente Nuevo
+        /****************************************
+            DIALOGOS RELACIONADOS CON EL CLIENTE
+         ****************************************/
+
+        // Dialogos Insertar Cliente Nuevo
         public static void ClienteGuardado()
         {
             _ = MessageBox.Show(

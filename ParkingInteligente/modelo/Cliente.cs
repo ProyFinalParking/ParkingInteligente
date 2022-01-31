@@ -1,28 +1,28 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 
 namespace ParkingInteligente.modelo
 {
     class Cliente : ObservableObject
     {
-        public Cliente(int id, string nombre, string documento, string foto, int edad, string genero, string telefono)
-        {
-            this.id = id;
-            this.nombre = nombre;
-            this.documento = documento;
-            this.foto = foto;
-            this.edad = edad;
-            this.genero = genero;
-            this.telefono = telefono;
-        }
-
         public Cliente()
         {
             // Se asigna una cadena vacía, para evitar Errores de Nulos
             nombre = "";
-            documento = "";
             foto = "";
             genero = "";
             telefono = "";
+        }
+
+        public Cliente(int id, string nombre, string documento, string foto, int edad, string genero, string telefono)
+        {
+            Id = id;
+            Nombre = nombre;
+            Documento = documento;
+            Foto = foto;
+            Edad = edad;
+            Genero = genero;
+            Telefono = telefono;
         }
 
         // Al insertar un Cliente en la BBDD, no se tiene en cuenta la ID del objeto
@@ -77,5 +77,10 @@ namespace ParkingInteligente.modelo
             set { SetProperty(ref telefono, value); }
         }
 
+        public override string ToString()
+        {
+            return "Cliente{" + "nombre=" + Nombre + ", documento=" + Documento + ", edad="
+                + Edad + ", genero=" + Genero + ", telefono=" + Telefono + '}';
+        }
     }
 }

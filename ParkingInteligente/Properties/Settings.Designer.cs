@@ -25,7 +25,7 @@ namespace ParkingInteligente.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("parking.db")]
+        [global::System.Configuration.DefaultSettingValueAttribute("..\\\\..\\\\bbdd\\\\parking.db")]
         public string NombreBD {
             get {
                 return ((string)(this["NombreBD"]));
