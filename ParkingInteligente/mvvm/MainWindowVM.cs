@@ -35,6 +35,7 @@ namespace ParkingInteligente.mvvm
             ControlVehiculos = new RelayCommand(AbrirControlVehiculos);
             ControlClientes = new RelayCommand(AbrirControlClientes);
             ControlAparcamientos = new RelayCommand(AbrirControlAparcamientos);
+            AbrirInicio();
         }
 
 
