@@ -228,14 +228,17 @@
                     Height="20"
                     Width="150"
                     Margin="5"
-                    Template="{DynamicResource ButtonControlTemplate1}" />
+                    IsCancel="True"
+                    Template="{DynamicResource ButtonControlTemplate1}" 
+                    Command="{Binding Path=CancelarButton}"/>
 
             <Button x:Name="AceptarButton"
                     Content="Añadir Cliente"
                     Height="20"
                     Width="150"
                     Margin="5"
-                    Template="{DynamicResource ButtonControlTemplate1}"/>
+                    Template="{DynamicResource ButtonControlTemplate1}"
+                    Command="{Binding Path=AñadirClienteButton}"/>
         </StackPanel>
 
     </Grid>
