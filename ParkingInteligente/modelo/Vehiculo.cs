@@ -28,11 +28,11 @@ namespace ParkingInteligente.modelo
             set { SetProperty(ref idVehiculo, value); }
         }
 
-        private int documentoCliente;
-        public int DocumentoCliente
+        private int idCliente;
+        public int IdCliente
         {
-            get { return documentoCliente; }
-            set { SetProperty(ref documentoCliente, value); }
+            get { return idCliente; }
+            set { SetProperty(ref idCliente, value); }
         }
 
         private string matricula;
