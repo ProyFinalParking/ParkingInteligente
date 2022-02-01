@@ -7,7 +7,7 @@ namespace ParkingInteligente.modelo
         public Vehiculo(int idVehiculo, int documentoCliente, string matricula, int idMarca, string modelo, string tipo)
         {
             IdVehiculo = idVehiculo;
-            DocumentoCliente = documentoCliente;
+            IdCliente = documentoCliente;
             Matricula = matricula;
             IdMarca = idMarca;
             Modelo = modelo;
@@ -66,7 +66,7 @@ namespace ParkingInteligente.modelo
 
         public override string ToString()
         {
-            return "Vehiculo{" + "matricula=" + matricula + ", documentoCliente=" + documentoCliente
+            return "Vehiculo{" + "matricula=" + matricula + ", documentoCliente=" + idCliente
                 + ", idMarca=" + idMarca + ", modelo=" + modelo + ", tipo=" + tipo + '}';
         }
     }

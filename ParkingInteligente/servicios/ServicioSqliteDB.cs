@@ -153,7 +153,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la ID del Cliente (0 en caso de que no exista)
-        public int GetIdClient(string docomento)
+        public int GetIdClient(string documento)
         {
             int idCliente = 0;
 
@@ -168,7 +168,7 @@ namespace ParkingInteligente.servicios
                 command.Parameters.Add("@docomento", SqliteType.Text);
 
                 // Se asignan los valores
-                command.Parameters["@docomento"].Value = docomento;
+                command.Parameters["@docomento"].Value = documento;
 
                 // Se ejecuta el SELECT
                 idCliente = Convert.ToInt32(command.ExecuteScalar());
@@ -215,19 +215,49 @@ namespace ParkingInteligente.servicios
             return lista;
         }
 
+        // Devuelve El cliente segun el documento pasado
+        public Cliente GetClient(string documento)
+        {
+            Cliente cliente = new Cliente();
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM clientes WHERE documento = @documento";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@docomento", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@docomento"].Value = documento;
+
+                // Se ejecuta el SELECT
+                using (SqliteDataReader lector = command.ExecuteReader())
+                {
+                    if (lector.HasRows)
+                    {
+                        lector.Read();
+
+                        cliente.Id = Convert.ToInt32(lector["id_cliente"]);
+                        cliente.Nombre = (string)lector["nombre"];
+                        cliente.Documento = (string)lector["documento"];
+                        cliente.Foto = (string)lector["foto"];
+                        cliente.Edad = Convert.ToInt32(lector["edad"]);
+                        cliente.Genero = (string)lector["genero"];
+                        cliente.Telefono = (string)lector["telefono"];
+                    }
+                }
+            }
+
+            return cliente;
+        }
+
         /**************************************************************************************************************************** 
          *                                                        TODO
          * **************************************************************************************************************************/
-       
-        public Cliente GetClient(string documento)
-        {
-            //TODO: Buscar un cliente por documento y devolver sus datos
-            Cliente c = new Cliente();
 
-            return c;
-        }
-        
-        
         public bool IsParked(Cliente c)
         {
             //TODO: Comprobar si alguno de los coches del cliente esta actualmente aparcado

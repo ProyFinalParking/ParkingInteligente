@@ -32,11 +32,6 @@ namespace ParkingInteligente
             vm = new MainWindowVM();
             this.DataContext = vm;
 
-            ServicioSqliteDB db = new ServicioSqliteDB();
-
-            int id = db.GetIdVehicleBrand("Aud");
-
-            Console.WriteLine("ID BMW: " + id);
         }
     }
 }
