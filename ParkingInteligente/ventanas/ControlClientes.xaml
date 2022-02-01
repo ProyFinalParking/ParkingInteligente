@@ -140,6 +140,7 @@
         </Grid.ColumnDefinitions>
 
         <syncfusion:SfDataGrid ItemsSource="{Binding Clientes}"
+                               SelectedItem="{Binding ClienteSeleccionado}"
                                Background="AntiqueWhite"
                                ColumnSizer="Star"
                                AllowSorting="True"

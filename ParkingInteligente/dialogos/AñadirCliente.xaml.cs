@@ -34,5 +34,6 @@ namespace ParkingInteligente.dialogos
             //Aqui llamamos al método para grabarlo en BD
             DialogResult = true;
         }
+
     }
 }

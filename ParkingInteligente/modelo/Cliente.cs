@@ -10,6 +10,7 @@ namespace ParkingInteligente.modelo
             // Se asigna una cadena vacía, para evitar Errores de Nulos
             nombre = "";
             foto = "";
+            documento = "";
             genero = "";
             telefono = "";
         }

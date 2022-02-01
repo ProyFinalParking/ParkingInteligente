@@ -171,7 +171,7 @@
             <TextBox x:Name="DNITextBox"
                      Grid.Column="1"
                      Margin="0,0,0,5"
-                     Text="DNI"
+                     Text="{Binding Path=ClienteSeleccionado.Documento}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -180,7 +180,7 @@
             <TextBox x:Name="NombreTextBox"
                      Grid.Row="1"
                      Margin="0,0,0,5"
-                     Text="Nombre"
+                     Text="{Binding Path=ClienteSeleccionado.Nombre}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -188,7 +188,7 @@
             <TextBox x:Name="TelefonoTextBox"
                      Grid.Row="2"
                      Margin="0,0,0,5"
-                     Text="Teléfono"
+                     Text="{Binding Path=ClienteSeleccionado.Telefono}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -196,7 +196,7 @@
             <TextBox x:Name="EdadTextBox"
                      Grid.Row="3"
                      Margin="0,0,0,5"
-                     Text="Edad"
+                     Text="{Binding Path=ClienteSeleccionado.Edad}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -205,7 +205,7 @@
             <TextBox x:Name="GeneroTextBox"
                      Grid.Row="4"
                      Margin="0,0,0,5"
-                     Text="Género"
+                     Text="{Binding Path=ClienteSeleccionado.Edad}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -213,7 +213,7 @@
             <TextBox x:Name="URLImagenTextBox"
                      Grid.Row="5"
                      Margin="0,0,0,5"
-                     Text="Imagen"
+                     Text="{Binding Path=ClienteSeleccionado.Foto}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
