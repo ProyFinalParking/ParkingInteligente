@@ -2,6 +2,7 @@
 using ParkingInteligente.modelo;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ParkingInteligente.servicios
 {
@@ -143,7 +144,7 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@documento"].Value = doc;
 
                 // Se ejecuta el SELECT
-                if(Convert.ToInt32(command.ExecuteScalar()) > 0)
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                 {
                     existe = true;
                 }
@@ -216,6 +217,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve El cliente segun el documento pasado
+        // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
         public Cliente GetClient(string documento)
         {
             Cliente cliente = new Cliente();
@@ -358,7 +360,7 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@brand"].Value = brand;
 
                 // Se ejecuta el SELECT
-               if(Convert.ToInt32(command.ExecuteScalar()) > 0)
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                 {
                     existe = true;
                 }
@@ -541,7 +543,7 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@matricula"].Value = matricula;
 
                 // Se ejecuta el SELECT
-                if(Convert.ToInt32(command.ExecuteScalar()) > 0)
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                 {
                     existe = true;
                 }
@@ -610,22 +612,276 @@ namespace ParkingInteligente.servicios
             return lista;
         }
 
-        /**************************************************************************************************************************** 
-         *                                                        TODO
-         * **************************************************************************************************************************/
-
-        public Vehiculo GetVehiculo(string matricula)
+        // Devuelve el vehiculo segun la matricula pasada de argumento
+        // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
+        public Vehiculo GetVehicle(string matricula)
         {
-            //TODO: Buscar un cliente por documento y devolver sus datos
-            Vehiculo v = new Vehiculo();
+            Vehiculo vehiculo = new Vehiculo();
 
-            return v;
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                using (SqliteDataReader lector = command.ExecuteReader())
+                {
+                    if (lector.HasRows)
+                    {
+                        lector.Read();
+
+                        vehiculo.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
+                        vehiculo.IdCliente = Convert.ToInt32(lector["id_cliente"]);
+                        vehiculo.Matricula = (string)lector["matricula"];
+                        vehiculo.IdMarca = Convert.ToInt32(lector["id_marca"]);
+                        vehiculo.Modelo = (string)lector["modelo"];
+                        vehiculo.Tipo = (string)lector["tipo"];
+                    }
+                }
+            }
+
+            return vehiculo;
         }
 
         /*******************************************************
             METODOS RELACIONADOS CON EL ESTACIONAMIENTO
          *******************************************************/
 
+        // Para insertar el vehiculo en el estacionamiento, recibe matricula y tipo de vehiculo
+        // La fecha de entrada se genera automaticamente
+        // La salida y el importe se generaran en el metodo FinishParkedVehicle
+        public void InsertParkedVehicle(string matricula, string tipo)
+        {
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+
+                // La ID se genera automaticamente (AUTOINCREMENT)
+                command.CommandText = "INSERT INTO estacionamientos VALUES (null, @id_vehiculo, @matricula, @entrada, @salida, @importe, @tipo)";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@id_vehiculo", SqliteType.Integer);
+                command.Parameters.Add("@matricula", SqliteType.Text);
+                command.Parameters.Add("@entrada", SqliteType.Text);
+                command.Parameters.Add("@salida", SqliteType.Text);
+                command.Parameters.Add("@importe", SqliteType.Real);
+                command.Parameters.Add("@tipo", SqliteType.Text);
+
+                // Comprueba la ID del vehiculo, si no está registrado, devuelve 0
+                int idVehiculo = GetIdVehicle(matricula);
+                string fechaEntrada = DateTime.Now.ToString();
+
+                // Se asignan los valores
+                command.Parameters["@id_vehiculo"].Value = idVehiculo;
+                command.Parameters["@matricula"].Value = matricula;
+                command.Parameters["@entrada"].Value = fechaEntrada;
+                command.Parameters["@salida"].Value = "";
+                command.Parameters["@importe"].Value = 0;
+                command.Parameters["@tipo"].Value = tipo;
+
+                // Se ejecuta el INSERT
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Recibe el Objeto Vehiculo con las propiedades editadas
+        // más la matricula original , para buscar el registro.
+        // Hay que hacer una copia del vehiculo original y editar
+        // los datos necesario antes de llamar este metodo
+        public void UpdateParkedVehicle(Vehiculo v, string matriculaOriginal)
+        {
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+
+                // La ID se genera automaticamente (AUTOINCREMENT)
+                command.CommandText = @"UPDATE vehiculos SET id_cliente = @id_cliente, 
+                                                            matricula = @matricula, 
+                                                            id_marca = @id_marca,
+                                                            modelo = @modelo,
+                                                            tipo = @tipo,
+                                                            WHERE matricula = @matriculaOriginal";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@id_cliente", SqliteType.Integer);
+                command.Parameters.Add("@matricula", SqliteType.Text);
+                command.Parameters.Add("@id_marca", SqliteType.Integer);
+                command.Parameters.Add("@modelo", SqliteType.Text);
+                command.Parameters.Add("@tipo", SqliteType.Text);
+                command.Parameters.Add("@matriculaOriginal", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@id_cliente"].Value = v.IdCliente;
+                command.Parameters["@matricula"].Value = v.Matricula;
+                command.Parameters["@id_marca"].Value = v.IdMarca;
+                command.Parameters["@modelo"].Value = v.Modelo;
+                command.Parameters["@tipo"].Value = v.Tipo;
+                command.Parameters["@matriculaOriginal"].Value = matriculaOriginal;
+
+                // Se ejecuta el UPDATE
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Comprobar antes de llamar el metodo, que el Vehiculo no tenga estacionamientos activos
+        public void DeleteParkedVehicle(string matricula)
+        {
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = @"DELETE FROM vehiculos 
+                                        WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el DELETE
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Comprueba si existe la Matricula en la tabla Vehiculos
+        public bool IsExistsParkedVehicle(string matricula)
+        {
+            bool existe = false;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT COUNT(*) FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
+                {
+                    existe = true;
+                }
+            }
+
+            return existe;
+        }
+
+        // Devuelve la ID de la marca (0 en caso de que no exista)
+        public int GetIdParkedVehicle(string matricula)
+        {
+            int idVehiculo = 0;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT id_vehiculo FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                idVehiculo = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return idVehiculo;
+        }
+
+        public List<Vehiculo> GetListParkedVehicle()
+        {
+            List<Vehiculo> lista = new List<Vehiculo>();
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM vehiculos";
+
+                // Se ejecuta el SELECT
+                using (SqliteDataReader lector = command.ExecuteReader())
+                {
+                    if (lector.HasRows)
+                    {
+                        while (lector.Read())
+                        {
+                            Vehiculo v = new Vehiculo();
+                            v.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
+                            v.IdCliente = Convert.ToInt32(lector["id_cliente"]);
+                            v.Matricula = (string)lector["matricula"];
+                            v.IdMarca = Convert.ToInt32(lector["id_marca"]);
+                            v.Modelo = (string)lector["modelo"];
+                            v.Tipo = (string)lector["tipo"];
+
+                            lista.Add(v);
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+        // Devuelve el vehiculo segun la matricula pasada de argumento
+        // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
+        public Vehiculo GetParkedVehicle(string matricula)
+        {
+            Vehiculo vehiculo = new Vehiculo();
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT * FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                using (SqliteDataReader lector = command.ExecuteReader())
+                {
+                    if (lector.HasRows)
+                    {
+                        lector.Read();
+
+                        vehiculo.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
+                        vehiculo.IdCliente = Convert.ToInt32(lector["id_cliente"]);
+                        vehiculo.Matricula = (string)lector["matricula"];
+                        vehiculo.IdMarca = Convert.ToInt32(lector["id_marca"]);
+                        vehiculo.Modelo = (string)lector["modelo"];
+                        vehiculo.Tipo = (string)lector["tipo"];
+                    }
+                }
+            }
+            return vehiculo;
+        }
 
 
         /*******************************************************
