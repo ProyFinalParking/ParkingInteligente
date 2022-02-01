@@ -147,7 +147,7 @@
                                ShowSortNumbers="True"
                                AllowFiltering="True"
                                SelectionMode="Extended"
-                               SelectionUnit="Cell"
+                               SelectionUnit="Row"
                                Margin="5">
             <syncfusion:SfDataGrid.Effect>
                 <DropShadowEffect Opacity="0.5" />

@@ -7,8 +7,10 @@
         xmlns:local="clr-namespace:ParkingInteligente"
         mc:Ignorable="d"
         Title="ParkingInteligente"
-        Height="450"
-        Width="800"
+        Height="500"
+        Width="950"
+        MinHeight="500"
+        MinWidth="850"
         Icon="assets/128.ico">
     <DockPanel>
         <syncfusion:SfNavigationDrawer x:Name="navigationDrawer"

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
         Title="AñadirCliente"
-        Height="358"
+        MinHeight="338"
+        MinWidth="487"
+        Height="338"
         Width="487"
         ShowInTaskbar="False"
         ResizeMode="NoResize">
@@ -227,7 +229,7 @@
 
             <Button x:Name="CancelarButton"
                     Content="Cancelar"
-                    Height="20"
+                    Height="30"
                     Width="150"
                     Margin="5"
                     IsCancel="True"
@@ -235,7 +237,7 @@
 
             <Button x:Name="AceptarButton"
                     Content="Añadir Cliente"
-                    Height="20"
+                    Height="30"
                     Width="150"
                     Margin="5"
                     IsDefault="True"
