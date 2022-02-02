@@ -1,15 +1,15 @@
-﻿<Window x:Class="ParkingInteligente.dialogos.AñadirCliente"
+﻿<Window x:Class="ParkingInteligente.dialogos.EliminarVehiculo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
-        Title="AñadirCliente"
-        MinHeight="338"
-        MinWidth="487"
-        Height="338"
-        Width="487"
+        Title="EliminarVehiculo"
+        MinHeight="190"
+        MinWidth="370"
+        Height="190"
+        Width="370"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -140,87 +140,14 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="260" />
+            <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="3"
-                BorderBrush="Black"
-                CornerRadius="3"
-                Width="150"
-                Height="140">
-
-            <Image x:Name="FotoCliente"
-                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg"
-                   Stretch="Fill"
-                   RenderTransformOrigin="0.5,0.5" />
-        </Border>
-
-        <Grid Grid.Column="1"
-              Margin="10">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-            </Grid.RowDefinitions>
-
-
-            <TextBox x:Name="DNITextBox"
-                     Grid.Column="1"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Documento}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
-
-            <TextBox x:Name="NombreTextBox"
-                     Grid.Row="1"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Nombre}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
-            <TextBox x:Name="TelefonoTextBox"
-                     Grid.Row="2"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Telefono}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}"/>
-
-            <TextBox x:Name="EdadTextBox"
-                     Grid.Row="3"
-                     IsEnabled="False"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Edad}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
-
-            <TextBox x:Name="GeneroTextBox"
-                     Grid.Row="4"
-                     IsEnabled="False"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Genero}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
-            <TextBox x:Name="URLImagenTextBox"
-                     Grid.Row="5"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Foto}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-        </Grid>
+        <TextBlock Grid.ColumnSpan="2"
+                   Text="¿Está seguro de que desea eliminar este Vehiculo?"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"></TextBlock>
 
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"
@@ -234,17 +161,17 @@
                     Width="150"
                     Margin="5"
                     IsCancel="True"
-                    Template="{DynamicResource ButtonControlTemplate1}"/>
+                    Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Button x:Name="AceptarButton"
-                    Content="Añadir Cliente"
+                    Content="Eliminar Vehiculo"
                     Height="30"
                     Width="150"
                     Margin="5"
                     IsDefault="True"
                     Click="AceptarButton_Click"
                     Template="{DynamicResource ButtonControlTemplate1}"
-                    Command="{Binding Path=AñadirClienteButton}"/>
+                    Command="{Binding Path=EliminarVehiculoButton}" />
         </StackPanel>
 
     </Grid>

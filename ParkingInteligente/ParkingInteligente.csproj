@@ -135,6 +135,12 @@
     <Compile Include="dialogos\EditarVehiculo.xaml.cs">
       <DependentUpon>EditarVehiculo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="dialogos\EliminarCliente.xaml.cs">
+      <DependentUpon>EliminarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="dialogos\EliminarVehiculo.xaml.cs">
+      <DependentUpon>EliminarVehiculo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dialogos\PagarEstacionamiento.xaml.cs">
       <DependentUpon>PagarEstacionamiento.xaml</DependentUpon>
     </Compile>
@@ -155,6 +161,8 @@
     <Compile Include="mvvm\ControlVehiculosVM.cs" />
     <Compile Include="mvvm\EditarClienteVM.cs" />
     <Compile Include="mvvm\EditarVehiculoVM.cs" />
+    <Compile Include="mvvm\EliminarClienteVM.cs" />
+    <Compile Include="mvvm\EliminarVehiculoVM.cs" />
     <Compile Include="mvvm\InicioVM.cs" />
     <Compile Include="mvvm\PagarEstacionamientoVM.cs" />
     <Compile Include="mvvm\VerVehiculoVM.cs" />
@@ -188,6 +196,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="dialogos\EditarVehiculo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dialogos\EliminarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dialogos\EliminarVehiculo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
