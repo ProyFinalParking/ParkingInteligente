@@ -60,6 +60,11 @@ namespace ParkingInteligente.mvvm
                 m.Reply(r.ClienteSeleccionado);
             });
 
+            WeakReferenceMessenger.Default.Register<ActualizarGridClientesMessage>(this, (r, m) =>
+            {
+                Clientes = m.Value;
+            });
+
             AñadirNuevoClienteCommand = new RelayCommand(AbrirDialogoNuevoCliente);
             EditarClienteCommand = new RelayCommand(AbrirDialogoEditarCliente);
             VerClienteCommand = new RelayCommand(AbrirVerCliente);

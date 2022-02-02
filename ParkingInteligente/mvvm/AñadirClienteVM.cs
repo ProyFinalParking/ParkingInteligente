@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using ParkingInteligente.modelo;
 using ParkingInteligente.servicios;
 using System;
@@ -33,6 +34,7 @@ namespace ParkingInteligente.mvvm
             NuevoCliente.Edad = 22;
             NuevoCliente.Genero = "Hombre";
             ServicioDB.InsertClient(NuevoCliente);
+            WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }
     }
 }

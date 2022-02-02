@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using ParkingInteligente.modelo;
 using ParkingInteligente.servicios;
 using System;
@@ -31,6 +32,7 @@ namespace ParkingInteligente.mvvm
         public void AñadirVehiculo()
         {
             ServicioDB.InsertVehicle(NuevoVehiculo);
+            WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
         }
     }
 }

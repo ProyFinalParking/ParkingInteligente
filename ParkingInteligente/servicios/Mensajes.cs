@@ -10,4 +10,13 @@ namespace ParkingInteligente.servicios
 {
     class ClienteSeleccionadoRequestMessage : RequestMessage<Cliente> { }
     class VehiculoSeleccionadoRequestMessage : RequestMessage<Vehiculo> { }
+    class ActualizarGridClientesMessage : ValueChangedMessage<List<Cliente>>
+    {
+        public ActualizarGridClientesMessage(List<Cliente> valor) : base(valor) { }
+    }
+
+    class ActualizarGridVehiculosMessage : ValueChangedMessage<List<Vehiculo>>
+    {
+        public ActualizarGridVehiculosMessage(List<Vehiculo> valor) : base(valor) { }
+    }
 }

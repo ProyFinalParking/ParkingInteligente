@@ -51,6 +51,11 @@ namespace ParkingInteligente.mvvm
                 m.Reply(r.VehiculoSeleccionado);
             });
 
+            WeakReferenceMessenger.Default.Register<ActualizarGridVehiculosMessage>(this, (r, m) =>
+            {
+                Vehiculos = m.Value;
+            });
+
             AñadirNuevoVehiculoCommand = new RelayCommand(AbrirDialogoNuevoVehiculo);
             EditarVehiculoCommand = new RelayCommand(AbrirDialogoEditarVehiculo);
             VerVehiculoCommand = new RelayCommand(AbrirDialogoVerVehiculo);
