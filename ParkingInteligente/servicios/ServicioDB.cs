@@ -135,7 +135,7 @@ namespace ParkingInteligente.servicios
                     // Elimina los vehiculos del Cliente
                     SqliteCommand eliminarCliente = connection.CreateCommand();
                     eliminarCliente.CommandText = @"DELETE FROM clientes 
-                    WHERE documento = @documento)";
+                    WHERE documento = @documento";
 
                     eliminarCliente.Parameters.Add("@documento", SqliteType.Text);
                     eliminarCliente.Parameters["@documento"].Value = doc;
