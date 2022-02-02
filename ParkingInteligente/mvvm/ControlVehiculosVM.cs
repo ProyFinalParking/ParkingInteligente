@@ -18,6 +18,7 @@ namespace ParkingInteligente.mvvm
         public RelayCommand AñadirNuevoVehiculoCommand { get; }
         public RelayCommand EditarVehiculoCommand { get; }
         public RelayCommand VerVehiculoCommand { get; }
+        public RelayCommand EliminarVehiculoCommand { get; }
 
 
         private Vehiculo vehiculoSeleccionado;
@@ -59,6 +60,7 @@ namespace ParkingInteligente.mvvm
             AñadirNuevoVehiculoCommand = new RelayCommand(AbrirDialogoNuevoVehiculo);
             EditarVehiculoCommand = new RelayCommand(AbrirDialogoEditarVehiculo);
             VerVehiculoCommand = new RelayCommand(AbrirDialogoVerVehiculo);
+            EliminarVehiculoCommand = new RelayCommand(AbrirDialogoEliminarVehiculo);
         }
 
         private void AbrirDialogoNuevoVehiculo()
@@ -74,6 +76,11 @@ namespace ParkingInteligente.mvvm
         private void AbrirDialogoVerVehiculo()
         {
             servicio.CargarDialogoVerVehiculo();
+        }
+
+        private void AbrirDialogoEliminarVehiculo()
+        {
+            servicio.CargarDialogoEliminarVehiculo();
         }
 
     }

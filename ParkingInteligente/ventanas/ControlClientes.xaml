@@ -160,6 +160,7 @@
             <Button x:Name="DeleteClientButton"
                     Margin="5"
                     Content="Eliminar Cliente"
+                    Command="{Binding Path=EliminarClienteCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Button x:Name="AddClientButton"

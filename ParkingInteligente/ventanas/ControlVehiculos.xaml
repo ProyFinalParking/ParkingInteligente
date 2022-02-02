@@ -161,6 +161,7 @@
             <Button x:Name="DeleteVehicleButton"
                     Margin="5"
                     Content="Eliminar Vehículo"
+                    Command="{Binding Path=EliminarVehiculoCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Button x:Name="AddVehicleButton"

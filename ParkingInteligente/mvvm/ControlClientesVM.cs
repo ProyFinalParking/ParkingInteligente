@@ -48,6 +48,7 @@ namespace ParkingInteligente.mvvm
         public RelayCommand AñadirNuevoClienteCommand { get; }
         public RelayCommand EditarClienteCommand { get; }
         public RelayCommand VerClienteCommand { get; }
+        public RelayCommand EliminarClienteCommand { get; }
 
         public ControlClientesVM()
         {
@@ -68,6 +69,7 @@ namespace ParkingInteligente.mvvm
             AñadirNuevoClienteCommand = new RelayCommand(AbrirDialogoNuevoCliente);
             EditarClienteCommand = new RelayCommand(AbrirDialogoEditarCliente);
             VerClienteCommand = new RelayCommand(AbrirVerCliente);
+            EliminarClienteCommand = new RelayCommand(AbrirDialogoEliminarCliente);
         }
 
         private void AbrirDialogoNuevoCliente()
@@ -83,6 +85,11 @@ namespace ParkingInteligente.mvvm
         private void AbrirVerCliente()
         {
             servicio.CargarDialogoVerCliente();
+        }
+
+        private void AbrirDialogoEliminarCliente()
+        {
+            servicio.CargarDialogoEliminarCliente();
         }
     }
 }
