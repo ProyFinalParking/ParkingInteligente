@@ -47,5 +47,17 @@ namespace ParkingInteligente.servicios
             EditarCliente dialogo = new EditarCliente();
             return dialogo.ShowDialog();
         }
+
+        public bool? CargarDialogoAñadirVehiculo()
+        {
+            AñadirVehiculo dialogo = new AñadirVehiculo();
+            return dialogo.ShowDialog();
+        }
+
+        public bool? CargarDialogoEditarVehiculo()
+        {
+            EditarVehiculo dialogo = new EditarVehiculo();
+            return dialogo.ShowDialog();
+        }
     }
 }
