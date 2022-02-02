@@ -9,7 +9,9 @@
         MinHeight="338"
         MinWidth="487"
         Height="338"
-        Width="487">
+        Width="487"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
@@ -147,7 +149,7 @@
                 Width="150"
                 Height="140">
 
-            <Image x:Name="FotoCliente"
+            <Image x:Name="FotoMatricula"
                    Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg"
                    Stretch="Fill"
                    RenderTransformOrigin="0.5,0.5" />
@@ -169,7 +171,7 @@
             <TextBox x:Name="MatriculaTextBox"
                      Grid.Column="1"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.Matricula}"
+                     Text="{Binding Path=VehiculoSeleccionado.Matricula}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -178,7 +180,7 @@
             <TextBox x:Name="DNIClienteTextBox"
                      Grid.Row="1"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.IdCliente}"
+                     Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -187,14 +189,14 @@
                       Grid.Row="2"
                       Margin="0,0,0,5"
                       ItemsSource="{Binding Path=Marcas}"
-                      SelectedIndex="{Binding Path=NuevoVehiculo.IdMarca}"
+                      SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
                       FontSize="16"
                       FontFamily="Source Code Pro" />
 
             <TextBox x:Name="ModeloTextBox"
                      Grid.Row="3"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.Modelo}"
+                     Text="{Binding Path=VehiculoSeleccionado.Modelo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -203,7 +205,7 @@
             <TextBox x:Name="TipoTextBox"
                      Grid.Row="4"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Tipo}"
+                     Text="{Binding Path=VehiculoSeleccionado.Tipo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -224,7 +226,7 @@
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
             <Button x:Name="AceptarButton"
-                    Content="Añadir Vehículo"
+                    Content="Editar Vehículo"
                     Height="30"
                     Width="150"
                     Margin="5"
