@@ -190,7 +190,7 @@
                       Grid.Row="2"
                       Margin="0,0,0,5"
                       ItemsSource="{Binding Path=Marcas}"
-                      SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
+                      SelectedItem="{Binding Path=VehiculoSeleccionado.IdMarca}"
                       IsEnabled="False"
                       FontSize="16"
                       FontFamily="Source Code Pro" />

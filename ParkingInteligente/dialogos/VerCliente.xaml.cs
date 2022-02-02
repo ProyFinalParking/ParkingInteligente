@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingInteligente.mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace ParkingInteligente.dialogos
     /// </summary>
     public partial class VerCliente : Window
     {
+        private VerClienteVM vm;
         public VerCliente()
         {
             InitializeComponent();
+            vm = new VerClienteVM();
+            this.DataContext = vm;
         }
     }
 }
