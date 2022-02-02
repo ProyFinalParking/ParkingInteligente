@@ -25,6 +25,9 @@ namespace ParkingInteligente.servicios
          * **************************************************************************************************************************/
 
 
+        // TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
+
+
         /*******************************************************
             METODOS RELACIONADOS CON EL CLIENTE
          *******************************************************/
