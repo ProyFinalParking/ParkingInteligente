@@ -230,8 +230,9 @@
                     Width="150"
                     Margin="5"
                     IsDefault="True"
+                    Click="AceptarButton_Click"
                     Template="{DynamicResource ButtonControlTemplate1}"
-                    Command="{Binding Path=AñadirClienteButton}" />
+                    Command="{Binding Path=EditarVehiculoButton}" />
         </StackPanel>
 
     </Grid>

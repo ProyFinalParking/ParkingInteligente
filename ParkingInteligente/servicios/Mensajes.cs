@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 namespace ParkingInteligente.servicios
 {
     class ClienteSeleccionadoRequestMessage : RequestMessage<Cliente> { }
-
+    class VehiculoSeleccionadoRequestMessage : RequestMessage<Vehiculo> { }
 }
