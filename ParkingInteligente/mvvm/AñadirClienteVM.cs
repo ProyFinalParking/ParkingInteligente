@@ -12,7 +12,6 @@ namespace ParkingInteligente.mvvm
 {
     class AñadirClienteVM : ObservableObject
     {
-        private ServicioSqliteDB servicioDB;
         public RelayCommand AñadirClienteButton { get; }
 
         private Cliente nuevoCliente;
@@ -26,7 +25,6 @@ namespace ParkingInteligente.mvvm
         public AñadirClienteVM()
         {
             NuevoCliente = new Cliente();
-            servicioDB = new ServicioSqliteDB();
             AñadirClienteButton = new RelayCommand(AñadirCliente);
         }
 
@@ -34,7 +32,7 @@ namespace ParkingInteligente.mvvm
         {
             NuevoCliente.Edad = 22;
             NuevoCliente.Genero = "Hombre";
-            servicioDB.InsertClient(NuevoCliente);
+            ServicioDB.InsertClient(NuevoCliente);
         }
     }
 }

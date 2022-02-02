@@ -13,7 +13,6 @@ namespace ParkingInteligente.mvvm
 {
     class EditarClienteVM : ObservableObject
     {
-        private ServicioSqliteDB servicioDB;
         public RelayCommand EditarClienteButton { get; }
 
         private Cliente clienteSeleccionado;
@@ -37,7 +36,6 @@ namespace ParkingInteligente.mvvm
             ClienteSeleccionado = new Cliente();
             ClienteSeleccionado = WeakReferenceMessenger.Default.Send<ClienteSeleccionadoRequestMessage>();
             DocClienteOriginal = ClienteSeleccionado.ToString();
-            servicioDB = new ServicioSqliteDB();
             EditarClienteButton = new RelayCommand(EditarCliente);
         }
 
@@ -45,7 +43,7 @@ namespace ParkingInteligente.mvvm
         {
             ClienteSeleccionado.Edad = 22;
             ClienteSeleccionado.Genero = "Hombre";
-            servicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
+            ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
         }
     }
 }

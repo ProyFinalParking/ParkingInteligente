@@ -32,7 +32,6 @@ namespace ParkingInteligente
             vm = new MainWindowVM();
             this.DataContext = vm;
 
-            ServicioSqliteDB db = new ServicioSqliteDB();
         }
     }
 }

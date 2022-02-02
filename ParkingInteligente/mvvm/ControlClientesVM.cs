@@ -15,7 +15,6 @@ namespace ParkingInteligente.mvvm
     class ControlClientesVM : ObservableObject
     {
         private NavigationService servicio;
-        private ServicioSqliteDB servicioDB;
 
         private Cliente clienteSeleccionado;
         public Cliente ClienteSeleccionado
@@ -42,7 +41,7 @@ namespace ParkingInteligente.mvvm
             }
             set
             {
-                SetProperty(ref clientes, value); 
+                SetProperty(ref clientes, value);
             }
         }
 
@@ -51,8 +50,7 @@ namespace ParkingInteligente.mvvm
 
         public ControlClientesVM()
         {
-            servicioDB = new ServicioSqliteDB();
-            Clientes = servicioDB.GetListClients();
+            Clientes = ServicioDB.GetListClients();
             servicio = new NavigationService();
             ClienteSeleccionado = new Cliente();
 

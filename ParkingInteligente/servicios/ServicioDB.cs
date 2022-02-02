@@ -6,19 +6,16 @@ using System.Globalization;
 
 namespace ParkingInteligente.servicios
 {
-    class ServicioSqliteDB
+    class ServicioDB
     {
         // Propiedad de Configuración de aplicaciones con el nombre de la BBDD
-        readonly string nombreBD = Properties.Settings.Default.NombreBD;
+        static readonly string nombreBD = Properties.Settings.Default.NombreBD;
 
-        public ServicioSqliteDB()
+        protected ServicioDB()
         {
             // Crea las tablas si no existen al instanciar el objeto
             //CreateTablesIfNotExists();
 
-            // Crea la BBDD con los datos Demo
-            // Borrar antes de entregar el proyecto
-            CreateDemoDB();
         }
 
         /**************************************************************************************************************************** 
@@ -29,7 +26,7 @@ namespace ParkingInteligente.servicios
         /*******************************************************
             METODOS RELACIONADOS CON EL CLIENTE
          *******************************************************/
-        public void InsertClient(Cliente c)
+        public static void InsertClient(Cliente c)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -65,7 +62,7 @@ namespace ParkingInteligente.servicios
         // más el documento original , para buscar el registro.
         // Hay que hacer una copia del cliente original y editar
         // los datos necesario antes de llamar este metodo
-        public void UpdateClient(Cliente c, string docOriginal)
+        public static void UpdateClient(Cliente c, string docOriginal)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -106,7 +103,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprobar antes de llamar el metodo, que el Cliente no tenga estacionamientos activos
-        public void DeleteClient(string doc)
+        public static void DeleteClient(string doc)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -128,7 +125,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprueba si existe el documento en la tabla Clientes
-        public bool IsExistsDocument(string doc)
+        public static bool IsExistsDocument(string doc)
         {
             bool existe = false;
 
@@ -156,7 +153,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la ID del Cliente (0 en caso de que no exista)
-        public int GetIdClient(string documento)
+        public static int GetIdClient(string documento)
         {
             int idCliente = 0;
 
@@ -181,7 +178,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la lista de todos los Clientes guardados
-        public List<Cliente> GetListClients()
+        public static List<Cliente> GetListClients()
         {
             List<Cliente> lista = new List<Cliente>();
 
@@ -220,7 +217,7 @@ namespace ParkingInteligente.servicios
 
         // Devuelve El cliente segun el documento pasado
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public Cliente GetClient(string documento)
+        public static Cliente GetClient(string documento)
         {
             Cliente cliente = new Cliente();
 
@@ -258,11 +255,7 @@ namespace ParkingInteligente.servicios
             return cliente;
         }
 
-        /**************************************************************************************************************************** 
-         *                                                        TODO
-         * **************************************************************************************************************************/
-
-        public bool IsParked(Cliente c)
+        public static bool IsParked(Cliente c)
         {
             //TODO: Comprobar si alguno de los coches del cliente esta actualmente aparcado
 
@@ -272,7 +265,7 @@ namespace ParkingInteligente.servicios
         /*******************************************************
             METODOS RELACIONADOS CON LA MARCA del vehiculo
          *******************************************************/
-        public void InsertVehicleBrand(string brand)
+        public static void InsertVehicleBrand(string brand)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -295,7 +288,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Recibe el nombre de la marca original y el nombre nuevo para actualizar
-        public void UpdateVehicleBrand(string oldBrand, string newBrand)
+        public static void UpdateVehicleBrand(string oldBrand, string newBrand)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -322,7 +315,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprobar antes de llamar el metodo, que no hayan coches vinculados con la marca
-        public void DeleteBrand(string brand)
+        public static void DeleteBrand(string brand)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -344,7 +337,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprueba si existe la Marca en la table Marcas
-        public bool IsExistsVehicleBrand(string brand)
+        public static bool IsExistsVehicleBrand(string brand)
         {
             bool existe = false;
 
@@ -372,7 +365,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la ID de la marca (0 en caso de que no exista)
-        public int GetIdVehicleBrand(string brand)
+        public static int GetIdVehicleBrand(string brand)
         {
             int idMarca = 0;
 
@@ -397,7 +390,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve el listado de todas las Marcas guardadas
-        public List<MarcaVehiculo> GetListVehicleBrands()
+        public static List<MarcaVehiculo> GetListVehicleBrands()
         {
             List<MarcaVehiculo> lista = new List<MarcaVehiculo>();
 
@@ -433,7 +426,7 @@ namespace ParkingInteligente.servicios
         /*******************************************************
             METODOS RELACIONADOS CON EL VEHICULO
          *******************************************************/
-        public void InsertVehicle(Vehiculo v)
+        public static void InsertVehicle(Vehiculo v)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -467,7 +460,7 @@ namespace ParkingInteligente.servicios
         // más la matricula original , para buscar el registro.
         // Hay que hacer una copia del vehiculo original y editar
         // los datos necesario antes de llamar este metodo
-        public void UpdateVehicle(Vehiculo v, string matriculaOriginal)
+        public static void UpdateVehicle(Vehiculo v, string matriculaOriginal)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -505,7 +498,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprobar antes de llamar el metodo, que el Vehiculo no tenga estacionamientos activos
-        public void DeleteVehicle(string matricula)
+        public static void DeleteVehicle(string matricula)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -527,7 +520,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprueba si existe la Matricula en la tabla Vehiculos
-        public bool IsExistsVehicle(string matricula)
+        public static bool IsExistsVehicle(string matricula)
         {
             bool existe = false;
 
@@ -555,7 +548,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la ID de la marca (0 en caso de que no exista)
-        public int GetIdVehicle(string matricula)
+        public static int GetIdVehicle(string matricula)
         {
             int idVehiculo = 0;
 
@@ -579,7 +572,7 @@ namespace ParkingInteligente.servicios
             return idVehiculo;
         }
 
-        public List<Vehiculo> GetListVehicles()
+        public static List<Vehiculo> GetListVehicles()
         {
             List<Vehiculo> lista = new List<Vehiculo>();
 
@@ -616,7 +609,7 @@ namespace ParkingInteligente.servicios
 
         // Devuelve el vehiculo segun la matricula pasada de argumento
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public Vehiculo GetVehicle(string matricula)
+        public static Vehiculo GetVehicle(string matricula)
         {
             Vehiculo vehiculo = new Vehiculo();
 
@@ -660,7 +653,7 @@ namespace ParkingInteligente.servicios
         // Para insertar el vehiculo en el estacionamiento, recibe matricula y tipo de vehiculo
         // La fecha de entrada se genera automaticamente
         // La salida y el importe se generaran en el metodo FinishParkedVehicle
-        public void InsertParkedVehicle(string matricula, string tipo)
+        public static void InsertParkedVehicle(string matricula, string tipo)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -700,7 +693,7 @@ namespace ParkingInteligente.servicios
         // más la matricula original , para buscar el registro.
         // Hay que hacer una copia del vehiculo original y editar
         // los datos necesario antes de llamar este metodo
-        public void UpdateParkedVehicle(Vehiculo v, string matriculaOriginal)
+        public static void UpdateParkedVehicle(Vehiculo v, string matriculaOriginal)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -738,7 +731,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprobar antes de llamar el metodo, que el Vehiculo no tenga estacionamientos activos
-        public void DeleteParkedVehicle(string matricula)
+        public static void DeleteParkedVehicle(string matricula)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -760,7 +753,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprueba si existe la Matricula en la tabla Vehiculos
-        public bool IsExistsParkedVehicle(string matricula)
+        public static bool IsExistsParkedVehicle(string matricula)
         {
             bool existe = false;
 
@@ -788,7 +781,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la ID de la marca (0 en caso de que no exista)
-        public int GetIdParkedVehicle(string matricula)
+        public static int GetIdParkedVehicle(string matricula)
         {
             int idVehiculo = 0;
 
@@ -812,7 +805,7 @@ namespace ParkingInteligente.servicios
             return idVehiculo;
         }
 
-        public List<Vehiculo> GetListParkedVehicle()
+        public static List<Vehiculo> GetListParkedVehicle()
         {
             List<Vehiculo> lista = new List<Vehiculo>();
 
@@ -849,7 +842,7 @@ namespace ParkingInteligente.servicios
 
         // Devuelve el vehiculo segun la matricula pasada de argumento
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public Vehiculo GetParkedVehicle(string matricula)
+        public static Vehiculo GetParkedVehicle(string matricula)
         {
             Vehiculo vehiculo = new Vehiculo();
 
@@ -889,7 +882,7 @@ namespace ParkingInteligente.servicios
         /*******************************************************
             METODO PARA CREAR LA BBDD EN CASO DE QUE NO EXISTA
          *******************************************************/
-        public void CreateTablesIfNotExists()
+        private static void CreateTablesIfNotExists()
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -947,7 +940,7 @@ namespace ParkingInteligente.servicios
         }
 
 
-        public void CreateDemoDB()
+        public static void CreateDemoDB()
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
@@ -959,13 +952,13 @@ namespace ParkingInteligente.servicios
                 {
                     SqliteCommand command = connection.CreateCommand();
 
-                    command.CommandText = @"DROP TABLE estacionamientos";
+                    command.CommandText = @"DROP TABLE IF EXISTS estacionamientos";
                     command.ExecuteNonQuery();
-                    command.CommandText = @"DROP TABLE vehiculos";
+                    command.CommandText = @"DROP TABLE IF EXISTS vehiculos";
                     command.ExecuteNonQuery();
-                    command.CommandText = @"DROP TABLE clientes";
+                    command.CommandText = @"DROP TABLE IF EXISTS clientes";
                     command.ExecuteNonQuery();
-                    command.CommandText = @"DROP TABLE marcas";
+                    command.CommandText = @"DROP TABLE IF EXISTS marcas";
                     command.ExecuteNonQuery();
 
                     // Tabla Clientes
@@ -1027,7 +1020,7 @@ namespace ParkingInteligente.servicios
                     command.ExecuteNonQuery();
 
                     // Datos Marcas
-                    command.CommandText = @"INSERT INTO 'marcas' ('id_marca','marca') VALUES (0,''), (1,'BMW'),
+                    command.CommandText = @"INSERT INTO 'marcas' ('id_marca','marca') VALUES (0,'No Registrado'), (1,'BMW'),
                          (2, 'Citroen'), (3, 'Renault'), (4, 'Mercedez'), (5, 'Peugeot'), (6, 'Audi'), (7, 'Range Rover'),
                          (8, 'Opel'), (9, 'Hyundai'), (10, 'Ford'), (11, 'Fiat'), (12, 'Jeep'), (13, 'Lexus'), (14, 'MINI'),
                          (15, 'SEAT'), (16, 'Subaru'), (17, 'Mitsubishi'), (18, 'Nissan'), (19, 'Skoda'), (20, 'Porsche'),
@@ -1038,7 +1031,7 @@ namespace ParkingInteligente.servicios
 
                     // Datos Vehiculos
                     command.CommandText = @"INSERT INTO 'vehiculos' ('id_vehiculo','id_cliente','matricula','id_marca','modelo','tipo')
-                                VALUES (0,0,'',0,'','Coche'),
+                                VALUES (0,0,'No Registrado',0,'','Coche'),
                                  (1,0,'',0,'','Moto'),
                                  (2, 2, '45778KYB', 2, 'C3', 'Coche'),
                                  (3, 11, '4595HHY', 36, 'R1', 'Moto'),
