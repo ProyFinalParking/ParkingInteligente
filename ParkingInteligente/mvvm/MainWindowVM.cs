@@ -30,6 +30,9 @@ namespace ParkingInteligente.mvvm
 
         public MainWindowVM()
         {
+            // TODO: Crea la BBDD al ejecutar la APP (Pendiente ver otra solucion)
+            ServicioDB.CreateDemoDB();
+
             servicio = new NavigationService();
             Inicio = new RelayCommand(AbrirInicio);
             ControlVehiculos = new RelayCommand(AbrirControlVehiculos);
@@ -37,8 +40,7 @@ namespace ParkingInteligente.mvvm
             ControlAparcamientos = new RelayCommand(AbrirControlAparcamientos);
             AbrirInicio();
 
-            // TODO: Crea la BBDD al ejecutar la APP (Pendiente ver otra solucion)
-            ServicioDB.CreateDemoDB();
+            
         }
 
 
