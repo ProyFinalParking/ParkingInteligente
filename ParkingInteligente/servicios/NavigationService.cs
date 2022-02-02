@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace ParkingInteligente.servicios
 {
@@ -39,36 +40,49 @@ namespace ParkingInteligente.servicios
         public bool? CargarDialogoAñadirCliente()
         {
             AñadirCliente dialogo = new AñadirCliente();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
 
         public bool? CargarDialogoEditarCliente()
         {
             EditarCliente dialogo = new EditarCliente();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
 
         public bool? CargarDialogoAñadirVehiculo()
         {
             AñadirVehiculo dialogo = new AñadirVehiculo();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
 
         public bool? CargarDialogoEditarVehiculo()
         {
             EditarVehiculo dialogo = new EditarVehiculo();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
 
         public bool? CargarDialogoVerVehiculo()
         {
             VerVehiculo dialogo = new VerVehiculo();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
 
         public bool? CargarDialogoVerCliente()
         {
             VerCliente dialogo = new VerCliente();
+            dialogo.Owner = Application.Current.MainWindow;
+            return dialogo.ShowDialog();
+        }
+
+        public bool? CargarDialogoPagarFinalizarParking()
+        {
+            PagarEstacionamiento dialogo = new PagarEstacionamiento();
+            dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
     }

@@ -135,6 +135,9 @@
     <Compile Include="dialogos\EditarVehiculo.xaml.cs">
       <DependentUpon>EditarVehiculo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="dialogos\PagarEstacionamiento.xaml.cs">
+      <DependentUpon>PagarEstacionamiento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dialogos\VerCliente.xaml.cs">
       <DependentUpon>VerCliente.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,7 @@
     <Compile Include="mvvm\EditarClienteVM.cs" />
     <Compile Include="mvvm\EditarVehiculoVM.cs" />
     <Compile Include="mvvm\InicioVM.cs" />
+    <Compile Include="mvvm\PagarEstacionamientoVM.cs" />
     <Compile Include="mvvm\VerVehiculoVM.cs" />
     <Compile Include="mvvm\VerClienteVM.cs" />
     <Compile Include="servicios\Mensajes.cs" />
@@ -184,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="dialogos\EditarVehiculo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dialogos\PagarEstacionamiento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
