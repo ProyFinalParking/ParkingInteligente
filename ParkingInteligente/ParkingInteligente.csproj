@@ -126,8 +126,14 @@
     <Compile Include="dialogos\AñadirCliente.xaml.cs">
       <DependentUpon>AñadirCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="dialogos\AñadirVehiculo.xaml.cs">
+      <DependentUpon>AñadirVehiculo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dialogos\EditarCliente.xaml.cs">
       <DependentUpon>EditarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="dialogos\EditarVehiculo.xaml.cs">
+      <DependentUpon>EditarVehiculo.xaml</DependentUpon>
     </Compile>
     <Compile Include="modelo\Cliente.cs" />
     <Compile Include="modelo\Estacionamiento.cs" />
@@ -159,7 +165,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="dialogos\AñadirVehiculo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="dialogos\EditarCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dialogos\EditarVehiculo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

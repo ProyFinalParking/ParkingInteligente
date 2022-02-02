@@ -162,11 +162,6 @@
                      Text="Buscar Por DNI"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
 
-            <TextBox x:Name="MatriculaSearchTextBox"
-                     Margin="5"
-                     Text="Buscar Por Matricula"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
             <Button x:Name="DeleteClientButton"
                     Margin="5"
                     Content="Eliminar Cliente"
@@ -184,6 +179,12 @@
                     Command="{Binding Path=EditarClienteCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
 
+            <Button x:Name="VisualizarClientButton"
+                    Margin="5"
+                    Content="Ver Cliente"
+                    Command="{Binding Path=VerClienteCommand}"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
+            
             <Image VerticalAlignment="Center"
                    x:Name="ClientImage"
                    Margin="5"
