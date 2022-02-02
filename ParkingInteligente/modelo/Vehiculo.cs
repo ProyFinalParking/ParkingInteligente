@@ -16,7 +16,9 @@ namespace ParkingInteligente.modelo
 
         public Vehiculo()
         {
+            matricula = "";
             modelo = "";
+            tipo = "";
         }
 
         // Al insertar un Vehiculo en la BBDD, no se tiene en cuenta la ID del objeto

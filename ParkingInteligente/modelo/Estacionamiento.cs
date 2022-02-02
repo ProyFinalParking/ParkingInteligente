@@ -17,7 +17,10 @@ namespace ParkingInteligente.modelo
 
         public Estacionamiento()
         {
+            matricula = "";
+            entrada = "";
             salida = "";
+            tipo = "";
         }
 
         // Al insertar un Estacionamiento en la BBDD, no se tiene en cuenta la ID del objeto
