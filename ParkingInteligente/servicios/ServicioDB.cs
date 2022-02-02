@@ -258,7 +258,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Comprueba si alguno de los vehiculos de un cliente tiene estacionamiento activo (sin finalizar)
-        public static bool IsParked(String documento)
+        public static bool IsParked(string documentoCliente)
         {
             bool existe = false;
 
@@ -276,7 +276,7 @@ namespace ParkingInteligente.servicios
                 command.Parameters.Add("@documento", SqliteType.Text);
 
                 // Se asignan los valores
-                command.Parameters["@documento"].Value = documento;
+                command.Parameters["@documento"].Value = documentoCliente;
 
                 // Se ejecuta el SELECT
                 if (Convert.ToInt32(command.ExecuteScalar()) > 0)
