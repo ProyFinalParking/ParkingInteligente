@@ -1,11 +1,11 @@
-﻿<Window x:Class="ParkingInteligente.dialogos.AñadirVehiculo"
+﻿<Window x:Class="ParkingInteligente.dialogos.VerVehiculo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
-        Title="AñadirVehiculo"
+        Title="Ver Vehiculo"
         MinHeight="338"
         MinWidth="487"
         Height="338"
@@ -139,7 +139,6 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="260" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -156,7 +155,8 @@
         </Border>
 
         <Grid Grid.Column="1"
-              Margin="10">
+              Margin="10"
+              VerticalAlignment="Center">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
@@ -170,7 +170,8 @@
             <TextBox x:Name="MatriculaTextBox"
                      Grid.Column="1"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.Matricula}"
+                     Text="{Binding Path=VehiculoSeleccionado.Matricula}"
+                     IsEnabled="False"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -179,23 +180,26 @@
             <TextBox x:Name="DNIClienteTextBox"
                      Grid.Row="1"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.IdCliente}"
+                     Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
+                     IsEnabled="False"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
 
             <ComboBox x:Name="MarcaTextBox"
-                     Grid.Row="2"
-                     Margin="0,0,0,5"
-                     ItemsSource="{Binding Path=Marcas}"
-                     SelectedIndex="{Binding Path=NuevoVehiculo.IdMarca}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"/>
+                      Grid.Row="2"
+                      Margin="0,0,0,5"
+                      ItemsSource="{Binding Path=Marcas}"
+                      SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
+                      IsEnabled="False"
+                      FontSize="16"
+                      FontFamily="Source Code Pro" />
 
             <TextBox x:Name="ModeloTextBox"
                      Grid.Row="3"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.Modelo}"
+                     IsEnabled="False"
+                     Text="{Binding Path=VehiculoSeleccionado.Modelo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
@@ -204,35 +208,13 @@
             <TextBox x:Name="TipoTextBox"
                      Grid.Row="4"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoVehiculo.Tipo}"
+                     IsEnabled="False"
+                     Text="{Binding Path=VehiculoSeleccionado.Tipo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
         </Grid>
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-
-            <Button x:Name="CancelarButton"
-                    Content="Cancelar"
-                    Height="30"
-                    Width="150"
-                    Margin="5"
-                    IsCancel="True"
-                    Template="{DynamicResource ButtonControlTemplate1}" />
-
-            <Button x:Name="AceptarButton"
-                    Content="Añadir Vehículo"
-                    Height="30"
-                    Width="150"
-                    Margin="5"
-                    IsDefault="True"
-                    Template="{DynamicResource ButtonControlTemplate1}"
-                    Command="{Binding Path=AñadirClienteButton}" />
-        </StackPanel>
 
     </Grid>
 </Window>
