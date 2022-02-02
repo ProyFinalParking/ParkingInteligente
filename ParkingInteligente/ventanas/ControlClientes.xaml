@@ -157,11 +157,6 @@
 
         <StackPanel Grid.Column="1">
 
-            <TextBox x:Name="DNISearchTextBox"
-                     Margin="5"
-                     Text="Buscar Por DNI"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
             <Button x:Name="DeleteClientButton"
                     Margin="5"
                     Content="Eliminar Cliente"

@@ -158,11 +158,6 @@
 
         <StackPanel Grid.Column="1">
 
-            <TextBox x:Name="MatriculaSearchTextBox"
-                     Margin="5"
-                     Text="Buscar Por Matrícula"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-
             <Button x:Name="DeleteVehicleButton"
                     Margin="5"
                     Content="Eliminar Vehículo"
