@@ -4,12 +4,168 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ParkingInteligente.ventanas"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:local1="clr-namespace:ParkingInteligente.mvvm"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
-      d:DesignWidth="800"
-      Background="White">
+      d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="TextBoxControlTemplate1"
+                         TargetType="{x:Type TextBox}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" />
+                </Border.Effect>
+                <ScrollViewer x:Name="PART_ContentHost"
+                              Focusable="False"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Opacity"
+                            TargetName="border"
+                            Value="0.56" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF7EEAE5" />
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF666666" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ButtonControlTemplate1"
+                         TargetType="{x:Type Button}">
+            <Border x:Name="border"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True"
+                    CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" />
+                </Border.Effect>
+                <ContentPresenter x:Name="contentPresenter"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                  Focusable="False"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="{TemplateBinding Padding}"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDefaulted"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FF84D2FF" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF2C6691" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFC4E5F6" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF2C628B" />
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFBCDDEE" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FF245A83" />
+                </Trigger>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="#FFADB2B5" />
+                    <Setter Property="Foreground"
+                            Value="#FF838383" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1"
+                             StartPoint="0.5,0">
+            <GradientStop Color="#FFC5C5C5"
+                          Offset="0" />
+            <GradientStop Color="#FFBBB9B9"
+                          Offset="1" />
+        </LinearGradientBrush>
+    </UserControl.Background>
+
+    <UserControl.DataContext>
+        <local1:ControlAparcamientosVM />
+    </UserControl.DataContext>
 
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <syncfusion:SfDataGrid ItemsSource="{Binding ParkingList}"
+                               SelectedItem="{Binding ParkingSelect}"
+                               Background="AntiqueWhite"
+                               ColumnSizer="Star"
+                               AllowSorting="True"
+                               AllowTriStateSorting="True"
+                               ShowSortNumbers="True"
+                               AllowFiltering="True"
+                               SelectionMode="Extended"
+                               SelectionUnit="Row"
+                               Margin="5">
+            <syncfusion:SfDataGrid.Effect>
+                <DropShadowEffect Opacity="0.5" />
+            </syncfusion:SfDataGrid.Effect>
+        </syncfusion:SfDataGrid>
+
+        <StackPanel Grid.Column="1">
+
+            <Button x:Name="CobrarFinalizarButton"
+                    Margin="5,30,5,5"
+                    Content="Cobrar y Finalizar"
+                    Command="{Binding Path=CobrarFinalizarCommand}"
+                    Template="{DynamicResource ButtonControlTemplate1}" />
+
+        </StackPanel>
     </Grid>
 </UserControl>
+
