@@ -27,24 +27,44 @@ namespace ParkingInteligente.mvvm
         {
             EstacionamientoSeleccionado = new Estacionamiento();
             EstacionamientoSeleccionado = WeakReferenceMessenger.Default.Send<EstacionamientoSeleccionadoRequestMessage>();
+
+            // Calcula el importe a pagar
+            EstacionamientoSeleccionado.Importe = CalcularImporteEstacionamiento();
+
             PagarFinalizarButton = new RelayCommand(PagarFinalizar);
         }
 
         public void PagarFinalizar()
         {
-            // Se calcula el importe
-            int costeParking = 10;
-
-            // Se añade la hora de salida
-            string horaSalida = DateTime.Now.ToString();
-            EstacionamientoSeleccionado.Salida = horaSalida;
-            EstacionamientoSeleccionado.Importe = costeParking;
+            // Se Edita el Estacionamiento, para finalizarlo
+            EstacionamientoSeleccionado.Salida = DateTime.Now.ToString();
 
             // Se actualiza el estacionamiento
             ServicioDB.UpdateParkedVehicle(EstacionamientoSeleccionado);
 
+            // Se resetea la propiedad
             EstacionamientoSeleccionado = new Estacionamiento();
             //WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
+        }
+
+        private double CalcularImporteEstacionamiento()
+        {
+            // Se añade la hora de salida
+            string horaSalida = DateTime.Now.ToString();
+
+            // Calcula los minutos del estacionamiento
+            DateTime entrada = Convert.ToDateTime(EstacionamientoSeleccionado.Entrada);
+            DateTime salida = Convert.ToDateTime(horaSalida);
+            TimeSpan diferenciaTiempo = salida - entrada;
+            double minutos = diferenciaTiempo.TotalMinutes;
+
+            // Obtiene el coste por minuto
+            double precioMinuto = Properties.Settings.Default.PrecioMinuto;
+
+            // Calcula el importe a pagar redondeando a 2 decimales
+            double importe = Math.Round(minutos * precioMinuto, 2);
+
+            return importe;
         }
     }
 }

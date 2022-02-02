@@ -217,7 +217,7 @@
 
             <!-- Importe -->
             <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
-                <TextBlock Text="Importe del aparcamiento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+                <TextBlock Text="Importe a Pagar" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
                 <TextBox x:Name="ImporteTextBox"
                      IsEnabled="False"
