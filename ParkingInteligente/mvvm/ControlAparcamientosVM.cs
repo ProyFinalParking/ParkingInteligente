@@ -36,13 +36,12 @@ namespace ParkingInteligente.mvvm
             ParkingList = ServicioDB.GetListActivesParkedVehicles();
             servicio = new NavigationService();
             ParkingSelect = new Estacionamiento();
+            CobrarFinalizarCommand = new RelayCommand(AbrirDialogoCobrarParking);
 
             WeakReferenceMessenger.Default.Register<ControlAparcamientosVM, EstacionamientoSeleccionadoRequestMessage>(this, (r, m) =>
             {
                 m.Reply(r.ParkingSelect);
             });
-
-            CobrarFinalizarCommand = new RelayCommand(AbrirDialogoCobrarParking);
         }
 
         private void AbrirDialogoCobrarParking()

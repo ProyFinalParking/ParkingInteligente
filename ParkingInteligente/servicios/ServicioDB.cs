@@ -765,7 +765,7 @@ namespace ParkingInteligente.servicios
                                                             entrada = @entrada,
                                                             salida = @salida,
                                                             importe = @importe,
-                                                            tipo = @tipo,
+                                                            tipo = @tipo
                                                             WHERE id_estacionamiento = @id_estacionamiento";
 
                 // Se Configura el tipo de valores
