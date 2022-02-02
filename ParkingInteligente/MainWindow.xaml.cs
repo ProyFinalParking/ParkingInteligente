@@ -31,7 +31,6 @@ namespace ParkingInteligente
             InitializeComponent();
             vm = new MainWindowVM();
             this.DataContext = vm;
-
         }
     }
 }

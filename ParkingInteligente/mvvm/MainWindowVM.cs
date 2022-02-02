@@ -12,7 +12,7 @@ namespace ParkingInteligente.mvvm
 {
     class MainWindowVM : ObservableObject
     {
-        private NavigationService servicio;
+        private readonly NavigationService servicio;
 
         private UserControl contenido;
 

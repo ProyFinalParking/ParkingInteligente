@@ -11,6 +11,9 @@ namespace ParkingInteligente.servicios
         // Propiedad de Configuración de aplicaciones con el nombre de la BBDD
         static readonly string nombreBD = Properties.Settings.Default.NombreBD;
 
+        protected ServicioDB()
+        { }
+
         static ServicioDB()
         {
             // TODO: Llamar el metodo 'CreateTablesIfNotExists()' en vez del siguiente:
@@ -254,15 +257,35 @@ namespace ParkingInteligente.servicios
             return cliente;
         }
 
-        public static bool IsParked(Cliente c)
+        // Comprueba si alguno de los vehiculos de un cliente tiene estacionamiento activo (sin finalizar)
+        public static bool IsParked(String documento)
         {
-            //TODO: Comprobar si alguno de los coches del cliente esta actualmente aparcado
+            bool existe = false;
 
-            // Obtener el listado de vehiculos del cliente
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
 
-            // Comprobar si algun vehiculo tiene un estacionamiento sin finalizar
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = @"Select COUNT(*) FROM estacionamientos 
+                    WHERE id_vehiculo IN (SELECT id_vehiculo FROM vehiculos 
+                        WHERE id_cliente IN (SELECT id_cliente FROM clientes 
+                            WHERE documento = @documento)) AND salida = ''";
 
-            return false;
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@documento", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@documento"].Value = documento;
+
+                // Se ejecuta el SELECT
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
+                {
+                    existe = true;
+                }
+            }
+
+            return existe;
         }
 
         /*******************************************************
@@ -1096,7 +1119,9 @@ namespace ParkingInteligente.servicios
                                 (4, 14, '9543YAC', 19, 'Fabia', 'Coche'),
                                 (5, 8, '3215KPE', 37, 'Hayabusa', 'Moto'),
                                 (6, 6, '9435ODS', 22, 'Model S', 'Coche'),
-                                (7,1,'2648KHY',1,'Serie 3','Coche')";
+                                (7,1,'2648KHY',1,'Serie 3','Coche'),
+                                (8,1,'5564KIK',1,'Serie 5','Coche'),
+                                (9, 8, '8899KIO', 1, 'Serie 1', 'Coche')";
                     command.ExecuteNonQuery();
 
                     // Datos Estacionamientos

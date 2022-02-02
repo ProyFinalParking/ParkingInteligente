@@ -14,7 +14,7 @@ namespace ParkingInteligente.mvvm
 {
     class ControlClientesVM : ObservableObject
     {
-        private NavigationService servicio;
+        private readonly NavigationService servicio;
 
         private Cliente clienteSeleccionado;
         public Cliente ClienteSeleccionado
