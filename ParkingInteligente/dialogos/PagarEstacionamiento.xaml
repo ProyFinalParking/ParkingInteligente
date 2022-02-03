@@ -8,7 +8,9 @@
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="PagarEstacionamiento" Height="450" Width="500">
+        Title="Pagar Estacionamiento" Height="400" Width="500">
+
+    <!-- ESTILOS -->
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
@@ -129,6 +131,8 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
+
+    <!-- DISEÑO -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -136,7 +140,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="260" />
+            <RowDefinition Height="290" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -156,66 +160,84 @@
               Margin="10">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
+            <!-- Id Estacionamiento -->
+            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,5">
+                <TextBlock Text="Id Estacionamiento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="DNITextBox"
-                     Grid.Column="1"
+                <TextBox x:Name="IdEstacionamientoTextBox"
+                     Grid.Row="0"
                      Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Documento}"
+                     Text="{Binding Path=EstacionamientoSeleccionado.IdEstacionamiento}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" AutomationProperties.HelpText="Prueba" />
+                     Template="{DynamicResource TextBoxControlTemplate1}" IsEnabled="False"/>
+            </StackPanel>
 
+            <!-- Id Vehiculo -->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,5">
+                <TextBlock Text="Id Vehiculo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="NombreTextBox"
-                     Grid.Row="1"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Nombre}"
+                <TextBox x:Name="IdVehiculoTextBox"
+                     Text="{Binding Path=EstacionamientoSeleccionado.IdVehiculo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
+                     Template="{DynamicResource TextBoxControlTemplate1}" IsEnabled="False" />
+            </StackPanel>
 
-            <TextBox x:Name="TelefonoTextBox"
-                     Grid.Row="2"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Telefono}"
+            <!-- Matricula -->
+            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
+                <TextBlock Text="Matricula" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="MatriculaTextBox"
+                     Text="{Binding Path=EstacionamientoSeleccionado.Matricula}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}"/>
+                     Template="{DynamicResource TextBoxControlTemplate1}" IsEnabled="False"/>
+            </StackPanel>
 
-            <TextBox x:Name="EdadTextBox"
-                     Grid.Row="3"
+            <!-- Entrada -->
+            <StackPanel Orientation="Vertical" Grid.Row="3" Margin="0,0,0,5">
+                <TextBlock Text="Entrada al Aparcamiento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="EntradaTextBox"
                      IsEnabled="False"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Edad}"
+                     Text="{Binding Path=EstacionamientoSeleccionado.Entrada}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
+            <!-- Importe -->
+            <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
+                <TextBlock Text="Importe a Pagar" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="GeneroTextBox"
-                     Grid.Row="4"
+                <TextBox x:Name="ImporteTextBox"
                      IsEnabled="False"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Genero}"
+                     Text="{Binding Path=EstacionamientoSeleccionado.Importe}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
-            <TextBox x:Name="URLImagenTextBox"
-                     Grid.Row="5"
-                     Margin="0,0,0,5"
-                     Text="{Binding Path=NuevoCliente.Foto}"
+            <!-- Tipo Vehiculo -->
+            <StackPanel Orientation="Vertical" Grid.Row="5" Margin="0,0,0,5">
+                <TextBlock Text="Tipo Vehiculo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="TipoTextBox"
+                     Text="{Binding Path=EstacionamientoSeleccionado.Tipo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
+                     Template="{DynamicResource TextBoxControlTemplate1}" IsEnabled="False" />
+            </StackPanel>
+
         </Grid>
 
         <StackPanel Orientation="Horizontal"
@@ -232,15 +254,15 @@
                     IsCancel="True"
                     Template="{DynamicResource ButtonControlTemplate1}"/>
 
-            <Button x:Name="AceptarButton"
-                    Content="Añadir Cliente"
+            <Button x:Name="CobrarButton"
+                    Content="Cobrar y Finalizar"
                     Height="30"
                     Width="150"
                     Margin="5"
                     IsDefault="True"
-                    Click="AceptarButton_Click"
+                    Click="CobrarButton_Click"
                     Template="{DynamicResource ButtonControlTemplate1}"
-                    Command="{Binding Path=AñadirClienteButton}"/>
+                    Command="{Binding Path=PagarFinalizarButton}"/>
         </StackPanel>
 
     </Grid>

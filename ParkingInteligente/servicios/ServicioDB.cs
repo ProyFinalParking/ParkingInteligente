@@ -25,6 +25,9 @@ namespace ParkingInteligente.servicios
          * **************************************************************************************************************************/
 
 
+        // TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
+
+
         /*******************************************************
             METODOS RELACIONADOS CON EL CLIENTE
          *******************************************************/
@@ -111,18 +114,43 @@ namespace ParkingInteligente.servicios
             {
                 connection.Open();
 
-                SqliteCommand command = connection.CreateCommand();
-                command.CommandText = @"DELETE FROM clientes 
-                                        WHERE documento = @documento";
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                {
+                    // Elimina los estacionamientos del Cliente
+                    SqliteCommand eliminarEstacionamientos = connection.CreateCommand();
+                    eliminarEstacionamientos.CommandText = @"DELETE FROM estacionamientos 
+                    WHERE id_vehiculo IN (SELECT id_vehiculo FROM vehiculos 
+                        WHERE id_cliente IN (SELECT id_cliente FROM clientes 
+                            WHERE documento = @documento))";
 
-                // Se Configura el tipo de valores
-                command.Parameters.Add("@documento", SqliteType.Text);
+                    eliminarEstacionamientos.Parameters.Add("@documento", SqliteType.Text);
+                    eliminarEstacionamientos.Parameters["@documento"].Value = doc;
 
-                // Se asignan los valores
-                command.Parameters["@documento"].Value = doc;
+                    // Elimina los vehiculos del Cliente
+                    SqliteCommand eliminarVehiculos = connection.CreateCommand();
+                    eliminarVehiculos.CommandText = @"DELETE FROM vehiculos 
+                    WHERE id_cliente IN (SELECT id_cliente FROM clientes 
+                            WHERE documento = @documento)";
 
-                // Se ejecuta el DELETE
-                command.ExecuteNonQuery();
+                    eliminarVehiculos.Parameters.Add("@documento", SqliteType.Text);
+                    eliminarVehiculos.Parameters["@documento"].Value = doc;
+
+                    // Elimina los vehiculos del Cliente
+                    SqliteCommand eliminarCliente = connection.CreateCommand();
+                    eliminarCliente.CommandText = @"DELETE FROM clientes 
+                    WHERE documento = @documento";
+
+                    eliminarCliente.Parameters.Add("@documento", SqliteType.Text);
+                    eliminarCliente.Parameters["@documento"].Value = doc;
+
+                    // Se ejecutan los DELETE
+                    eliminarEstacionamientos.ExecuteNonQuery();
+                    eliminarVehiculos.ExecuteNonQuery();
+                    eliminarCliente.ExecuteNonQuery();
+
+                    // Se ejecuta el Commit
+                    transaction.Commit();
+                }
             }
         }
 
@@ -765,7 +793,7 @@ namespace ParkingInteligente.servicios
                                                             entrada = @entrada,
                                                             salida = @salida,
                                                             importe = @importe,
-                                                            tipo = @tipo,
+                                                            tipo = @tipo
                                                             WHERE id_estacionamiento = @id_estacionamiento";
 
                 // Se Configura el tipo de valores

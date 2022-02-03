@@ -30,7 +30,7 @@ namespace ParkingInteligente.dialogos
             this.DataContext = vm;
         }
 
-        private void AceptarButton_Click(object sender, RoutedEventArgs e)
+        private void CobrarButton_Click(object sender, RoutedEventArgs e)
         {
             //Aqui llamamos al método para grabarlo en BD
             DialogResult = true;

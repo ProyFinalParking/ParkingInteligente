@@ -5,5 +5,14 @@
     <Setting Name="NombreBD" Type="System.String" Scope="Application">
       <Value Profile="(Default)">parking.db</Value>
     </Setting>
+    <Setting Name="PrecioMinuto" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0.0315</Value>
+    </Setting>
+    <Setting Name="PlazasMoto" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="PlazaCoche" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

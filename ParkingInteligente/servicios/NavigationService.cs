@@ -85,5 +85,19 @@ namespace ParkingInteligente.servicios
             dialogo.Owner = Application.Current.MainWindow;
             return dialogo.ShowDialog();
         }
+
+        public bool? CargarDialogoEliminarCliente()
+        {
+            EliminarCliente dialogo = new EliminarCliente();
+            dialogo.Owner = Application.Current.MainWindow;
+            return dialogo.ShowDialog();
+        }
+
+        public bool? CargarDialogoEliminarVehiculo()
+        {
+            EliminarVehiculo dialogo = new EliminarVehiculo();
+            dialogo.Owner = Application.Current.MainWindow;
+            return dialogo.ShowDialog();
+        }
     }
 }

@@ -31,5 +31,38 @@ namespace ParkingInteligente.Properties {
                 return ((string)(this["NombreBD"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0315")]
+        public double PrecioMinuto {
+            get {
+                return ((double)(this["PrecioMinuto"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int PlazasMoto {
+            get {
+                return ((int)(this["PlazasMoto"]));
+            }
+            set {
+                this["PlazasMoto"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int PlazaCoche {
+            get {
+                return ((int)(this["PlazaCoche"]));
+            }
+            set {
+                this["PlazaCoche"] = value;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace ParkingInteligente.modelo
 {
     class Estacionamiento : ObservableObject
     {
-        public Estacionamiento(int idEstacionamiento, int idVehiculo, string matricula, string entrada, string salida, float importe, string tipo)
+        public Estacionamiento(int idEstacionamiento, int idVehiculo, string matricula, string entrada, string salida, double importe, string tipo)
         {
             IdEstacionamiento = idEstacionamiento;
             IdVehiculo = idVehiculo;
@@ -60,8 +60,8 @@ namespace ParkingInteligente.modelo
             set { SetProperty(ref salida, value); }
         }
 
-        private float importe;
-        public float Importe
+        private double importe;
+        public double Importe
         {
             get { return importe; }
             set { SetProperty(ref importe, value); }
