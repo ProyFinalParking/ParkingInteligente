@@ -200,6 +200,7 @@
                      Text="{Binding Path=ClienteSeleccionado.Edad}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
+                     IsEnabled="False"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
 
 
@@ -209,6 +210,7 @@
                      Text="{Binding Path=ClienteSeleccionado.Genero}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
+                     IsEnabled="False"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
 
             <TextBox x:Name="URLImagenTextBox"
