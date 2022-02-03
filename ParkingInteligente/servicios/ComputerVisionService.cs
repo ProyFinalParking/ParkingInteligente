@@ -20,7 +20,7 @@ namespace ParkingInteligente.servicios
             computerVisionClient = ComputerVisionAuthenticate(COMPUTERVISION_ENDPOINT, COMPUTERVISION_SUSCRIPTION_KEY);
         }
 
-        public string LeerImagen(string urlFile)
+        public string GetMatricula(string urlFile)
         {
             // Carga el archivo
             var textHeaders = computerVisionClient.ReadAsync(urlFile).Result;
@@ -38,7 +38,8 @@ namespace ParkingInteligente.servicios
             }
             while (results.Status == OperationStatusCodes.Running || results.Status == OperationStatusCodes.NotStarted);
 
-            String resultado = string.Empty;
+            // Lista de valores devueltos por el servicio, el primero es la matricula
+            List<string> lista = new List<string>();
 
             // Pasamos los datos encontrados a string
             var textUrlFileResults = results.AnalyzeResult.ReadResults;
@@ -46,11 +47,13 @@ namespace ParkingInteligente.servicios
             {
                 foreach (Line line in page.Lines)
                 {
-                    resultado += line.Text + "\n";
+                    lista.Add(line.Text);
                 }
             }
 
-            return resultado;
+            string matricula = lista[0];
+
+            return matricula;
         }
 
         private static ComputerVisionClient ComputerVisionAuthenticate(string endpoint, string key)

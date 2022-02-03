@@ -28,17 +28,20 @@ namespace ParkingInteligente.mvvm
 
         public AñadirVehiculoVM()
         {
+            NuevoVehiculo = new Vehiculo();
+            NuevoVehiculo.Foto = "https://motor.elpais.com/wp-content/uploads/2018/11/CUPRA-Ateca057H.jpg";
+
+            // TODO Añadir a Vehículo una Foto de este para poder detectar Tipo y Matrícula
             servicioCustomVision = new CustomVisionService();
             servicioComputerVision = new ComputerVisionService();
-            NuevoVehiculo = new Vehiculo();
+            NuevoVehiculo.Tipo = servicioCustomVision.ComprobarVehiculo(NuevoVehiculo.Foto);
+            NuevoVehiculo.Matricula = servicioComputerVision.GetMatricula(NuevoVehiculo.Foto);
+
             AñadirVehiculoButton = new RelayCommand(AñadirVehiculo);
         }
 
         public void AñadirVehiculo()
         {
-            // TODO Añadir a Vehículo una Foto de este para poder detectar Tipo y Matrícula
-            // NuevoVehiculo.Tipo = servicioCustomVision.ComprobarVehiculo(NuevoVehiculo.Foto);
-            // NuevoVehiculo.Matricula = servicioComputerVision.LeerImagen(NuevoVehiculo.Foto);
             ServicioDB.InsertVehicle(NuevoVehiculo);
             WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
         }

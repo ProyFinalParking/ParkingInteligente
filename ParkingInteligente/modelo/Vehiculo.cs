@@ -4,21 +4,23 @@ namespace ParkingInteligente.modelo
 {
     class Vehiculo : ObservableObject
     {
-        public Vehiculo(int idVehiculo, int documentoCliente, string matricula, int idMarca, string modelo, string tipo)
-        {
-            IdVehiculo = idVehiculo;
-            IdCliente = documentoCliente;
-            Matricula = matricula;
-            IdMarca = idMarca;
-            Modelo = modelo;
-            Tipo = tipo;
-        }
-
         public Vehiculo()
         {
             matricula = "";
             modelo = "";
             tipo = "";
+            foto = "";
+        }
+
+        public Vehiculo(int idVehiculo, int idCliente, string matricula, string foto, int idMarca, string modelo, string tipo)
+        {
+            IdVehiculo = idVehiculo;
+            IdCliente = idCliente;
+            Matricula = matricula;
+            Foto = foto;
+            IdMarca = idMarca;
+            Modelo = modelo;
+            Tipo = tipo;
         }
 
         // Al insertar un Vehiculo en la BBDD, no se tiene en cuenta la ID del objeto
@@ -42,6 +44,13 @@ namespace ParkingInteligente.modelo
         {
             get { return matricula; }
             set { SetProperty(ref matricula, value); }
+        }
+
+        private string foto;
+        public string Foto
+        {
+            get { return foto; }
+            set { SetProperty(ref foto, value); }
         }
 
         private int idMarca;

@@ -28,14 +28,17 @@ namespace ParkingInteligente.mvvm
         public AñadirClienteVM()
         {
             NuevoCliente = new Cliente();
+            NuevoCliente.Foto = "https://xavierferras.com/wp-content/uploads/2019/02/266-Persona.jpg";
+
             servicio = new FaceService();
+            NuevoCliente.Edad = servicio.ObtenerEdad(NuevoCliente.Foto);
+            NuevoCliente.Genero = servicio.ObtenerGenero(NuevoCliente.Foto);
+
             AñadirClienteButton = new RelayCommand(AñadirCliente);
         }
 
         public void AñadirCliente()
         {
-            NuevoCliente.Edad = servicio.ObtenerEdad(NuevoCliente.Foto);
-            NuevoCliente.Genero = servicio.ObtenerGenero(NuevoCliente.Foto);
             ServicioDB.InsertClient(NuevoCliente);
             WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }

@@ -165,11 +165,12 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
 
             <TextBox x:Name="MatriculaTextBox"
-                     Grid.Column="1"
+                     Grid.Row="0"
                      Margin="0,0,0,5"
                      Text="{Binding Path=NuevoVehiculo.Matricula}"
                      FontSize="16"
@@ -206,6 +207,14 @@
                      Grid.Row="4"
                      Margin="0,0,0,5"
                      Text="{Binding Path=NuevoVehiculo.Tipo}"
+                     FontSize="16"
+                     FontFamily="Source Code Pro"
+                     Template="{DynamicResource TextBoxControlTemplate1}" />
+            <!-- TODO: Temporal -->
+            <TextBox x:Name="URLFotoTextBox"
+                     Grid.Row="5"
+                     Margin="0,0,0,5"
+                     Text="{Binding Path=NuevoVehiculo.Foto}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
