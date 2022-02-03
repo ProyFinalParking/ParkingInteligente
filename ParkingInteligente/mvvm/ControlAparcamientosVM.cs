@@ -46,7 +46,9 @@ namespace ParkingInteligente.mvvm
 
         private void AbrirDialogoCobrarParking()
         {
-            servicio.CargarDialogoPagarFinalizarParking();
+            if (ParkingSelect.IdEstacionamiento > 0) {
+                servicio.CargarDialogoPagarFinalizarParking();
+            }
         }
 
     }

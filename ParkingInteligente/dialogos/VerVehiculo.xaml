@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
         Title="Ver Vehiculo"
-        MinHeight="338"
-        MinWidth="487"
-        Height="338"
-        Width="487"
+        Height="340"
+        Width="490"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
