@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
         Title="EditarVehiculo"
-        MinHeight="338"
-        MinWidth="487"
-        Height="338"
-        Width="487"
+        Height="370"
+        Width="490"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -140,7 +138,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="260" />
+            <RowDefinition Height="290" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -160,55 +158,72 @@
               Margin="10">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
+            <!-- Matricula -->
+            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,5">
+                <TextBlock Text="Matricula" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="MatriculaTextBox"
-                     Grid.Column="1"
-                     Margin="0,0,0,5"
+                <TextBox x:Name="MatriculaTextBox"
                      Text="{Binding Path=VehiculoSeleccionado.Matricula}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
 
-            <TextBox x:Name="DNIClienteTextBox"
-                     Grid.Row="1"
-                     Margin="0,0,0,5"
+            <!-- ID del Cliente -->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,5">
+                <TextBlock Text="ID del Cliente" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="DNIClienteTextBox"
                      Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
-            <ComboBox x:Name="MarcaTextBox"
-                      Grid.Row="2"
-                      Margin="0,0,0,5"
+
+            <!-- Marca del Vehículo -->
+            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
+                <TextBlock Text="Marca" FontSize="9" Margin="15,0,0,-1"></TextBlock>
+
+                <ComboBox x:Name="MarcaTextBox"
                       ItemsSource="{Binding Path=Marcas}"
                       SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
                       FontSize="16"
                       FontFamily="Source Code Pro" />
+            </StackPanel>
+            
 
-            <TextBox x:Name="ModeloTextBox"
-                     Grid.Row="3"
-                     Margin="0,0,0,5"
+            <!-- Modelo -->
+            <StackPanel Orientation="Vertical" Grid.Row="3" Margin="0,0,0,5">
+                <TextBlock Text="Modelo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="ModeloTextBox"
                      Text="{Binding Path=VehiculoSeleccionado.Modelo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
+            
 
+            <!-- Tipo -->
+            <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
+                <TextBlock Text="Tipo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="TipoTextBox"
-                     Grid.Row="4"
-                     Margin="0,0,0,5"
+                <TextBox x:Name="TipoTextBox"
                      Text="{Binding Path=VehiculoSeleccionado.Tipo}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
+            
         </Grid>
 
         <StackPanel Orientation="Horizontal"

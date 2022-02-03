@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
         mc:Ignorable="d"
+        Height="370"
+        Width="490"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="Pagar Estacionamiento" Height="400" Width="500">
+        Title="Pagar Estacionamiento">
 
     <!-- ESTILOS -->
     <Window.Background>
@@ -173,8 +175,6 @@
                 <TextBlock Text="Id Estacionamiento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
                 <TextBox x:Name="IdEstacionamientoTextBox"
-                     Grid.Row="0"
-                     Margin="0,0,0,5"
                      Text="{Binding Path=EstacionamientoSeleccionado.IdEstacionamiento}"
                      FontSize="16"
                      FontFamily="Source Code Pro"

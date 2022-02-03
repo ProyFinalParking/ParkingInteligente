@@ -160,70 +160,86 @@
               VerticalAlignment="Center">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
             </Grid.RowDefinitions>
 
+            <!-- Documento -->
+            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,5">
+                <TextBlock Text="Documento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="DNITextBox"
-                     Grid.Column="1"
-                     Margin="0,0,0,5"
+                <TextBox x:Name="DNITextBox"
                      IsEnabled="False"
                      Text="{Binding Path=ClienteSeleccionado.Documento}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
+            <!-- Nombre -->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,5">
+                <TextBlock Text="Nombre" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="NombreTextBox"
-                     Grid.Row="1"
-                     Margin="0,0,0,5"
+                <TextBox x:Name="NombreTextBox"
                      IsEnabled="False"
                      Text="{Binding Path=ClienteSeleccionado.Nombre}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
-            <TextBox x:Name="TelefonoTextBox"
-                     Grid.Row="2"
-                     Margin="0,0,0,5"
+            <!-- Telefono -->
+            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
+                <TextBlock Text="Teléfono" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="TelefonoTextBox"
                      IsEnabled="False"
                      Text="{Binding Path=ClienteSeleccionado.Telefono}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
-            <TextBox x:Name="EdadTextBox"
-                     Grid.Row="3"
+            <!-- Edad -->
+            <StackPanel Orientation="Vertical" Grid.Row="3" Margin="0,0,0,5">
+                <TextBlock Text="Edad" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="EdadTextBox"
                      IsEnabled="False"
-                     Margin="0,0,0,5"
                      Text="{Binding Path=ClienteSeleccionado.Edad}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
+            <!-- Genero -->
+            <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
+                <TextBlock Text="Género" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-            <TextBox x:Name="GeneroTextBox"
-                     Grid.Row="4"
+                <TextBox x:Name="GeneroTextBox"
                      IsEnabled="False"
-                     Margin="0,0,0,5"
                      Text="{Binding Path=ClienteSeleccionado.Genero}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
 
-            <TextBox x:Name="URLImagenTextBox"
-                     Grid.Row="5"
-                     Margin="0,0,0,5"
+            <!-- URL de la Foto -->
+            <StackPanel Orientation="Vertical" Grid.Row="5" Margin="0,0,0,5">
+                <TextBlock Text="URL de la Foto" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+                <TextBox x:Name="URLImagenTextBox"
                      IsEnabled="False"
                      Text="{Binding Path=ClienteSeleccionado.Foto}"
                      FontSize="16"
                      FontFamily="Source Code Pro"
                      Template="{DynamicResource TextBoxControlTemplate1}" />
+            </StackPanel>
+            
         </Grid>
 
     </Grid>
