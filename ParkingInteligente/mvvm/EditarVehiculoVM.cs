@@ -15,6 +15,9 @@ namespace ParkingInteligente.mvvm
     {
         public RelayCommand EditarVehiculoButton { get; }
 
+        private readonly CustomVisionService servicioCustomVision;
+        private readonly ComputerVisionService servicioComputerVision;
+
         private Vehiculo vehiculoSeleccionado;
 
         public Vehiculo VehiculoSeleccionado
@@ -33,6 +36,8 @@ namespace ParkingInteligente.mvvm
 
         public EditarVehiculoVM()
         {
+            servicioCustomVision = new CustomVisionService();
+            servicioComputerVision = new ComputerVisionService();
             VehiculoSeleccionado = new Vehiculo();
             VehiculoSeleccionado = WeakReferenceMessenger.Default.Send<VehiculoSeleccionadoRequestMessage>();
             DocVehiculoOriginal = VehiculoSeleccionado.ToString();
@@ -41,6 +46,9 @@ namespace ParkingInteligente.mvvm
 
         public void EditarVehiculo()
         {
+            // TODO Añadir a Vehículo una Foto de este para poder detectar Tipo y Matrícula
+            // VehiculoSeleccionado.Tipo = servicioCustomVision.ComprobarVehiculo(VehiculoSeleccionado.Foto);
+            // VehiculoSeleccionado.Matricula = servicioComputerVision.LeerImagen(VehiculoSeleccionado.Foto);
             ServicioDB.UpdateVehicle(VehiculoSeleccionado, DocVehiculoOriginal);
         }
     }

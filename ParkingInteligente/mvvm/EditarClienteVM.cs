@@ -15,6 +15,8 @@ namespace ParkingInteligente.mvvm
     {
         public RelayCommand EditarClienteButton { get; }
 
+        private readonly FaceService servicio;
+
         private Cliente clienteSeleccionado;
 
         public Cliente ClienteSeleccionado
@@ -33,6 +35,7 @@ namespace ParkingInteligente.mvvm
 
         public EditarClienteVM()
         {
+            servicio = new FaceService();
             ClienteSeleccionado = new Cliente();
             ClienteSeleccionado = WeakReferenceMessenger.Default.Send<ClienteSeleccionadoRequestMessage>();
             DocClienteOriginal = ClienteSeleccionado.ToString();
@@ -41,8 +44,8 @@ namespace ParkingInteligente.mvvm
 
         public void EditarCliente()
         {
-            ClienteSeleccionado.Edad = 22;
-            ClienteSeleccionado.Genero = "Hombre";
+            ClienteSeleccionado.Edad = servicio.ObtenerEdad(ClienteSeleccionado.Foto);
+            ClienteSeleccionado.Genero = servicio.ObtenerGenero(ClienteSeleccionado.Foto);
             ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
         }
     }

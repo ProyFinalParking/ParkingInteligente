@@ -15,6 +15,9 @@ namespace ParkingInteligente.mvvm
     {
         public RelayCommand AñadirVehiculoButton { get; }
 
+        private readonly CustomVisionService servicioCustomVision;
+        private readonly ComputerVisionService servicioComputerVision;
+
         private Vehiculo nuevoVehiculo;
 
         public Vehiculo NuevoVehiculo
@@ -25,12 +28,17 @@ namespace ParkingInteligente.mvvm
 
         public AñadirVehiculoVM()
         {
+            servicioCustomVision = new CustomVisionService();
+            servicioComputerVision = new ComputerVisionService();
             NuevoVehiculo = new Vehiculo();
             AñadirVehiculoButton = new RelayCommand(AñadirVehiculo);
         }
 
         public void AñadirVehiculo()
         {
+            // TODO Añadir a Vehículo una Foto de este para poder detectar Tipo y Matrícula
+            // NuevoVehiculo.Tipo = servicioCustomVision.ComprobarVehiculo(NuevoVehiculo.Foto);
+            // NuevoVehiculo.Matricula = servicioComputerVision.LeerImagen(NuevoVehiculo.Foto);
             ServicioDB.InsertVehicle(NuevoVehiculo);
             WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
         }

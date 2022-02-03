@@ -23,34 +23,36 @@ namespace ParkingInteligente.servicios
             faceClient = FaceAuthenticate(FACE_ENDPOINT, FACE_SUBSCRIPTION_KEY);
         }
 
-        public async Task<int> ObtenerEdad(String imageURL)
+        public int ObtenerEdad(String imageURL)
         {
             // Creamos una lista de las caras que detectará
             IList<DetectedFace> detectedFaces;
 
             // Le hacemos reconocer las caras, esto puede tardar un poco
-            detectedFaces = await faceClient.Face.DetectWithUrlAsync(imageURL,
+            detectedFaces = faceClient.Face.DetectWithUrlAsync(imageURL,
                 returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Age },
                         detectionModel: DetectionModel.Detection01,
-                        recognitionModel: RECOGNITION_MODEL4);
+                        recognitionModel: RECOGNITION_MODEL4).Result;
 
+            int edad = (int)detectedFaces[0].FaceAttributes.Age;
             // Devolvemos la edad de la cara principal
-            return (int)detectedFaces[0].FaceAttributes.Age;
+            return edad;
         }
 
-        public async Task<string> ObtenerGenero(string imageURL)
+        public string ObtenerGenero(string imageURL)
         {
             // Creamos una lista de las caras que detectará
             IList<DetectedFace> detectedFaces;
 
             // Le hacemos reconocer las caras, esto puede tardar un poco
-            detectedFaces = await faceClient.Face.DetectWithUrlAsync(imageURL,
+            detectedFaces = faceClient.Face.DetectWithUrlAsync(imageURL,
                 returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Gender },
                         detectionModel: DetectionModel.Detection01,
-                        recognitionModel: RECOGNITION_MODEL4);
+                        recognitionModel: RECOGNITION_MODEL4).Result;
 
             // Devolvemos el género de la cara principal
-            return detectedFaces[0].FaceAttributes.Gender.ToString();
+            string genero = detectedFaces[0].FaceAttributes.Gender.ToString() == "Male" ? "Hombre" : "Mujer";
+            return genero;
         }
 
 

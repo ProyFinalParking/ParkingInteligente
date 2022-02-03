@@ -20,10 +20,10 @@ namespace ParkingInteligente.servicios
             computerVisionClient = ComputerVisionAuthenticate(COMPUTERVISION_ENDPOINT, COMPUTERVISION_SUSCRIPTION_KEY);
         }
 
-        public async Task<string> LeerImagen(string urlFile)
+        public string LeerImagen(string urlFile)
         {
             // Carga el archivo
-            var textHeaders = await computerVisionClient.ReadAsync(urlFile);
+            var textHeaders = computerVisionClient.ReadAsync(urlFile).Result;
             string operationLocation = textHeaders.OperationLocation;
 
             // Solo necesitamos el ID de la URL, quitamos lo demás
@@ -34,7 +34,7 @@ namespace ParkingInteligente.servicios
             ReadOperationResult results;
             do
             {
-                results = await computerVisionClient.GetReadResultAsync(Guid.Parse(operationId));
+                results = computerVisionClient.GetReadResultAsync(Guid.Parse(operationId)).Result;
             }
             while (results.Status == OperationStatusCodes.Running || results.Status == OperationStatusCodes.NotStarted);
 

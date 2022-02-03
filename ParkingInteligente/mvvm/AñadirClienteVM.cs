@@ -15,6 +15,8 @@ namespace ParkingInteligente.mvvm
     {
         public RelayCommand AñadirClienteButton { get; }
 
+        private readonly FaceService servicio;
+
         private Cliente nuevoCliente;
 
         public Cliente NuevoCliente
@@ -26,13 +28,14 @@ namespace ParkingInteligente.mvvm
         public AñadirClienteVM()
         {
             NuevoCliente = new Cliente();
+            servicio = new FaceService();
             AñadirClienteButton = new RelayCommand(AñadirCliente);
         }
 
         public void AñadirCliente()
         {
-            NuevoCliente.Edad = 22;
-            NuevoCliente.Genero = "Hombre";
+            NuevoCliente.Edad = servicio.ObtenerEdad(NuevoCliente.Foto);
+            NuevoCliente.Genero = servicio.ObtenerGenero(NuevoCliente.Foto);
             ServicioDB.InsertClient(NuevoCliente);
             WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }
