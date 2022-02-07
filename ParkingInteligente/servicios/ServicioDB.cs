@@ -21,9 +21,12 @@ namespace ParkingInteligente.servicios
         }
 
         /**************************************************************************************************************************** 
-         * Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
+         * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
          * **************************************************************************************************************************/
 
+        /**************************************************************************************************************************** 
+         * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
+         * **************************************************************************************************************************/
 
         // TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
 
@@ -1141,15 +1144,18 @@ namespace ParkingInteligente.servicios
                     // Datos Vehiculos
                     command.CommandText = @"INSERT INTO 'vehiculos' ('id_vehiculo','id_cliente','matricula','id_marca','modelo','tipo')
                             VALUES (0,0,'No Registrado',0,'','Coche'),
-                                (1,0,'',0,'','Moto'),
-                                (2, 2, '45778KYB', 2, 'C3', 'Coche'),
+                                (1,0,'Eliminado',0,'','Coche'),
+                                (2,0,'Eliminado',0,'','Moto'),
+                                (3,0,'No Registrado',0,'','Moto'),
                                 (3, 11, '4595HHY', 36, 'R1', 'Moto'),
                                 (4, 14, '9543YAC', 19, 'Fabia', 'Coche'),
                                 (5, 8, '3215KPE', 37, 'Hayabusa', 'Moto'),
                                 (6, 6, '9435ODS', 22, 'Model S', 'Coche'),
                                 (7,1,'2648KHY',1,'Serie 3','Coche'),
                                 (8,1,'5564KIK',1,'Serie 5','Coche'),
-                                (9, 8, '8899KIO', 1, 'Serie 1', 'Coche')";
+                                (9, 8, '8899KIO', 1, 'Serie 1', 'Coche'),
+                                (10,0,'',0,'','Moto'),
+                                (11, 2, '45778KYB', 2, 'C3', 'Coche'),";
                     command.ExecuteNonQuery();
 
                     // Datos Estacionamientos
