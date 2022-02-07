@@ -58,7 +58,10 @@ namespace ParkingInteligente.mvvm
 
             WeakReferenceMessenger.Default.Register<ControlClientesVM, ClienteSeleccionadoRequestMessage>(this, (r, m) =>
             {
-                m.Reply(r.ClienteSeleccionado);
+                if (!m.HasReceivedResponse)
+                {
+                    m.Reply(r.ClienteSeleccionado);
+                }
             });
 
             WeakReferenceMessenger.Default.Register<ActualizarGridClientesMessage>(this, (r, m) =>

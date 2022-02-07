@@ -49,7 +49,10 @@ namespace ParkingInteligente.mvvm
 
             WeakReferenceMessenger.Default.Register<ControlVehiculosVM, VehiculoSeleccionadoRequestMessage>(this, (r, m) =>
             {
-                m.Reply(r.VehiculoSeleccionado);
+                if (!m.HasReceivedResponse)
+                {
+                    m.Reply(r.VehiculoSeleccionado);
+                }
             });
 
             WeakReferenceMessenger.Default.Register<ActualizarGridVehiculosMessage>(this, (r, m) =>
