@@ -21,12 +21,12 @@ namespace ParkingInteligente.ventanas
     /// </summary>
     public partial class ControlAparcamientos : UserControl
     {
-        private ControlAparcamientosVM vm;
+        private ControlEstacionamientosVM vm;
 
         public ControlAparcamientos()
         {
             InitializeComponent();
-            vm = new ControlAparcamientosVM();
+            vm = new ControlEstacionamientosVM();
             this.DataContext = vm;
         }
     }

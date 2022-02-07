@@ -20,4 +20,10 @@ namespace ParkingInteligente.servicios
     {
         public ActualizarGridVehiculosMessage(List<Vehiculo> valor) : base(valor) { }
     }
+
+    // Actualiza la lista de Estacionamientos por suscripcion al finalizar un estacionamiento
+    class ActualizarGridEstacionamientosMessage : ValueChangedMessage<List<Estacionamiento>>
+    {
+        public ActualizarGridEstacionamientosMessage(List<Estacionamiento> valor) : base(valor) { }
+    }
 }

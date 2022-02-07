@@ -73,17 +73,45 @@ namespace ParkingInteligente.mvvm
 
         private void AbrirDialogoEditarVehiculo()
         {
-            servicio.CargarDialogoEditarVehiculo();
+            if (VehiculoSeleccionado.Matricula != "")
+            {
+                servicio.CargarDialogoEditarVehiculo();
+            }
+            else
+            {
+                // TODO: Avisar de que hay que seleccionar un vehiculo
+            }
         }
 
         private void AbrirDialogoVerVehiculo()
         {
-            servicio.CargarDialogoVerVehiculo();
+            if (VehiculoSeleccionado.Matricula != "")
+            {
+                servicio.CargarDialogoVerVehiculo();
+            }
+            else
+            {
+                // TODO: Avisar de que hay que seleccionar un vehiculo
+            }
         }
 
         private void AbrirDialogoEliminarVehiculo()
         {
-            servicio.CargarDialogoEliminarVehiculo();
+            if (VehiculoSeleccionado.Matricula != "")
+            {
+                if (ServicioDB.IsVehicleParked(VehiculoSeleccionado.Matricula))
+                {
+                    servicio.CargarDialogoEliminarVehiculo();
+                }
+                else
+                {
+                    // TODO: Avisar de que el cliente tiene estacionamiento activo sin finalizar
+                }
+            }
+            else
+            {
+                // TODO: Avisar de que hay que seleccionar un vehiculo
+            }
         }
 
     }

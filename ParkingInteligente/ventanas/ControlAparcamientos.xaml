@@ -131,7 +131,7 @@
     </UserControl.Background>
 
     <UserControl.DataContext>
-        <local1:ControlAparcamientosVM />
+        <local1:ControlEstacionamientosVM />
     </UserControl.DataContext>
 
     <Grid>

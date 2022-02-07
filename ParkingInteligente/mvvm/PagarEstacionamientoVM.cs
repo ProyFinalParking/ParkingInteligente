@@ -4,10 +4,6 @@ using Microsoft.Toolkit.Mvvm.Messaging;
 using ParkingInteligente.modelo;
 using ParkingInteligente.servicios;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkingInteligente.mvvm
 {
@@ -44,7 +40,9 @@ namespace ParkingInteligente.mvvm
 
             // Se resetea la propiedad
             EstacionamientoSeleccionado = new Estacionamiento();
-            //WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
+
+            // Actualiza el listado al finalizar un estacionamiento
+            WeakReferenceMessenger.Default.Send(new ActualizarGridEstacionamientosMessage(ServicioDB.GetListActivesParkedVehicles()));
         }
 
         private double CalcularImporteEstacionamiento()

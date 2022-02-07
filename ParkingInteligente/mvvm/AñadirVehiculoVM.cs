@@ -42,7 +42,15 @@ namespace ParkingInteligente.mvvm
 
         public void AñadirVehiculo()
         {
-            ServicioDB.InsertVehicle(NuevoVehiculo);
+            if (!ServicioDB.IsExistsVehicle(NuevoVehiculo.Matricula))
+            {
+                ServicioDB.InsertVehicle(NuevoVehiculo);
+            }
+            else
+            {
+                // TODO: Avisar que ya existe un Vehiculo con la Matricuula indicada
+            }
+
             WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
         }
     }

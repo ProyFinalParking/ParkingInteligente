@@ -82,17 +82,49 @@ namespace ParkingInteligente.mvvm
 
         private void AbrirDialogoEditarCliente()
         {
-            servicio.CargarDialogoEditarCliente();
+            // Comprueba que haya un cliente seleccionado
+            if (ClienteSeleccionado.Documento != "")
+            {
+                servicio.CargarDialogoEditarCliente();
+            }
+            else
+            {
+                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+            }
         }
 
         private void AbrirVerCliente()
         {
-            servicio.CargarDialogoVerCliente();
+            // Comprueba que haya un cliente seleccionado
+            if (ClienteSeleccionado.Documento != "")
+            {
+                servicio.CargarDialogoVerCliente();
+            }
+            else
+            {
+                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+            }
         }
 
         private void AbrirDialogoEliminarCliente()
         {
-            servicio.CargarDialogoEliminarCliente();
+            // Comprueba que haya un cliente seleccionado
+            if (ClienteSeleccionado.Documento != "")
+            {
+                // Comprueba que no tenga vehiculos estacionados actualmente
+                if (!ServicioDB.IsParked(ClienteSeleccionado.Documento))
+                {
+                    servicio.CargarDialogoEliminarCliente();
+                }
+                else
+                {
+                    // TODO: Avisar de que el Cliente tiene Estacionamientos Activos
+                }
+            }
+            else
+            {
+                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+            }
         }
     }
 }

@@ -5,13 +5,10 @@ using ParkingInteligente.modelo;
 using ParkingInteligente.servicios;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParkingInteligente.mvvm
 {
-    class ControlAparcamientosVM : ObservableObject
+    class ControlEstacionamientosVM : ObservableObject
     {
         private readonly NavigationService servicio;
 
@@ -31,23 +28,36 @@ namespace ParkingInteligente.mvvm
 
         public RelayCommand CobrarFinalizarCommand { get; }
 
-        public ControlAparcamientosVM()
+        public ControlEstacionamientosVM()
         {
             ParkingList = ServicioDB.GetListActivesParkedVehicles();
             servicio = new NavigationService();
             ParkingSelect = new Estacionamiento();
             CobrarFinalizarCommand = new RelayCommand(AbrirDialogoCobrarParking);
 
-            WeakReferenceMessenger.Default.Register<ControlAparcamientosVM, EstacionamientoSeleccionadoRequestMessage>(this, (r, m) =>
+            WeakReferenceMessenger.Default.Register<ControlEstacionamientosVM, EstacionamientoSeleccionadoRequestMessage>(this, (r, m) =>
             {
-                m.Reply(r.ParkingSelect);
+                if (!m.HasReceivedResponse)
+                {
+                    m.Reply(r.ParkingSelect);
+                }
+            });
+
+            WeakReferenceMessenger.Default.Register<ActualizarGridEstacionamientosMessage>(this, (r, m) =>
+            {
+                ParkingList = m.Value;
             });
         }
 
         private void AbrirDialogoCobrarParking()
         {
-            if (ParkingSelect.IdEstacionamiento > 0) {
+            if (ParkingSelect.IdEstacionamiento > 0)
+            {
                 servicio.CargarDialogoPagarFinalizarParking();
+            }
+            else
+            {
+                // TODO: Avisar de que hay que seleccionar una Estacionamiento
             }
         }
 

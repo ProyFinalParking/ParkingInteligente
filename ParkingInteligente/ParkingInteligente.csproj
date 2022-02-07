@@ -202,7 +202,7 @@
     <Compile Include="modelo\Vehiculo.cs" />
     <Compile Include="mvvm\AñadirClienteVM.cs" />
     <Compile Include="mvvm\AñadirVehiculoVM.cs" />
-    <Compile Include="mvvm\ControlAparcamientosVM.cs" />
+    <Compile Include="mvvm\ControlEstacionamientosVM.cs" />
     <Compile Include="mvvm\ControlClientesVM.cs" />
     <Compile Include="mvvm\ControlVehiculosVM.cs" />
     <Compile Include="mvvm\EditarClienteVM.cs" />
@@ -218,7 +218,6 @@
     <Compile Include="servicios\FaceService.cs" />
     <Compile Include="servicios\Mensajes.cs" />
     <Compile Include="servicios\NavigationService.cs" />
-    <Compile Include="servicios\ServicioDialogos.cs" />
     <Compile Include="servicios\ServicioDB.cs" />
     <Compile Include="ventanas\ControlAparcamientos.xaml.cs">
       <DependentUpon>ControlAparcamientos.xaml</DependentUpon>

@@ -2,7 +2,6 @@
 using ParkingInteligente.modelo;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace ParkingInteligente.servicios
 {
@@ -22,14 +21,9 @@ namespace ParkingInteligente.servicios
 
         /**************************************************************************************************************************** 
          * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
+         * 
+         * TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
          * **************************************************************************************************************************/
-
-        /**************************************************************************************************************************** 
-         * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
-         * **************************************************************************************************************************/
-
-        // TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
-
 
         /*******************************************************
             METODOS RELACIONADOS CON EL CLIENTE
@@ -119,15 +113,18 @@ namespace ParkingInteligente.servicios
 
                 using (SqliteTransaction transaction = connection.BeginTransaction())
                 {
-                    // Elimina los estacionamientos del Cliente
-                    SqliteCommand eliminarEstacionamientos = connection.CreateCommand();
-                    eliminarEstacionamientos.CommandText = @"DELETE FROM estacionamientos 
+
+                    // Desvincula los Vehiculos del Estacionamiento, para evitar tener que borrarlos
+                    // Vehiculo con ID=1 es un vehiculo eliminado de tipo Generico
+                    SqliteCommand desvincularEstacionamientos = connection.CreateCommand();
+                    desvincularEstacionamientos.CommandText = @"UPDATE estacionamientos
+                    SET id_vehiculo = 1, matricula = '*******'
                     WHERE id_vehiculo IN (SELECT id_vehiculo FROM vehiculos 
                         WHERE id_cliente IN (SELECT id_cliente FROM clientes 
                             WHERE documento = @documento))";
 
-                    eliminarEstacionamientos.Parameters.Add("@documento", SqliteType.Text);
-                    eliminarEstacionamientos.Parameters["@documento"].Value = doc;
+                    desvincularEstacionamientos.Parameters.Add("@documento", SqliteType.Text);
+                    desvincularEstacionamientos.Parameters["@documento"].Value = doc;
 
                     // Elimina los vehiculos del Cliente
                     SqliteCommand eliminarVehiculos = connection.CreateCommand();
@@ -147,7 +144,7 @@ namespace ParkingInteligente.servicios
                     eliminarCliente.Parameters["@documento"].Value = doc;
 
                     // Se ejecutan los DELETE
-                    eliminarEstacionamientos.ExecuteNonQuery();
+                    desvincularEstacionamientos.ExecuteNonQuery();
                     eliminarVehiculos.ExecuteNonQuery();
                     eliminarCliente.ExecuteNonQuery();
 
@@ -211,6 +208,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve la lista de todos los Clientes guardados
+        // Menos el cliente Generico 'No Registrado'
         public static List<Cliente> GetListClients()
         {
             List<Cliente> lista = new List<Cliente>();
@@ -220,7 +218,7 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM clientes";
+                command.CommandText = "SELECT * FROM clientes WHERE id_cliente > 0";
 
                 // Se ejecuta el SELECT
                 using (SqliteDataReader lector = command.ExecuteReader())
@@ -561,18 +559,37 @@ namespace ParkingInteligente.servicios
             {
                 connection.Open();
 
-                SqliteCommand command = connection.CreateCommand();
-                command.CommandText = @"DELETE FROM vehiculos 
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                {
+                    // Desvincula el Vehiculo del Estacionamiento, para evitar tener que borrarlos
+                    // Vehiculo con ID=1 es un vehiculo eliminado de tipo Generico
+                    SqliteCommand desvincularEstacionamientos = connection.CreateCommand();
+                    desvincularEstacionamientos.CommandText = @"UPDATE estacionamientos
+                    SET id_vehiculo = 1, matricula = '*******'
+                    WHERE matricula = @matricula))";
+
+                    desvincularEstacionamientos.Parameters.Add("@matricula", SqliteType.Text);
+                    desvincularEstacionamientos.Parameters["@matricula"].Value = matricula;
+
+                    desvincularEstacionamientos.ExecuteNonQuery();
+
+                    // Elimina El vehiculo
+                    SqliteCommand command = connection.CreateCommand();
+                    command.CommandText = @"DELETE FROM vehiculos 
                                         WHERE matricula = @matricula";
 
-                // Se Configura el tipo de valores
-                command.Parameters.Add("@matricula", SqliteType.Text);
+                    // Se Configura el tipo de valores
+                    command.Parameters.Add("@matricula", SqliteType.Text);
 
-                // Se asignan los valores
-                command.Parameters["@matricula"].Value = matricula;
+                    // Se asignan los valores
+                    command.Parameters["@matricula"].Value = matricula;
 
-                // Se ejecuta el DELETE
-                command.ExecuteNonQuery();
+                    // Se ejecuta el DELETE
+                    command.ExecuteNonQuery();
+
+                    // Se ejecuta el Commit
+                    transaction.Commit();
+                }
             }
         }
 
@@ -604,31 +621,8 @@ namespace ParkingInteligente.servicios
             return existe;
         }
 
-        // Devuelve la ID de la marca (0 en caso de que no exista)
-        public static int GetIdVehicle(string matricula)
-        {
-            int idVehiculo = 0;
-
-            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
-            {
-                connection.Open();
-
-                SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT id_vehiculo FROM vehiculos WHERE matricula = @matricula";
-
-                // Se Configura el tipo de valores
-                command.Parameters.Add("@matricula", SqliteType.Text);
-
-                // Se asignan los valores
-                command.Parameters["@matricula"].Value = matricula;
-
-                // Se ejecuta el SELECT
-                idVehiculo = Convert.ToInt32(command.ExecuteScalar());
-            }
-
-            return idVehiculo;
-        }
-
+        // Devuelve la lista de Vehiculos
+        // Menos los Vehiculos Genericos 'Eliminado' y 'No Registrado'
         public static List<Vehiculo> GetListVehicles()
         {
             List<Vehiculo> lista = new List<Vehiculo>();
@@ -638,7 +632,7 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM vehiculos";
+                command.CommandText = "SELECT * FROM vehiculos WHERE id_vehiculo > 1";
 
                 // Se ejecuta el SELECT
                 using (SqliteDataReader lector = command.ExecuteReader())
@@ -707,16 +701,16 @@ namespace ParkingInteligente.servicios
 
         // Devuelve el vehiculo segun la matricula pasada de argumento
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public static Vehiculo GetVehicle(string matricula)
+        public static bool IsVehicleParked(string matricula)
         {
-            Vehiculo vehiculo = new Vehiculo();
+            bool ispArked = false;
 
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM vehiculos WHERE matricula = @matricula";
+                command.CommandText = "SELECT COUNT(*) FROM vehiculos WHERE matricula = @matricula";
 
                 // Se Configura el tipo de valores
                 command.Parameters.Add("@matricula", SqliteType.Text);
@@ -725,24 +719,16 @@ namespace ParkingInteligente.servicios
                 command.Parameters["@matricula"].Value = matricula;
 
                 // Se ejecuta el SELECT
-                using (SqliteDataReader lector = command.ExecuteReader())
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                 {
-                    if (lector.HasRows)
-                    {
-                        lector.Read();
-
-                        vehiculo.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                        vehiculo.IdCliente = Convert.ToInt32(lector["id_cliente"]);
-                        vehiculo.Matricula = (string)lector["matricula"];
-                        vehiculo.IdMarca = Convert.ToInt32(lector["id_marca"]);
-                        vehiculo.Modelo = (string)lector["modelo"];
-                        vehiculo.Tipo = (string)lector["tipo"];
-                    }
+                    ispArked = true;
                 }
             }
 
-            return vehiculo;
+            return ispArked;
         }
+
+
 
         /*******************************************************
             METODOS RELACIONADOS CON EL ESTACIONAMIENTO
@@ -1143,10 +1129,9 @@ namespace ParkingInteligente.servicios
 
                     // Datos Vehiculos
                     command.CommandText = @"INSERT INTO 'vehiculos' ('id_vehiculo','id_cliente','matricula','id_marca','modelo','tipo')
-                            VALUES (0,0,'No Registrado',0,'','Coche'),
-                                (1,0,'Eliminado',0,'','Coche'),
-                                (2,0,'Eliminado',0,'','Moto'),
-                                (3,0,'No Registrado',0,'','Moto'),
+                            VALUES (0,0,'No Registrado',0,'','Generico'),
+                                (1,0,'Eliminado',0,'','Generico'),
+                                (2, 2, '45778KYB', 2, 'C3', 'Coche'),
                                 (3, 11, '4595HHY', 36, 'R1', 'Moto'),
                                 (4, 14, '9543YAC', 19, 'Fabia', 'Coche'),
                                 (5, 8, '3215KPE', 37, 'Hayabusa', 'Moto'),
@@ -1154,8 +1139,7 @@ namespace ParkingInteligente.servicios
                                 (7,1,'2648KHY',1,'Serie 3','Coche'),
                                 (8,1,'5564KIK',1,'Serie 5','Coche'),
                                 (9, 8, '8899KIO', 1, 'Serie 1', 'Coche'),
-                                (10,0,'',0,'','Moto'),
-                                (11, 2, '45778KYB', 2, 'C3', 'Coche'),";
+                                (10,0,'',0,'','Moto')";
                     command.ExecuteNonQuery();
 
                     // Datos Estacionamientos
@@ -1163,7 +1147,7 @@ namespace ParkingInteligente.servicios
                             VALUES (1,0,'0295GTS','02/02/2022 1:00:33','',0.0,'Coche'),
                                 (2, 0, '9315KNM', '02/02/2022 1:00:33', '', 0.0, 'Coche'),
                                 (3, 0, '7854HAL', '02/02/2022 1:00:33', '', 0.0, 'Moto'),
-                                (4, 0, '3474JUY', '02/02/2022 1:00:33', '', 0.0, 'Coche'),
+                                (4, 1, '*******', '02/02/2022 1:00:33', '07/02/2022 17:20:09', 252.63, 'Coche'),
                                 (5, 0, '3694UDM', '02/02/2022 1:00:33', '', 0.0, 'Moto'),
                                 (6, 0, '7812MNB', '02/02/2022 1:00:33', '', 0.0, 'Coche'),
                                 (7, 4, '9543YAC', '02/02/2022 1:00:33', '', 0.0, 'Coche'),

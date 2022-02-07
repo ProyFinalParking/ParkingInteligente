@@ -39,7 +39,15 @@ namespace ParkingInteligente.mvvm
 
         public void AñadirCliente()
         {
-            ServicioDB.InsertClient(NuevoCliente);
+            if (!ServicioDB.IsExistsDocument(NuevoCliente.Documento))
+            {
+                ServicioDB.InsertClient(NuevoCliente);
+            }
+            else
+            {
+                // TODO: Avisar de que el documento del Cliente ya está registrado en la BBDD
+            }
+
             WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }
     }
