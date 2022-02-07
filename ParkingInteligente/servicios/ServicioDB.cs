@@ -23,6 +23,8 @@ namespace ParkingInteligente.servicios
          * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
          * 
          * TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
+         * 
+         * TODO: Eliminar los metodos inutilizados
          * **************************************************************************************************************************/
 
         /*******************************************************
