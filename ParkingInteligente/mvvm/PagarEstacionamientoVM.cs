@@ -62,6 +62,12 @@ namespace ParkingInteligente.mvvm
             // Calcula el importe a pagar redondeando a 2 decimales
             double importe = Math.Round(minutos * precioMinuto, 2);
 
+            // Si el vehiculo está registrado, se le hace el descuento del 10%
+            if (EstacionamientoSeleccionado.IdVehiculo > 1)
+            {
+                importe *= 0.9;
+            }
+
             return importe;
         }
     }
