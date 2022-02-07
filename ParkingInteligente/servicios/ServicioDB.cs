@@ -245,9 +245,9 @@ namespace ParkingInteligente.servicios
             return lista;
         }
 
-        // Devuelve El cliente segun el documento pasado
+        // Devuelve El cliente segun la ID
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public static Cliente GetClient(string documento)
+        public static Cliente GetClientById(int id)
         {
             Cliente cliente = new Cliente();
 
@@ -256,13 +256,13 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM clientes WHERE documento = @documento";
+                command.CommandText = "SELECT * FROM clientes WHERE id_cliente = @idCliente";
 
                 // Se Configura el tipo de valores
-                command.Parameters.Add("@docomento", SqliteType.Text);
+                command.Parameters.Add("@idCliente", SqliteType.Text);
 
                 // Se asignan los valores
-                command.Parameters["@docomento"].Value = documento;
+                command.Parameters["@idCliente"].Value = id;
 
                 // Se ejecuta el SELECT
                 using (SqliteDataReader lector = command.ExecuteReader())
