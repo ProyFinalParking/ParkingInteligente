@@ -213,6 +213,7 @@
     <Compile Include="mvvm\PagarEstacionamientoVM.cs" />
     <Compile Include="mvvm\VerVehiculoVM.cs" />
     <Compile Include="mvvm\VerClienteVM.cs" />
+    <Compile Include="servicios\AzureBlobStorage.cs" />
     <Compile Include="servicios\ComputerVisionService.cs" />
     <Compile Include="servicios\CustomVisionService.cs" />
     <Compile Include="servicios\FaceService.cs" />
