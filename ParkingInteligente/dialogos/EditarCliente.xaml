@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
+        xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="EditarCliente"
-        Height="370"
-        Width="490"
+        Height="550"
+        Width="760"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -133,12 +134,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="290" />
+            <RowDefinition Height="450" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -149,96 +150,110 @@
                 Height="140">
 
             <Image x:Name="FotoCliente"
-                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg"
+                   Source="{Binding Path=ClienteSeleccionado.Foto}"
                    Stretch="Fill"
                    RenderTransformOrigin="0.5,0.5" />
         </Border>
-
-        <Grid Grid.Column="1"
-              Margin="10">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-            </Grid.RowDefinitions>
-
+        <StackPanel Grid.Column="1">
             <!-- Documento -->
-            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,5">
-                <TextBlock Text="Documento" FontSize="9" Margin="15,0,0,-6"></TextBlock>
-
+            <inputLayout:SfTextInputLayout Hint="DNI"
+                                           HintFloatMode="Float"
+                                           BorderBrush="#FFA9AFB4"
+                                           Foreground="#FFA9AFB4"
+                                           Margin="5"
+                                           Height="65">
                 <TextBox x:Name="DNITextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Documento}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
+                         Text="{Binding Path=ClienteSeleccionado.Documento}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
 
             <!-- Nombre -->
-            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,5">
-                <TextBlock Text="Nombre" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
+            <inputLayout:SfTextInputLayout Hint="Nombre"
+                                           HintFloatMode="Float"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
+                <inputLayout:SfTextInputLayout.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#FFA9AFB4"
+                                      Offset="0" />
+                        <GradientStop Color="White"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </inputLayout:SfTextInputLayout.BorderBrush>
                 <TextBox x:Name="NombreTextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Nombre}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-            
+                         Text="{Binding Path=ClienteSeleccionado.Nombre}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+            <!-- Teléfono -->
 
-            <!-- Telefono -->
-            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
-                <TextBlock Text="Teléfono" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <inputLayout:SfTextInputLayout Hint="Teléfono"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="TelefonoTextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Telefono}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-
-
+                         Text="{Binding Path=ClienteSeleccionado.Telefono}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
             <!-- Edad -->
-            <StackPanel Orientation="Vertical" Grid.Row="3" Margin="0,0,0,5">
-                <TextBlock Text="Edad" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+
+            <inputLayout:SfTextInputLayout Hint="Edad"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="EdadTextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Edad}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     IsEnabled="False"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-
+                         IsEnabled="False"
+                         Text="{Binding Path=ClienteSeleccionado.Edad}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
 
             <!-- Genero -->
-            <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
-                <TextBlock Text="Género" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <inputLayout:SfTextInputLayout Hint="Género"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="GeneroTextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Genero}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     IsEnabled="False"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
+                         IsEnabled="False"
+                         Text="{Binding Path=ClienteSeleccionado.Genero}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
 
-
-            <!-- URL de la Foto -->
-            <StackPanel Orientation="Vertical" Grid.Row="5" Margin="0,0,0,5">
-                <TextBlock Text="URL de la Foto" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <!-- Url de la Foto -->
+            <inputLayout:SfTextInputLayout Hint="URL de la Foto"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="URLImagenTextBox"
-                     Text="{Binding Path=ClienteSeleccionado.Foto}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-            
-        </Grid>
+                         Text="{Binding Path=ClienteSeleccionado.Foto}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"

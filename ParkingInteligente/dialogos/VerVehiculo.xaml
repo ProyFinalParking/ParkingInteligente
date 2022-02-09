@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkingInteligente.dialogos"
+        xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="Ver Vehiculo"
-        Height="340"
-        Width="490"
+        Height="460"
+        Width="760"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -133,12 +134,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="450" />
         </Grid.RowDefinitions>
 
         <Border BorderThickness="3"
@@ -148,87 +149,120 @@
                 Height="140">
 
             <Image x:Name="FotoMatricula"
-                   Source="/ParkingInteligente;component/assets/IconoEmpresa.jpg"
+                   Source="{Binding Path=VehiculoSeleccionado.Foto}"
                    Stretch="Fill"
                    RenderTransformOrigin="0.5,0.5" />
         </Border>
 
-        <Grid Grid.Column="1"
-              Margin="10"
-              VerticalAlignment="Center">
+        <StackPanel Grid.Column="1"
+                    Margin="10">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-            </Grid.RowDefinitions>
+
 
             <!-- Matricula -->
-            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,5">
-                <TextBlock Text="Matrícula" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <inputLayout:SfTextInputLayout Hint="Matrícula"
+                                           HintFloatMode="Float"
+                                           BorderBrush="#FFA9AFB4"
+                                           Foreground="#FFA9AFB4"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="MatriculaTextBox"
-                     Text="{Binding Path=VehiculoSeleccionado.Matricula}"
-                     IsEnabled="False"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
+                         Text="{Binding Path=VehiculoSeleccionado.Matricula}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
 
-            <!-- IdCliente -->
-            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,5">
-                <TextBlock Text="Id Cliente" FontSize="9" Margin="15,0,0,-6"></TextBlock>
 
-                <TextBox x:Name="DNIClienteTextBox"
-                     Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
-                     IsEnabled="False"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
+            <!-- Id del Cliente -->
+            <inputLayout:SfTextInputLayout Hint="ID Cliente"
+                                           HintFloatMode="Float"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
+                <inputLayout:SfTextInputLayout.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#FFA9AFB4"
+                                      Offset="0" />
+                        <GradientStop Color="White"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </inputLayout:SfTextInputLayout.BorderBrush>
 
-            <!-- ID Marca -->
-            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
-                <TextBlock Text="Id Marca" FontSize="9" Margin="15,0,0,-1"></TextBlock>
+                <TextBox x:Name="IdClienteTextBox"
+                         Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+
+
+            <!-- Marca -->
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        Margin="0,0,0,5">
+                <TextBlock Text="Marca"
+                           FontSize="9"
+                           Margin="15,0,0,-1"></TextBlock>
 
                 <ComboBox x:Name="MarcaTextBox"
-                      ItemsSource="{Binding Path=Marcas}"
-                      SelectedItem="{Binding Path=VehiculoSeleccionado.IdMarca}"
-                      IsEnabled="False"
-                      FontSize="16"
-                      FontFamily="Source Code Pro" />
+                          ItemsSource="{Binding Path=Marcas}"
+                          SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
+                          FontSize="16"
+                          FontFamily="Source Code Pro" />
             </StackPanel>
-            
+
 
             <!-- Modelo -->
-            <StackPanel Orientation="Vertical" Grid.Row="3" Margin="0,0,0,5">
-                <TextBlock Text="Modelo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <inputLayout:SfTextInputLayout Hint="Modelo"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="ModeloTextBox"
-                     IsEnabled="False"
-                     Text="{Binding Path=VehiculoSeleccionado.Modelo}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-            
+                         Text="{Binding Path=VehiculoSeleccionado.Modelo}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+
 
             <!-- Tipo -->
-            <StackPanel Orientation="Vertical" Grid.Row="4" Margin="0,0,0,5">
-                <TextBlock Text="Tipo" FontSize="9" Margin="15,0,0,-6"></TextBlock>
+            <inputLayout:SfTextInputLayout Hint="Tipo"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
 
                 <TextBox x:Name="TipoTextBox"
-                     IsEnabled="False"
-                     Text="{Binding Path=VehiculoSeleccionado.Tipo}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"
-                     Template="{DynamicResource TextBoxControlTemplate1}" />
-            </StackPanel>
-            
-        </Grid>
+                         Text="{Binding Path=VehiculoSeleccionado.Tipo}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
 
 
+            <!-- TODO: Temporal -->
+            <!--  -->
+            <inputLayout:SfTextInputLayout Hint="URL Foto del Coche"
+                                           HintFloatMode="Float"
+                                           BorderBrush="AliceBlue"
+                                           Foreground="AliceBlue"
+                                           Margin="5"
+                                           Height="65">
+
+                <TextBox x:Name="URLFotoTextBox"
+                         Text="{Binding Path=VehiculoSeleccionado.Foto}"
+                         FontSize="16"
+                         FontFamily="Source Code Pro"
+                         Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+
+        </StackPanel>
     </Grid>
 </Window>
