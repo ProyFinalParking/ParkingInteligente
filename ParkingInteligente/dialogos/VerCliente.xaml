@@ -7,8 +7,8 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="Ver Cliente"
-        Height="480"
-        Width="760"
+        Height="620"
+        Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -139,7 +139,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="450" />
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border BorderThickness="3"
@@ -153,17 +153,18 @@
                    Stretch="Fill"
                    RenderTransformOrigin="0.5,0.5" />
         </Border>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Center">
             <!-- Documento -->
             <inputLayout:SfTextInputLayout Hint="DNI"
                                            HintFloatMode="Float"
                                            BorderBrush="#FFA9AFB4"
                                            Foreground="#FFA9AFB4"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <TextBox x:Name="DNITextBox"
                          Text="{Binding Path=ClienteSeleccionado.Documento}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -173,8 +174,7 @@
             <inputLayout:SfTextInputLayout Hint="Nombre"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <inputLayout:SfTextInputLayout.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
@@ -187,6 +187,7 @@
                 <TextBox x:Name="NombreTextBox"
                          Text="{Binding Path=ClienteSeleccionado.Nombre}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -196,12 +197,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="TelefonoTextBox"
                          Text="{Binding Path=ClienteSeleccionado.Telefono}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -211,13 +212,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="EdadTextBox"
-                         IsEnabled="False"
                          Text="{Binding Path=ClienteSeleccionado.Edad}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -227,8 +227,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="GeneroTextBox"
                          IsEnabled="False"
@@ -243,12 +242,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="URLImagenTextBox"
                          Text="{Binding Path=ClienteSeleccionado.Foto}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>

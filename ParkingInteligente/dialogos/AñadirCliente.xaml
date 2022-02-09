@@ -7,8 +7,8 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="AñadirCliente"
-        Height="550"
-        Width="760"
+        Height="620"
+        Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -134,12 +134,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="190" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="450" />
+            <RowDefinition Height="530" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -160,8 +160,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="#FFA9AFB4"
                                            Foreground="#FFA9AFB4"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <TextBox x:Name="DNITextBox"
                          Text="{Binding Path=NuevoCliente.Documento}"
                          FontSize="16"
@@ -174,8 +173,7 @@
             <inputLayout:SfTextInputLayout Hint="Nombre"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <inputLayout:SfTextInputLayout.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
@@ -197,8 +195,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="TelefonoTextBox"
                          Text="{Binding Path=NuevoCliente.Telefono}"
@@ -212,8 +209,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="EdadTextBox"
                          IsEnabled="False"
@@ -228,8 +224,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="GeneroTextBox"
                          IsEnabled="False"
@@ -244,8 +239,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="URLImagenTextBox"
                          Text="{Binding Path=NuevoCliente.Foto}"

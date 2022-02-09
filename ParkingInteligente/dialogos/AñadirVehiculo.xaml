@@ -7,8 +7,8 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="AñadirVehiculo"
-        Height="550"
-        Width="760"
+        Height="590"
+        Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -134,12 +134,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="190" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="450" />
+            <RowDefinition Height="500" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -156,17 +156,16 @@
         </Border>
 
         <StackPanel Grid.Column="1"
-              Margin="10">
+                    VerticalAlignment="Center">
 
-            
+
 
             <!-- Matricula -->
             <inputLayout:SfTextInputLayout Hint="Matrícula"
                                            HintFloatMode="Float"
                                            BorderBrush="#FFA9AFB4"
                                            Foreground="#FFA9AFB4"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="MatriculaTextBox"
                          Text="{Binding Path=NuevoVehiculo.Matricula}"
@@ -180,8 +179,7 @@
             <inputLayout:SfTextInputLayout Hint="ID Cliente"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <inputLayout:SfTextInputLayout.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
@@ -201,24 +199,27 @@
 
 
             <!-- Marca -->
-            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,5">
-                <TextBlock Text="Marca" FontSize="9" Margin="15,0,0,-1"></TextBlock>
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        Margin="0,0,0,5">
+                <TextBlock Text="Marca"
+                           FontSize="9"
+                           Margin="15,0,0,-1"></TextBlock>
 
                 <ComboBox x:Name="MarcaTextBox"
-                     ItemsSource="{Binding Path=Marcas}"
-                     SelectedIndex="{Binding Path=NuevoVehiculo.IdMarca}"
-                     FontSize="16"
-                     FontFamily="Source Code Pro"/>
+                          ItemsSource="{Binding Path=Marcas}"
+                          SelectedIndex="{Binding Path=NuevoVehiculo.IdMarca}"
+                          FontSize="16"
+                          FontFamily="Source Code Pro" />
             </StackPanel>
-            
+
 
             <!-- Modelo -->
             <inputLayout:SfTextInputLayout Hint="Modelo"
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="ModeloTextBox"
                          Text="{Binding Path=NuevoVehiculo.Modelo}"
@@ -233,8 +234,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="TipoTextBox"
                          Text="{Binding Path=NuevoVehiculo.Tipo}"
@@ -250,8 +250,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="URLFotoTextBox"
                          Text="{Binding Path=NuevoVehiculo.Foto}"

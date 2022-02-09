@@ -7,8 +7,8 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="Ver Vehiculo"
-        Height="460"
-        Width="760"
+        Height="590"
+        Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -139,7 +139,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="450" />
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Border BorderThickness="3"
@@ -155,7 +155,8 @@
         </Border>
 
         <StackPanel Grid.Column="1"
-                    Margin="10">
+                    Margin="10"
+                    VerticalAlignment="Center">
 
 
 
@@ -164,12 +165,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="#FFA9AFB4"
                                            Foreground="#FFA9AFB4"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="MatriculaTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Matricula}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -179,8 +180,7 @@
             <inputLayout:SfTextInputLayout Hint="ID Cliente"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <inputLayout:SfTextInputLayout.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
@@ -194,6 +194,7 @@
                 <TextBox x:Name="IdClienteTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -211,6 +212,7 @@
                           ItemsSource="{Binding Path=Marcas}"
                           SelectedIndex="{Binding Path=VehiculoSeleccionado.IdMarca}"
                           FontSize="16"
+                          IsEnabled="False"
                           FontFamily="Source Code Pro" />
             </StackPanel>
 
@@ -220,12 +222,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="ModeloTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Modelo}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -236,12 +238,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="TipoTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Tipo}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>
@@ -253,12 +255,12 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="URLFotoTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Foto}"
                          FontSize="16"
+                         IsEnabled="False"
                          FontFamily="Source Code Pro"
                          Template="{DynamicResource TextBoxControlTemplate1}" />
             </inputLayout:SfTextInputLayout>

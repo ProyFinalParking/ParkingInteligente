@@ -7,8 +7,8 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="EditarVehiculo"
-        Height="550"
-        Width="760"
+        Height="590"
+        Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -134,12 +134,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="190" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="450" />
+            <RowDefinition Height="510" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -165,8 +165,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="#FFA9AFB4"
                                            Foreground="#FFA9AFB4"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="MatriculaTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Matricula}"
@@ -180,8 +179,7 @@
             <inputLayout:SfTextInputLayout Hint="ID Cliente"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
                 <inputLayout:SfTextInputLayout.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1"
                                          StartPoint="0.5,0">
@@ -221,8 +219,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="ModeloTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Modelo}"
@@ -237,8 +234,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="TipoTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Tipo}"
@@ -254,8 +250,7 @@
                                            HintFloatMode="Float"
                                            BorderBrush="AliceBlue"
                                            Foreground="AliceBlue"
-                                           Margin="5"
-                                           Height="65">
+                                           Margin="5">
 
                 <TextBox x:Name="URLFotoTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.Foto}"
