@@ -4,6 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ParkingInteligente.ventanas"
       xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+      xmlns:properties="clr-namespace:ParkingInteligente.Properties"
       x:Class="ParkingInteligente.ventanas.Inicio"
       mc:Ignorable="d"
       d:DesignHeight="450"
@@ -70,36 +71,38 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Grafico Coches -->
-                <DockPanel Grid.Column="0">
-
-                <TextBlock Text="Coches" HorizontalAlignment="Center"  DockPanel.Dock="Top"
-                           FontSize="20" FontWeight="Bold" VerticalAlignment="Top"></TextBlock>
-
                 <syncfusion:SfCircularGauge
                     x:Name="circularGauge2"
                     GaugeHeaderPosition="0.5,0.35"
-                    HeaderAlignment="Custom">
+                    HeaderAlignment="Custom"
+                    Grid.Column="0">
 
                     <!-- Texto del grafico -->
                     <syncfusion:SfCircularGauge.GaugeHeader>
                         <StackPanel>
-                            <TextBlock
-                                FontSize="15"
-                                Text="75/100"
-                                TextAlignment="Center" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock FontSize="15" Text="{Binding Path=PlazasLibresCoches}"/>
+                                <TextBlock FontSize="15" Text="/"/>
+                                <TextBlock FontSize="15" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlazasCoches}"/>
+                            </StackPanel>
 
                             <TextBlock
                                 FontSize="15"
                                 Text="Plazas libres"
                                 TextAlignment="Center"/>
+
+                            <TextBlock
+                                FontSize="15"
+                                Text="Coches"
+                                TextAlignment="Center" FontWeight="Bold"/>
                         </StackPanel>
                     </syncfusion:SfCircularGauge.GaugeHeader>
 
                     <syncfusion:SfCircularGauge.Scales>
-                        <!-- Estilo de la barra de plazas Totales -->
+                        <!-- Estilo de la barra de plazas Totales para Coches -->
                         <syncfusion:CircularScale
                             x:Name="gauge2Scale"
-                            EndValue="100"
+                            EndValue="{Binding Source={x:Static properties:Settings.Default}, Path=PlazasCoches}"
                             Interval="1"
                             RadiusFactor="0.8"
                             RangePosition="Custom"
@@ -115,13 +118,13 @@
                             <syncfusion:CircularScale.Ranges>
                                 <syncfusion:CircularRange
                                     x:Name="gauge2Range"
-                                    EndValue="25"
+                                    EndValue="{Binding Path=PlazasOcupadasCoches}"
                                     StartValue="0"
-                                    Stroke="Orange"
+                                    Stroke="#FF2E2E"
                                     StrokeThickness="15"
                                     Offset="0.8" />
                             </syncfusion:CircularScale.Ranges>
-                            
+
                             <!-- Deshabilita el flecha de tipo velocimetro -->
                             <syncfusion:CircularScale.Pointers>
                                 <syncfusion:CircularPointer NeedlePointerVisibility="Collapsed" />
@@ -129,39 +132,41 @@
                         </syncfusion:CircularScale>
                     </syncfusion:SfCircularGauge.Scales>
                 </syncfusion:SfCircularGauge>
-                </DockPanel>
 
                 <!-- Grafico Coches -->
-                <DockPanel Grid.Column="1">
-
-                    <TextBlock Text="Motos" HorizontalAlignment="Center"  DockPanel.Dock="Top"
-                           FontSize="20" FontWeight="Bold" VerticalAlignment="Top"></TextBlock>
-
-                    <syncfusion:SfCircularGauge
+                <syncfusion:SfCircularGauge
                     x:Name="circularGauge22"
                     GaugeHeaderPosition="0.5,0.35"
-                    HeaderAlignment="Custom">
+                    HeaderAlignment="Custom"
+                    Grid.Column="1">
 
-                        <!-- Texto del grafico -->
-                        <syncfusion:SfCircularGauge.GaugeHeader>
-                            <StackPanel>
-                                <TextBlock
-                                FontSize="15"
-                                Text="5/20"
-                                TextAlignment="Center" />
+                    <!-- Texto del grafico -->
+                    <syncfusion:SfCircularGauge.GaugeHeader>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock FontSize="15" Text="{Binding Path=PlazasLibresMotos}"/>
+                                <TextBlock FontSize="15" Text="/"/>
+                                <TextBlock FontSize="15" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlazasMotos}"/>
+                            </StackPanel>
 
-                                <TextBlock
+                            <TextBlock
                                 FontSize="15"
                                 Text="Plazas libres"
                                 TextAlignment="Center"/>
-                            </StackPanel>
-                        </syncfusion:SfCircularGauge.GaugeHeader>
 
-                        <syncfusion:SfCircularGauge.Scales>
-                            <!-- Estilo de la barra de plazas Totales -->
-                            <syncfusion:CircularScale
+                            <TextBlock
+                                FontSize="15"
+                                Text="Motos"
+                                TextAlignment="Center" FontWeight="Bold"/>
+
+                        </StackPanel>
+                    </syncfusion:SfCircularGauge.GaugeHeader>
+
+                    <syncfusion:SfCircularGauge.Scales>
+                        <!-- Estilo de la barra de plazas Totales para Motos -->
+                        <syncfusion:CircularScale
                             x:Name="gauge2Scale2"
-                            EndValue="20"
+                            EndValue="{Binding Source={x:Static properties:Settings.Default}, Path=PlazasMotos}"
                             Interval="1"
                             RadiusFactor="0.8"
                             RangePosition="Custom"
@@ -173,25 +178,24 @@
                             StartValue="0"
                             SweepAngle="180">
 
-                                <!-- Estilo de la barra de plazas ocupadas -->
-                                <syncfusion:CircularScale.Ranges>
-                                    <syncfusion:CircularRange
+                            <!-- Estilo de la barra de plazas ocupadas -->
+                            <syncfusion:CircularScale.Ranges>
+                                <syncfusion:CircularRange
                                     x:Name="gauge2Range2"
-                                    EndValue="15"
+                                    EndValue="{Binding Path=PlazasOcupadasMotos}"
                                     StartValue="0"
-                                    Stroke="Orange"
+                                    Stroke="#FF2E2E"
                                     StrokeThickness="15"
                                     Offset="0.8" />
-                                </syncfusion:CircularScale.Ranges>
+                            </syncfusion:CircularScale.Ranges>
 
-                                <!-- Deshabilita el flecha de tipo velocimetro -->
-                                <syncfusion:CircularScale.Pointers>
-                                    <syncfusion:CircularPointer NeedlePointerVisibility="Collapsed" />
-                                </syncfusion:CircularScale.Pointers>
-                            </syncfusion:CircularScale>
-                        </syncfusion:SfCircularGauge.Scales>
-                    </syncfusion:SfCircularGauge>
-                </DockPanel>
+                            <!-- Deshabilita el flecha de tipo velocimetro -->
+                            <syncfusion:CircularScale.Pointers>
+                                <syncfusion:CircularPointer NeedlePointerVisibility="Collapsed" />
+                            </syncfusion:CircularScale.Pointers>
+                        </syncfusion:CircularScale>
+                    </syncfusion:SfCircularGauge.Scales>
+                </syncfusion:SfCircularGauge>
             </Grid>
             
         </DockPanel>
