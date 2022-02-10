@@ -42,11 +42,11 @@
                        FontFamily="Source Sans Pro Black"
                        Foreground="Black" />
         </StackPanel>
-        
+
         <!-- Bloque de la izquierda con la cabecera y los graficos -->
         <DockPanel DockPanel.Dock="Left"
                    LastChildFill="True">
-            
+
             <!-- Cabecera con el Logo -->
             <Border DockPanel.Dock="Top">
                 <Image Source="/assets/IconoEmpresa.jpg"
@@ -106,7 +106,7 @@
                             Interval="1"
                             RadiusFactor="0.8"
                             RangePosition="Custom"
-                            RimStroke="Green"
+                            RimStroke="Orange"
                             RimStrokeThickness="15"
                             ShowLabels="False"
                             ShowTicks="False"
@@ -118,9 +118,9 @@
                             <syncfusion:CircularScale.Ranges>
                                 <syncfusion:CircularRange
                                     x:Name="gauge2Range"
-                                    EndValue="{Binding Path=PlazasOcupadasCoches}"
+                                    EndValue="{Binding Path=PlazasLibresCoches}"
                                     StartValue="0"
-                                    Stroke="#FF2E2E"
+                                    Stroke="Green"
                                     StrokeThickness="15"
                                     Offset="0.8" />
                             </syncfusion:CircularScale.Ranges>
@@ -170,7 +170,7 @@
                             Interval="1"
                             RadiusFactor="0.8"
                             RangePosition="Custom"
-                            RimStroke="Green"
+                            RimStroke="Orange"
                             RimStrokeThickness="15"
                             ShowLabels="False"
                             ShowTicks="False"
@@ -182,9 +182,9 @@
                             <syncfusion:CircularScale.Ranges>
                                 <syncfusion:CircularRange
                                     x:Name="gauge2Range2"
-                                    EndValue="{Binding Path=PlazasOcupadasMotos}"
+                                    EndValue="{Binding Path=PlazasLibresMotos}"
                                     StartValue="0"
-                                    Stroke="#FF2E2E"
+                                    Stroke="Green"
                                     StrokeThickness="15"
                                     Offset="0.8" />
                             </syncfusion:CircularScale.Ranges>
@@ -197,7 +197,7 @@
                     </syncfusion:SfCircularGauge.Scales>
                 </syncfusion:SfCircularGauge>
             </Grid>
-            
+
         </DockPanel>
 
     </DockPanel>
