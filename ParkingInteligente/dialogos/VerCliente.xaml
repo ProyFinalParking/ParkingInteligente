@@ -15,12 +15,10 @@
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
-            <GradientStop Color="Gainsboro"
-                          Offset="0.11" />
-            <GradientStop Color="#FF727272"
-                          Offset="0.747" />
-            <GradientStop Color="#FFA0A0A0"
-                          Offset="0.427" />
+            <GradientStop Color="#FF555555"
+                          Offset="1" />
+            <GradientStop Color="#FF9B9B9B"
+                          Offset="0.088" />
         </LinearGradientBrush>
     </Window.Background>
     <Window.Resources>
@@ -131,6 +129,7 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -139,7 +138,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Border BorderThickness="3"
@@ -158,15 +157,16 @@
             <!-- Documento -->
             <inputLayout:SfTextInputLayout Hint="DNI"
                                            HintFloatMode="Float"
-                                           BorderBrush="#FFA9AFB4"
-                                           Foreground="#FFA9AFB4"
+                                           BorderBrush="White"
+                                           Foreground="AliceBlue"
                                            Margin="5">
                 <TextBox x:Name="DNITextBox"
                          Text="{Binding Path=ClienteSeleccionado.Documento}"
                          FontSize="16"
                          IsEnabled="False"
                          FontFamily="Source Code Pro"
-                         Template="{DynamicResource TextBoxControlTemplate1}" />
+                         Template="{DynamicResource TextBoxControlTemplate1}"
+                         BorderBrush="{x:Null}" />
             </inputLayout:SfTextInputLayout>
 
             <!-- Nombre -->
@@ -174,16 +174,8 @@
             <inputLayout:SfTextInputLayout Hint="Nombre"
                                            HintFloatMode="Float"
                                            Foreground="AliceBlue"
-                                           Margin="5">
-                <inputLayout:SfTextInputLayout.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1"
-                                         StartPoint="0.5,0">
-                        <GradientStop Color="#FFA9AFB4"
-                                      Offset="0" />
-                        <GradientStop Color="White"
-                                      Offset="1" />
-                    </LinearGradientBrush>
-                </inputLayout:SfTextInputLayout.BorderBrush>
+                                           Margin="5"
+                                           BorderBrush="White">
                 <TextBox x:Name="NombreTextBox"
                          Text="{Binding Path=ClienteSeleccionado.Nombre}"
                          FontSize="16"
