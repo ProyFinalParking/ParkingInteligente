@@ -8,10 +8,10 @@
     <Setting Name="PrecioMinuto" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">0.0315</Value>
     </Setting>
-    <Setting Name="PlazasMoto" Type="System.Int32" Scope="User">
+    <Setting Name="PlazasMotos" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">25</Value>
     </Setting>
-    <Setting Name="PlazaCoche" Type="System.Int32" Scope="User">
+    <Setting Name="PlazasCoches" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">120</Value>
     </Setting>
   </Settings>

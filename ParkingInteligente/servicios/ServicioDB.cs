@@ -832,7 +832,7 @@ namespace ParkingInteligente.servicios
             }
         }
 
-        // Comprueba si el vehiculo esta estacionado actualmente (salida == "")
+        // Comprueba si el vehiculo esta estacionado actualmente (no tiene fecha de salida)
         public static bool IsActiveParkedVehicle(string matricula)
         {
             bool estacionamientoActivo = false;
@@ -860,47 +860,6 @@ namespace ParkingInteligente.servicios
             }
 
             return estacionamientoActivo;
-        }
-
-        // Devuelve el vehiculo con estacionamiento sin finalizar segun la matricula 
-        // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public static Estacionamiento GetActiveParkedVehicle(string matricula)
-        {
-            Estacionamiento estacionamiento = new Estacionamiento();
-
-            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
-            {
-                connection.Open();
-
-                SqliteCommand command = connection.CreateCommand();
-                command.CommandText = @"SELECT * FROM estacionamientos 
-                                        WHERE matricula = @matricula 
-                                        AND salida = ''";
-
-                // Se Configura el tipo de valores
-                command.Parameters.Add("@matricula", SqliteType.Text);
-
-                // Se asignan los valores
-                command.Parameters["@matricula"].Value = matricula;
-
-                // Se ejecuta el SELECT
-                using (SqliteDataReader lector = command.ExecuteReader())
-                {
-                    if (lector.HasRows)
-                    {
-                        lector.Read();
-
-                        estacionamiento.IdEstacionamiento = Convert.ToInt32(lector["id_estacionamiento"]);
-                        estacionamiento.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                        estacionamiento.Matricula = (string)lector["matricula"];
-                        estacionamiento.Entrada = (string)lector["entrada"];
-                        estacionamiento.Salida = (string)lector["salida"];
-                        estacionamiento.Importe = Convert.ToInt32(lector["importe"]);
-                        estacionamiento.Tipo = (string)lector["tipo"];
-                    }
-                }
-            }
-            return estacionamiento;
         }
 
         // Devuelve el listado de Estacionamientos
@@ -942,7 +901,7 @@ namespace ParkingInteligente.servicios
         }
 
         // Devuelve el listado de Estacionamientos Activos (sin finalizar)
-        public static List<Estacionamiento> GetListActivesParkedVehicles()
+        public static List<Estacionamiento> GetListActiveParkedVehicles()
         {
             List<Estacionamiento> lista = new List<Estacionamiento>();
 
@@ -976,6 +935,44 @@ namespace ParkingInteligente.servicios
             }
 
             return lista;
+        }
+
+        // Devuelve el numero de Coches aparcados actualmente
+        public static int GetNumberParkedCars()
+        {
+            int cochesAparcados;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT COUNT(*) FROM estacionamientos WHERE salida = '' AND tipo='Coche'";
+
+                // Se ejecuta el SELECT
+                cochesAparcados = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return cochesAparcados;
+        }
+
+        // Devuelve el numero de Motos aparcadas actualmente
+        public static int GetNumberParkedMotorcycles()
+        {
+            int motosAparcados;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT COUNT(*) FROM estacionamientos WHERE salida = '' AND tipo='Moto'";
+
+                // Se ejecuta el SELECT
+                motosAparcados = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return motosAparcados;
         }
 
 

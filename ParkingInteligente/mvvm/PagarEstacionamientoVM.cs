@@ -42,7 +42,7 @@ namespace ParkingInteligente.mvvm
             EstacionamientoSeleccionado = new Estacionamiento();
 
             // Actualiza el listado al finalizar un estacionamiento
-            WeakReferenceMessenger.Default.Send(new ActualizarGridEstacionamientosMessage(ServicioDB.GetListActivesParkedVehicles()));
+            WeakReferenceMessenger.Default.Send(new ActualizarGridEstacionamientosMessage(ServicioDB.GetListActiveParkedVehicles()));
         }
 
         private double CalcularImporteEstacionamiento()

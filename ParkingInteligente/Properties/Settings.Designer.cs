@@ -41,27 +41,21 @@ namespace ParkingInteligente.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public int PlazasMoto {
+        public int PlazasMotos {
             get {
-                return ((int)(this["PlazasMoto"]));
-            }
-            set {
-                this["PlazasMoto"] = value;
+                return ((int)(this["PlazasMotos"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("120")]
-        public int PlazaCoche {
+        public int PlazasCoches {
             get {
-                return ((int)(this["PlazaCoche"]));
-            }
-            set {
-                this["PlazaCoche"] = value;
+                return ((int)(this["PlazasCoches"]));
             }
         }
     }

@@ -30,7 +30,7 @@ namespace ParkingInteligente.mvvm
 
         public ControlEstacionamientosVM()
         {
-            ParkingList = ServicioDB.GetListActivesParkedVehicles();
+            ParkingList = ServicioDB.GetListActiveParkedVehicles();
             servicio = new NavigationService();
             ParkingSelect = new Estacionamiento();
             CobrarFinalizarCommand = new RelayCommand(AbrirDialogoCobrarParking);
