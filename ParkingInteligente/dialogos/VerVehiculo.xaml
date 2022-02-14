@@ -15,12 +15,10 @@
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
-            <GradientStop Color="Gainsboro"
-                          Offset="0.11" />
-            <GradientStop Color="#FF727272"
-                          Offset="0.747" />
-            <GradientStop Color="#FFA0A0A0"
-                          Offset="0.427" />
+            <GradientStop Color="#FF555555"
+                          Offset="1" />
+            <GradientStop Color="#FF9B9B9B"
+                          Offset="0.088" />
         </LinearGradientBrush>
     </Window.Background>
     <Window.Resources>
@@ -163,8 +161,8 @@
             <!-- Matricula -->
             <inputLayout:SfTextInputLayout Hint="Matrícula"
                                            HintFloatMode="Float"
-                                           BorderBrush="#FFA9AFB4"
-                                           Foreground="#FFA9AFB4"
+                                           BorderBrush="White"
+                                           Foreground="AliceBlue"
                                            Margin="5">
 
                 <TextBox x:Name="MatriculaTextBox"
@@ -179,17 +177,9 @@
             <!-- Id del Cliente -->
             <inputLayout:SfTextInputLayout Hint="ID Cliente"
                                            HintFloatMode="Float"
+                                           BorderBrush="White"
                                            Foreground="AliceBlue"
                                            Margin="5">
-                <inputLayout:SfTextInputLayout.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1"
-                                         StartPoint="0.5,0">
-                        <GradientStop Color="#FFA9AFB4"
-                                      Offset="0" />
-                        <GradientStop Color="White"
-                                      Offset="1" />
-                    </LinearGradientBrush>
-                </inputLayout:SfTextInputLayout.BorderBrush>
 
                 <TextBox x:Name="IdClienteTextBox"
                          Text="{Binding Path=VehiculoSeleccionado.IdCliente}"
