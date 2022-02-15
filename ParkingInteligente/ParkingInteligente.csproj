@@ -338,12 +338,20 @@
     <Resource Include="assets\Car.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\Parking.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="assets\IconoEmpresa.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="assets\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\power.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Parking.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.7\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.7\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
