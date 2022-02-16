@@ -13,9 +13,12 @@ namespace ParkingInteligente.mvvm
         // Propiedad de Configuración de aplicaciones con el numero de plazas
         static readonly int plazasCoches = Properties.Settings.Default.PlazasCoches;
         static readonly int plazasMotos = Properties.Settings.Default.PlazasMotos;
+        static readonly string notasGuardadas = Properties.Settings.Default.NotasGuardadas;
 
         public InicioVM()
         {
+            FechaActual = DateTime.Now.ToLongDateString();
+            BlockNotas = notasGuardadas;
             ActualizarGraficos();
         }
 
@@ -47,9 +50,23 @@ namespace ParkingInteligente.mvvm
             set { SetProperty(ref plazasLibresCoches, value); }
         }
 
+        private string fechaActual;
+        public string FechaActual
+        {
+            get { return fechaActual; }
+            set { SetProperty(ref fechaActual, value); }
+        }
+
+        private string blockNotas;
+        public string BlockNotas
+        {
+            get { return blockNotas; }
+            set { SetProperty(ref blockNotas, value); }
+        }
+
         private void ActualizarGraficos()
         {
-            // Bucle infinito que actualiza el numero de plazas ocupadas, cada segundo
+            // Actualiza el numero de plazas ocupadas, consultando la BBDD
             PlazasOcupadasCoches = ServicioDB.GetNumberParkedCars();
             PlazasOcupadasMotos = ServicioDB.GetNumberParkedMotorcycles();
 

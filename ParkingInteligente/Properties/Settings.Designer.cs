@@ -58,5 +58,17 @@ namespace ParkingInteligente.Properties {
                 return ((int)(this["PlazasCoches"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("El cliente ID:563 ha olvidado su tarjeta de credito en el cajero automatico")]
+        public string NotasGuardadas {
+            get {
+                return ((string)(this["NotasGuardadas"]));
+            }
+            set {
+                this["NotasGuardadas"] = value;
+            }
+        }
     }
 }

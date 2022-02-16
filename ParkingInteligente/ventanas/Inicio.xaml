@@ -23,7 +23,7 @@
         <!-- Bloque de la derecha con las Notas -->
         <StackPanel DockPanel.Dock="Right">
             <TextBlock  x:Name="FechaTextBlock"
-                        Text="Martes 26-Enero-2022"
+                        Text="{Binding Path=FechaActual}"
                         HorizontalAlignment="Right"
                         Margin="5"
                         Foreground="Black"
@@ -32,6 +32,9 @@
                         FontSize="14" />
 
             <TextBox x:Name="NotasTextBox"
+                     Text="{Binding Path=BlockNotas}"
+                     TextWrapping="WrapWithOverflow"
+                     AcceptsReturn="True"
                      Height="400"
                      Width="250"
                      Margin="3" />

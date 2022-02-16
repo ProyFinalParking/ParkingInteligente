@@ -22,9 +22,7 @@ namespace ParkingInteligente.servicios
         /**************************************************************************************************************************** 
          * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
          * 
-         * TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
-         * 
-         * TODO: Eliminar los metodos inutilizados
+         * TODO: Eliminar los metodos inutilizados¿?
          * **************************************************************************************************************************/
 
         /*******************************************************
@@ -621,6 +619,31 @@ namespace ParkingInteligente.servicios
             }
 
             return existe;
+        }
+
+        // Comprueba si existe la Matricula en la tabla Vehiculos
+        public static int GetVehicleId(string matricula)
+        {
+            int id = 0;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT id_vehiculo FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                id = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return id;
         }
 
         // Devuelve la lista de Vehiculos
