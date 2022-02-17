@@ -27,6 +27,12 @@ namespace ParkingInteligente.dialogos
             InitializeComponent();
             vm = new AñadirVehiculoVM();
             this.DataContext = vm;
+
+            FotoMatricula.Source = vm.imagenPorDefecto();
+        }
+        private void FotoMatricula_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FotoMatricula.Source = vm.CargarImagen();
         }
 
         private void AceptarButton_Click(object sender, RoutedEventArgs e)

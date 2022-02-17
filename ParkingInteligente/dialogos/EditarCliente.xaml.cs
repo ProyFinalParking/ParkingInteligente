@@ -27,6 +27,12 @@ namespace ParkingInteligente.dialogos
             InitializeComponent();
             vm = new EditarClienteVM();
             this.DataContext = vm;
+
+            FotoCliente.Source = vm.imagenPorDefecto();
+        }
+        private void FotoCliente_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FotoCliente.Source = vm.CargarImagen();
         }
 
         private void AceptarButton_Click(object sender, RoutedEventArgs e)
