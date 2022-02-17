@@ -22,9 +22,7 @@ namespace ParkingInteligente.servicios
         /**************************************************************************************************************************** 
          * TODO: Ver la forma de controlar excepciones de SQLite, para devolver TRUE en caso de exito y FALSE en caso de error
          * 
-         * TODO: Crear los metodos que devuelvan el numero de coches y motos aparcadas, para comprobar si quedan plazas libres
-         * 
-         * TODO: Eliminar los metodos inutilizados
+         * TODO: Eliminar los metodos inutilizados¿?
          * **************************************************************************************************************************/
 
         /*******************************************************
@@ -623,6 +621,31 @@ namespace ParkingInteligente.servicios
             return existe;
         }
 
+        // Comprueba si existe la Matricula en la tabla Vehiculos
+        public static int GetVehicleId(string matricula)
+        {
+            int id = 0;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT id_vehiculo FROM vehiculos WHERE matricula = @matricula";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@matricula", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@matricula"].Value = matricula;
+
+                // Se ejecuta el SELECT
+                id = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return id;
+        }
+
         // Devuelve la lista de Vehiculos
         // Menos los Vehiculos Genericos 'Eliminado' y 'No Registrado'
         public static List<Vehiculo> GetListVehicles()
@@ -1100,20 +1123,20 @@ namespace ParkingInteligente.servicios
                     // Datos Clientes
                     command.CommandText = @"INSERT INTO 'clientes' ('id_cliente','nombre','documento','foto','edad','genero','telefono') 
                         VALUES (0,'No Registrado','0','',0,'',''),
-                                (1,'Acevedo Manríquez María Mireya','12358496A','URL Imagen 1',25,'Femenino','956124578'),
-                                (2, 'Aguilar Lorantes Irma', '32659815B', 'URL 2', 33, 'Femenino', '965234589'),
-                                (3, 'Alcoverde Martínez Roberto Antonio', '95123678C', 'URL 3', 49, 'Masculino', '654128935'),
-                                (4, 'Alvarado Mendoza Oscar', '56489520D', 'URL4', 65, 'Masculino', '784629514'),
-                                (5, 'Serina Byrd', '65841523H', 'URL 5', 62, 'Femenino', '645127895'),
-                                (6, 'Ursa Mcdowell', '62845951K', 'URL 6', 33, 'Femenino', '964513498'),
-                                (7, 'Channing Melton', '98156343O', 'URL 7', 54, 'Femenino', '651284231'),
-                                (8, 'Chantale Barrera', '83492154Y', 'URL 8', 24, 'Femenino', '679512354'),
-                                (9, 'Jonah Quinn', '65124578T', 'URL 9', 45, 'Masculino', '635951555'),
-                                (10, 'John Daniels', '95152648H', 'URL 10', 25, 'Masculino', '632145791'),
-                                (11, 'Alexander Lancaster', '01324807G', 'URL 11', 34, 'Masculino', '654123951'),
-                                (12, 'Hollee Pratt', '96234584R', 'URL 12', 41, 'Femenino', '653753159'),
-                                (13, 'Fernando Alonso', '95123648J', 'URL', 45, 'Masculino', '654789512'),
-                                (14, 'Juan Antonio Gonzalez Rodriguez', '26154859G', 'Foto', 44, 'Masculino', '651234895')";
+                                (1,'Acevedo Manríquez María Mireya','12358496A','https://proyparkint.blob.core.windows.net/imgparking/avatar06:11:41.jpg',35,'Mujer','956124578'),
+                                (2, 'Aguilar Lorantes Irma', '32659815B', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:13:24.jpg', 32, 'Mujer', '965234589'),
+                                (3, 'Alcoverde Martínez Roberto Antonio', '95123678C', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:14:28.jpg', 34, 'Hombre', '654128935'),
+                                (4, 'Alvarado Mendoza Oscar', '56489520D', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:23:51.jpg', 40, 'Hombre', '784629514'),
+                                (5, 'Serina Byrd', '65841523H', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:16:39.jpg', 39, 'Mujer', '645127895'),
+                                (6, 'Ursa Mcdowell', '62845951K', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:17:33.jpg', 30, 'Mujer', '964513498'),
+                                (7, 'Channing Melton', '98156343O', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:18:30.jpg', 40, 'Mujer', '651284231'),
+                                (8, 'Chantale Barrera', '83492154Y', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:19:27.jpg', 20, 'Mujer', '679512354'),
+                                (9, 'Jonah Quinn', '65124578T', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:24:40.jpg', 42, 'Hombre', '635951555'),
+                                (10, 'John Daniels', '95152648H', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:26:06.jpg', 33, 'Hombre', '632145791'),
+                                (11, 'Alexander Lancaster', '01324807G', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:27:45.jpg', 34, 'Hombre', '654123951'),
+                                (12, 'Hollee Pratt', '96234584R', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:20:20.jpg', 19, 'Mujer', '653753159'),
+                                (13, 'Fernando Alonso', '95123648J', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:28:15.jpg', 28, 'Hombre', '654789512'),
+                                (14, 'Juan Antonio Gonzalez Rodriguez', '26154859G', 'https://proyparkint.blob.core.windows.net/imgparking/avatar06:28:44.jpg', 38, 'Hombre', '651234895')";
                     command.ExecuteNonQuery();
 
                     // Datos Marcas

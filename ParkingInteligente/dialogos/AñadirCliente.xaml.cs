@@ -28,6 +28,13 @@ namespace ParkingInteligente.dialogos
             InitializeComponent();
             vm = new AñadirClienteVM();
             this.DataContext = vm;
+
+            FotoClienteImage.Source = vm.imagenPorDefecto();
+        }
+
+        private void FotoCliente_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FotoClienteImage.Source = vm.CargarImagen();
         }
 
         private void AceptarButton_Click(object sender, RoutedEventArgs e)
@@ -35,6 +42,5 @@ namespace ParkingInteligente.dialogos
             //Aqui llamamos al método para grabarlo en BD
             DialogResult = true;
         }
-
     }
 }

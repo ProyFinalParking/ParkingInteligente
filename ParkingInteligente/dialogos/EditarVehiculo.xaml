@@ -148,9 +148,9 @@
                 Height="140">
 
             <Image x:Name="FotoMatricula"
-                   Source="{Binding Path=VehiculoSeleccionado.Foto}"
                    Stretch="Fill"
-                   RenderTransformOrigin="0.5,0.5" />
+                   RenderTransformOrigin="0.5,0.5"
+                   MouseDown="FotoMatricula_MouseDown" />
         </Border>
 
         <StackPanel Grid.Column="1"
@@ -243,6 +243,7 @@
                                            Margin="5">
 
                 <TextBox x:Name="URLFotoTextBox"
+                         IsEnabled="False"
                          Text="{Binding Path=VehiculoSeleccionado.Foto}"
                          FontSize="16"
                          FontFamily="Source Code Pro"

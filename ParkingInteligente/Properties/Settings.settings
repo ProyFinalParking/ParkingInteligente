@@ -14,5 +14,8 @@
     <Setting Name="PlazasCoches" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">120</Value>
     </Setting>
+    <Setting Name="NotasGuardadas" Type="System.String" Scope="User">
+      <Value Profile="(Default)">El cliente ID:563 ha olvidado su tarjeta de credito en el cajero automatico</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

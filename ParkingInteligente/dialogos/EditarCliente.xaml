@@ -148,9 +148,9 @@
                 Height="140">
 
             <Image x:Name="FotoCliente"
-                   Source="{Binding Path=ClienteSeleccionado.Foto}"
                    Stretch="Fill"
-                   RenderTransformOrigin="0.5,0.5" />
+                   RenderTransformOrigin="0.5,0.5"
+                   MouseDown="FotoCliente_MouseDown"/>
         </Border>
         <StackPanel Grid.Column="1"
                     VerticalAlignment="Center">
@@ -233,6 +233,7 @@
                                            Margin="5">
 
                 <TextBox x:Name="URLImagenTextBox"
+                         IsEnabled="False"
                          Text="{Binding Path=ClienteSeleccionado.Foto}"
                          FontSize="16"
                          FontFamily="Source Code Pro"
