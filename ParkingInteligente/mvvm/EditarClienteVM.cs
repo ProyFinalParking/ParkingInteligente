@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ParkingInteligente.mvvm
@@ -98,7 +99,16 @@ namespace ParkingInteligente.mvvm
 
         public void EditarCliente()
         {
-            ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
+            if (!ServicioDB.IsExistsDocument(ClienteSeleccionado.Documento) && ClienteSeleccionado.Documento != "")
+            {
+                ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
+            }
+            else
+            {
+                MessageBox.Show("El campo DNI esta vacio o el DNI es igual que el de otro cliente", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }
     }
 }

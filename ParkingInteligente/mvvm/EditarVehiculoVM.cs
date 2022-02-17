@@ -109,9 +109,10 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                MessageBox.Show("La celda de matricula esta vacia o la matricula es igual a la de otro coche", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("El campo matricula esta vacio o la matricula es igual a la de otro coche", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
+            WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
         }
     }
 }
