@@ -58,7 +58,9 @@ namespace ParkingInteligente.mvvm
             BitmapImage bi = new BitmapImage();
 
             bi.BeginInit();
-            bi.UriSource = new Uri(VehiculoSeleccionado.Foto, UriKind.Absolute);
+            //TODO Descomentar cuando la BD tenga el campo foto y borrar la que acaba en relative.
+            //bi.UriSource = new Uri(VehiculoSeleccionado.Foto, UriKind.Absolute); 
+            bi.UriSource = new Uri(VehiculoSeleccionado.Foto, UriKind.Relative);
             bi.EndInit();
 
             return bi;
