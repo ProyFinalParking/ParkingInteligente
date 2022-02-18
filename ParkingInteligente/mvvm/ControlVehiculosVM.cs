@@ -13,7 +13,7 @@ namespace ParkingInteligente.mvvm
 {
     class ControlVehiculosVM : ObservableObject
     {
-        private NavigationService servicio;
+        private readonly NavigationService servicio;
 
         public RelayCommand AñadirNuevoVehiculoCommand { get; }
         public RelayCommand EditarVehiculoCommand { get; }
@@ -31,14 +31,8 @@ namespace ParkingInteligente.mvvm
         private List<Vehiculo> vehiculos;
         public List<Vehiculo> Vehiculos
         {
-            get
-            {
-                return vehiculos;
-            }
-            set
-            {
-                SetProperty(ref vehiculos, value);
-            }
+            get { return vehiculos; }
+            set { SetProperty(ref vehiculos, value); }
         }
 
         public ControlVehiculosVM()
@@ -79,7 +73,7 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                // TODO: Avisar de que hay que seleccionar un vehiculo
+                ServicioDialogos.ErrorMensaje("No ha seleccionado ningún vehículo.");
             }
         }
 
@@ -91,7 +85,7 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                // TODO: Avisar de que hay que seleccionar un vehiculo
+                ServicioDialogos.ErrorMensaje("No ha seleccionado ningún vehículo.");
             }
         }
 
@@ -102,16 +96,18 @@ namespace ParkingInteligente.mvvm
                 if (ServicioDB.IsVehicleParked(VehiculoSeleccionado.Matricula))
                 {
                     servicio.CargarDialogoEliminarVehiculo();
+
+                    // Resetea la selección
                     VehiculoSeleccionado = new Vehiculo();
                 }
                 else
                 {
-                    // TODO: Avisar de que el cliente tiene estacionamiento activo sin finalizar
+                    ServicioDialogos.ErrorMensaje("El vehicúculo seleccionado tiene un estaciónamiento sin finalizar.");
                 }
             }
             else
             {
-                // TODO: Avisar de que hay que seleccionar un vehiculo
+                ServicioDialogos.ErrorMensaje("No ha seleccionado ningún vehículo.");
             }
         }
 

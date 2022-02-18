@@ -54,11 +54,13 @@ namespace ParkingInteligente.mvvm
             if (ParkingSelect.IdEstacionamiento > 0)
             {
                 servicio.CargarDialogoPagarFinalizarParking();
+
+                // Resetea la selección
                 ParkingSelect = new Estacionamiento();
             }
             else
             {
-                // TODO: Avisar de que hay que seleccionar una Estacionamiento
+                ServicioDialogos.ErrorMensaje("No ha seleccionado ningún estacionamiento.");
             }
         }
 
