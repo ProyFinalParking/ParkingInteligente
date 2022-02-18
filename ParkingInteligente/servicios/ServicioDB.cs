@@ -724,8 +724,7 @@ namespace ParkingInteligente.servicios
             return lista;
         }
 
-        // Devuelve el vehiculo segun la matricula pasada de argumento
-        // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
+        // Comprueba si el coche tiene un estacionamiento activo
         public static bool IsVehicleParked(string matricula)
         {
             bool ispArked = false;
@@ -735,7 +734,7 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT COUNT(*) FROM vehiculos WHERE matricula = @matricula";
+                command.CommandText = "SELECT COUNT(*) FROM estacionamientos WHERE matricula = @matricula AND salida = ''";
 
                 // Se Configura el tipo de valores
                 command.Parameters.Add("@matricula", SqliteType.Text);

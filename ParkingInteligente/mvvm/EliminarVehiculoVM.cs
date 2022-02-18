@@ -41,8 +41,15 @@ namespace ParkingInteligente.mvvm
 
         public void EliminarVehiculo()
         {
-            ServicioDB.DeleteVehicle(docVehiculoOriginal);
-            WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
+            if (ServicioDB.IsVehicleParked(docVehiculoOriginal))
+            {
+                ServicioDB.DeleteVehicle(docVehiculoOriginal);
+                WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
+            }
+            else
+            {
+                ServicioDialogos.ErrorMensaje("El vehículo seleccionado tiene un estacionamiento sin finalizar.");
+            }
         }
     }
 }
