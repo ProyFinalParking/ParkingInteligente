@@ -48,7 +48,7 @@ namespace ParkingInteligente.mvvm
             VehiculoSeleccionado = new Vehiculo();
 
             VehiculoSeleccionado = WeakReferenceMessenger.Default.Send<VehiculoSeleccionadoRequestMessage>();
-            DocVehiculoOriginal = VehiculoSeleccionado.ToString();
+            DocVehiculoOriginal = VehiculoSeleccionado.Matricula.ToString();
 
             EditarVehiculoButton = new RelayCommand(EditarVehiculo);
         }

@@ -528,7 +528,7 @@ namespace ParkingInteligente.servicios
                                                             matricula = @matricula, 
                                                             id_marca = @id_marca,
                                                             modelo = @modelo,
-                                                            tipo = @tipo,
+                                                            tipo = @tipo
                                                             WHERE matricula = @matriculaOriginal";
 
                 // Se Configura el tipo de valores
