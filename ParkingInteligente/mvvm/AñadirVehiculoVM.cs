@@ -16,7 +16,6 @@ namespace ParkingInteligente.mvvm
 {
     class AñadirVehiculoVM : ObservableObject
     {
-        //TODO Existe un error al eliminar el vehiculo que añades nuevo
 
         public RelayCommand AñadirVehiculoButton { get; }
 
@@ -24,8 +23,8 @@ namespace ParkingInteligente.mvvm
         private readonly ComputerVisionService servicioComputerVision;
         private readonly AzureBlobStorage servicioAlmacenamiento;
 
-        private List<MarcaVehiculo> marcas;
-        public List<MarcaVehiculo> Marcas
+        private List<string> marcas;
+        public List<string> Marcas
         {
             get { return marcas; }
             set { SetProperty(ref marcas, value); }
@@ -42,7 +41,7 @@ namespace ParkingInteligente.mvvm
         public AñadirVehiculoVM()
         {
             NuevoVehiculo = new Vehiculo();
-            Marcas = ServicioDB.GetListVehicleBrands();
+            Marcas = CargarMarcas();
 
             servicioCustomVision = new CustomVisionService();
             servicioComputerVision = new ComputerVisionService();
@@ -105,13 +104,28 @@ namespace ParkingInteligente.mvvm
             if (!ServicioDB.IsExistsVehicle(NuevoVehiculo.Matricula) && nuevoVehiculo.Matricula != "")
             {
                 ServicioDB.InsertVehicle(NuevoVehiculo);
+                WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
             }
             else
             {
                 ServicioDialogos.ErrorMensaje("Debes insertar una foto para poder añadir un vehiculo");
             }
+        }
 
-            WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
+        private List<string> CargarMarcas()
+        {
+            List<MarcaVehiculo> listaObjetosMarca = ServicioDB.GetListVehicleBrands();
+            List<string> listaMarcas = new List<string>();
+
+            // La primera entrada esta en blanco, que es la opción por defecto
+            listaMarcas.Add("");
+
+            foreach (MarcaVehiculo m in listaObjetosMarca)
+            {
+                listaMarcas.Add(m.Marca);
+            }
+
+            return listaMarcas;
         }
     }
 }

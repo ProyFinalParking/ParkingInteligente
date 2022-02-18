@@ -454,7 +454,7 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM marcas";
+                command.CommandText = "SELECT * FROM marcas WHERE id_marca > 0";
 
                 // Se ejecuta el SELECT
                 using (SqliteDataReader lector = command.ExecuteReader())
