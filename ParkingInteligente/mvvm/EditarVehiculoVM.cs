@@ -34,7 +34,7 @@ namespace ParkingInteligente.mvvm
 
         private string docVehiculoOriginal;
 
-        public string DocVehiculoOriginal
+        public string MatVehiculoOriginal
         {
             get { return docVehiculoOriginal; }
             set { SetProperty(ref docVehiculoOriginal, value); }
@@ -48,7 +48,7 @@ namespace ParkingInteligente.mvvm
             VehiculoSeleccionado = new Vehiculo();
 
             VehiculoSeleccionado = WeakReferenceMessenger.Default.Send<VehiculoSeleccionadoRequestMessage>();
-            DocVehiculoOriginal = VehiculoSeleccionado.Matricula.ToString();
+            MatVehiculoOriginal = VehiculoSeleccionado.Matricula.ToString();
 
             EditarVehiculoButton = new RelayCommand(EditarVehiculo);
         }
@@ -107,11 +107,18 @@ namespace ParkingInteligente.mvvm
         {
             if(!ServicioDB.IsExistsVehicle(VehiculoSeleccionado.Matricula) && VehiculoSeleccionado.Matricula != "")
             {
-                ServicioDB.UpdateVehicle(VehiculoSeleccionado, DocVehiculoOriginal);
+                ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
             }
             else
             {
-                MessageBox.Show("El campo matricula esta vacio o la matricula es igual a la de otro coche", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if(vehiculoSeleccionado.Matricula == MatVehiculoOriginal)
+                {
+                    ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
+                }
+                else
+                {
+                    MessageBox.Show("El campo matricula esta vacio o la matricula es igual a la de otro coche", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
             WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));

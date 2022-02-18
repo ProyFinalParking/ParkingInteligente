@@ -24,6 +24,7 @@ namespace ParkingInteligente.mvvm
             set { SetProperty(ref contenido, value); }
         }
 
+
         public RelayCommand Inicio { get; }
         public RelayCommand ControlVehiculos { get; }
         public RelayCommand ControlClientes { get; }
@@ -60,6 +61,5 @@ namespace ParkingInteligente.mvvm
         {
             Contenido = servicio.CargarControlAparcamientos();
         }
-
     }
 }

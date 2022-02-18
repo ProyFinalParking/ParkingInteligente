@@ -72,10 +72,12 @@
             </syncfusion:NavigationItem>
             <syncfusion:NavigationItem ItemType="Separator"
                                        Height="30"/>
-            <syncfusion:NavigationItem Header="Manual De Usuario"
+            <syncfusion:NavigationItem x:Name="VerManual"
+                                       Header="Manual De Usuario"
                                        IsExpanded="True"
                                        IsSelected="False"
                                        Command="{Binding Path=VerManual}"
+                                       MouseDown="VerManual_MouseDown"
                                        Height="50">
                 <syncfusion:NavigationItem.Icon>
                     <Image Source="assets/help.png"

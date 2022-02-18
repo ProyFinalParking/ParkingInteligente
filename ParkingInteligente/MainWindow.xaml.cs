@@ -32,5 +32,10 @@ namespace ParkingInteligente
             vm = new MainWindowVM();
             this.DataContext = vm;
         }
+
+        private void VerManual_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Help.ShowHelp(null, "ayuda/AyudaParkDroid.chm", HelpNavigator.Topic);
+        }
     }
 }

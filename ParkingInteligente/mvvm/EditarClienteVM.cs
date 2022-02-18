@@ -102,14 +102,20 @@ namespace ParkingInteligente.mvvm
             if (!ServicioDB.IsExistsDocument(ClienteSeleccionado.Documento) && ClienteSeleccionado.Documento != "")
             {
                 ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
-                
             }
             else
             {
-                MessageBox.Show("El campo DNI esta vacio o el DNI es igual que el de otro cliente", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (clienteSeleccionado.Documento == docClienteOriginal)
+                {
+                    ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
+                }
+                else
+                {
+                    MessageBox.Show("El campo DNI esta vacio o el DNI es igual que el de otro cliente", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
 
+            WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
         }
     }
 }
