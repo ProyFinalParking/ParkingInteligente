@@ -566,7 +566,7 @@ namespace ParkingInteligente.servicios
                     SqliteCommand desvincularEstacionamientos = connection.CreateCommand();
                     desvincularEstacionamientos.CommandText = @"UPDATE estacionamientos
                     SET id_vehiculo = 1, matricula = '*******'
-                    WHERE matricula = @matricula))";
+                    WHERE matricula = @matricula";
 
                     desvincularEstacionamientos.Parameters.Add("@matricula", SqliteType.Text);
                     desvincularEstacionamientos.Parameters["@matricula"].Value = matricula;
@@ -1161,7 +1161,7 @@ namespace ParkingInteligente.servicios
                                 (7,1,'2648KHY',1,'Serie 3','Coche'),
                                 (8,1,'5564KIK',1,'Serie 5','Coche'),
                                 (9, 8, '8899KIO', 1, 'Serie 1', 'Coche'),
-                                (10,0,'',0,'','Moto')";
+                                (10,3,'8967KKY',37,'GSX','Moto')";
                     command.ExecuteNonQuery();
 
                     // Datos Estacionamientos
