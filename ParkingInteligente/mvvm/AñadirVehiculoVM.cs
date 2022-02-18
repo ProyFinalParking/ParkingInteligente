@@ -24,6 +24,13 @@ namespace ParkingInteligente.mvvm
         private readonly ComputerVisionService servicioComputerVision;
         private readonly AzureBlobStorage servicioAlmacenamiento;
 
+        private List<MarcaVehiculo> marcas;
+        public List<MarcaVehiculo> Marcas
+        {
+            get { return marcas; }
+            set { SetProperty(ref marcas, value); }
+        }
+
         private Vehiculo nuevoVehiculo;
 
         public Vehiculo NuevoVehiculo
@@ -35,6 +42,7 @@ namespace ParkingInteligente.mvvm
         public AñadirVehiculoVM()
         {
             NuevoVehiculo = new Vehiculo();
+            Marcas = ServicioDB.GetListVehicleBrands();
 
             servicioCustomVision = new CustomVisionService();
             servicioComputerVision = new ComputerVisionService();
