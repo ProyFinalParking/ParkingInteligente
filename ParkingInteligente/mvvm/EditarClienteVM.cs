@@ -44,7 +44,7 @@ namespace ParkingInteligente.mvvm
             ClienteSeleccionado = new Cliente();
 
             ClienteSeleccionado = WeakReferenceMessenger.Default.Send<ClienteSeleccionadoRequestMessage>();
-            DocClienteOriginal = ClienteSeleccionado.ToString();
+            DocClienteOriginal = ClienteSeleccionado.Documento.ToString();
 
             EditarClienteButton = new RelayCommand(EditarCliente);
         }
@@ -102,13 +102,14 @@ namespace ParkingInteligente.mvvm
             if (!ServicioDB.IsExistsDocument(ClienteSeleccionado.Documento) && ClienteSeleccionado.Documento != "")
             {
                 ServicioDB.UpdateClient(ClienteSeleccionado, DocClienteOriginal);
+                
             }
             else
             {
                 MessageBox.Show("El campo DNI esta vacio o el DNI es igual que el de otro cliente", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
             WeakReferenceMessenger.Default.Send(new ActualizarGridClientesMessage(ServicioDB.GetListClients()));
+
         }
     }
 }
