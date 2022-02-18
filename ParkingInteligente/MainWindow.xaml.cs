@@ -35,7 +35,7 @@ namespace ParkingInteligente
 
         private void VerManual_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Help.ShowHelp(null, "AyudaParkDroid.chm");
+            Help.ShowHelp(null, "AyudaParkingInteligente.chm");
         }
     }
 }
