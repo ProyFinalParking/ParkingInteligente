@@ -21,7 +21,7 @@
 
     <DockPanel LastChildFill="True">
         <!-- Bloque de la derecha con las Notas -->
-        <StackPanel DockPanel.Dock="Right">
+        <DockPanel DockPanel.Dock="Right" Width="250">
             <TextBlock  x:Name="FechaTextBlock"
                         Text="{Binding Path=FechaActual}"
                         HorizontalAlignment="Right"
@@ -29,22 +29,32 @@
                         Foreground="Black"
                         FontWeight="Bold"
                         FontFamily="Source Sans Pro Black"
-                        FontSize="14" />
-
-            <TextBox x:Name="NotasTextBox"
-                     Text="{Binding Path=BlockNotas}"
-                     TextWrapping="WrapWithOverflow"
-                     AcceptsReturn="True"
-                     Height="400"
-                     Width="250"
-                     Margin="3" />
+                        FontSize="14"
+                        DockPanel.Dock="Top"/>
 
             <TextBlock Text="© Copyright Licensed"
                        HorizontalAlignment="Right"
                        FontWeight="Bold"
                        FontFamily="Source Sans Pro Black"
-                       Foreground="Black" />
-        </StackPanel>
+                       Foreground="Black"
+                       DockPanel.Dock="Bottom"/>
+
+            <Button DockPanel.Dock="Bottom" 
+                    Margin="0,0,0,10"
+                    Content="Actualizar Gráficos"
+                    Command="{Binding Path=ActualizarGraficos}"/>
+            
+            <Button DockPanel.Dock="Bottom" 
+                    Margin="0,0,0,3"
+                    Content="Guardar Notas"
+                    Command="{Binding Path=GuardarNotas}"/>
+
+            <TextBox x:Name="NotasTextBox"
+                     Text="{Binding Path=BlockNotas}"
+                     TextWrapping="WrapWithOverflow"
+                     AcceptsReturn="True"
+                     Margin="3" />
+        </DockPanel>
 
         <!-- Bloque de la izquierda con la cabecera y los graficos -->
         <DockPanel DockPanel.Dock="Left"

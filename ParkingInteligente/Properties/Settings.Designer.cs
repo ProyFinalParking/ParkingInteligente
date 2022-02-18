@@ -61,7 +61,9 @@ namespace ParkingInteligente.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("El cliente ID:563 ha olvidado su tarjeta de credito en el cajero automatico")]
+        [global::System.Configuration.DefaultSettingValueAttribute("El cliente ID:522 se ha dejado la tarjeta de credito en el cajero automático.\r\n\r\n" +
+            "Se le avisó el 16/02/20222\r\n\r\nRecogió la tarjeta el 18/02/20222\r\n---------------" +
+            "---------------------")]
         public string NotasGuardadas {
             get {
                 return ((string)(this["NotasGuardadas"]));

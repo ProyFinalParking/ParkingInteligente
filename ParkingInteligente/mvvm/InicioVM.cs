@@ -1,10 +1,8 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using ParkingInteligente.servicios;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace ParkingInteligente.mvvm
 {
@@ -13,13 +11,19 @@ namespace ParkingInteligente.mvvm
         // Propiedad de Configuración de aplicaciones con el numero de plazas
         static readonly int plazasCoches = Properties.Settings.Default.PlazasCoches;
         static readonly int plazasMotos = Properties.Settings.Default.PlazasMotos;
-        static readonly string notasGuardadas = Properties.Settings.Default.NotasGuardadas;
+
+        public RelayCommand GuardarNotas { get; }
+        public RelayCommand ActualizarGraficos { get; }
 
         public InicioVM()
         {
+            BlockNotas = Properties.Settings.Default.NotasGuardadas;
             FechaActual = DateTime.Now.ToLongDateString();
-            BlockNotas = notasGuardadas;
-            ActualizarGraficos();
+
+            GuardarNotas = new RelayCommand(GuardarBlockNotas);
+            ActualizarGraficos = new RelayCommand(ActualizarDatosGraficos);
+
+            ActualizarDatosGraficos();
         }
 
         private int plazasOcupadasMotos;
@@ -64,7 +68,7 @@ namespace ParkingInteligente.mvvm
             set { SetProperty(ref blockNotas, value); }
         }
 
-        private void ActualizarGraficos()
+        private void ActualizarDatosGraficos()
         {
             // Actualiza el numero de plazas ocupadas, consultando la BBDD
             PlazasOcupadasCoches = ServicioDB.GetNumberParkedCars();
@@ -72,6 +76,12 @@ namespace ParkingInteligente.mvvm
 
             PlazasLibresMotos = plazasMotos - PlazasOcupadasMotos;
             PlazasLibresCoches = plazasCoches - PlazasOcupadasCoches;
+        }
+
+        private void GuardarBlockNotas()
+        {
+            Properties.Settings.Default.NotasGuardadas = BlockNotas;
+            Properties.Settings.Default.Save();
         }
 
     }

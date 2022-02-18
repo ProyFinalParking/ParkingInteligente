@@ -15,7 +15,12 @@
       <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="NotasGuardadas" Type="System.String" Scope="User">
-      <Value Profile="(Default)">El cliente ID:563 ha olvidado su tarjeta de credito en el cajero automatico</Value>
+      <Value Profile="(Default)">El cliente ID:522 se ha dejado la tarjeta de credito en el cajero automático.
+
+Se le avisó el 16/02/20222
+
+Recogió la tarjeta el 18/02/20222
+------------------------------------</Value>
     </Setting>
   </Settings>
 </SettingsFile>
