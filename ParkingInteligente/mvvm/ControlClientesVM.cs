@@ -89,7 +89,7 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+                ServicioDialogos.ErrorMensaje("No hay ningún cliente seleccionado.");
             }
         }
 
@@ -102,7 +102,7 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+                ServicioDialogos.ErrorMensaje("No hay ningún cliente seleccionado.");
             }
         }
 
@@ -115,15 +115,16 @@ namespace ParkingInteligente.mvvm
                 if (!ServicioDB.IsParked(ClienteSeleccionado.Documento))
                 {
                     servicio.CargarDialogoEliminarCliente();
+                    ClienteSeleccionado = new Cliente();
                 }
                 else
                 {
-                    // TODO: Avisar de que el Cliente tiene Estacionamientos Activos
+                    ServicioDialogos.ErrorMensaje("No se puede eliminar el Cliente.\nTiene estacionamientos activos.");
                 }
             }
             else
             {
-                // TODO: Avisar de que para Eliminar un Cliente, hay que seleccionar uno
+                ServicioDialogos.ErrorMensaje("No hay ningún cliente seleccionado.");
             }
         }
     }

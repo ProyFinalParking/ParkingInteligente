@@ -102,6 +102,7 @@ namespace ParkingInteligente.mvvm
                 if (ServicioDB.IsVehicleParked(VehiculoSeleccionado.Matricula))
                 {
                     servicio.CargarDialogoEliminarVehiculo();
+                    VehiculoSeleccionado = new Vehiculo();
                 }
                 else
                 {

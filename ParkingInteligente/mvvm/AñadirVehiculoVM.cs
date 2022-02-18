@@ -100,7 +100,7 @@ namespace ParkingInteligente.mvvm
             }
             else
             {
-                MessageBox.Show("Debes insertar una foto para poder añadir un vehiculo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ServicioDialogos.ErrorMensaje("Debes insertar una foto para poder añadir un vehiculo");
             }
 
             WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));

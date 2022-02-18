@@ -54,6 +54,7 @@ namespace ParkingInteligente.mvvm
             if (ParkingSelect.IdEstacionamiento > 0)
             {
                 servicio.CargarDialogoPagarFinalizarParking();
+                ParkingSelect = new Estacionamiento();
             }
             else
             {

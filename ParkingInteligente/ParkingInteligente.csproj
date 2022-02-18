@@ -223,6 +223,7 @@
     <Compile Include="servicios\Mensajes.cs" />
     <Compile Include="servicios\NavigationService.cs" />
     <Compile Include="servicios\ServicioDB.cs" />
+    <Compile Include="servicios\ServicioDialogos.cs" />
     <Compile Include="ventanas\ControlAparcamientos.xaml.cs">
       <DependentUpon>ControlAparcamientos.xaml</DependentUpon>
     </Compile>
