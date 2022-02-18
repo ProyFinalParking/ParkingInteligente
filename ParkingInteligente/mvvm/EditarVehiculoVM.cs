@@ -16,16 +16,9 @@ namespace ParkingInteligente.mvvm
 {
     class EditarVehiculoVM : ObservableObject
     {
-        //TODO Necesitamos que se guarden las URL de las imagenes en la DB, ya que si no la uri de la imagen no es correcta porque no existe.
-
         public RelayCommand EditarVehiculoButton { get; }
 
-        private readonly CustomVisionService servicioCustomVision;
-        private readonly ComputerVisionService servicioComputerVision;
-        private readonly AzureBlobStorage servicioAlmacenamiento;
-
         private Vehiculo vehiculoSeleccionado;
-
         public Vehiculo VehiculoSeleccionado
         {
             get { return vehiculoSeleccionado; }
@@ -33,37 +26,29 @@ namespace ParkingInteligente.mvvm
         }
 
         private string docVehiculoOriginal;
-
         public string MatVehiculoOriginal
         {
             get { return docVehiculoOriginal; }
             set { SetProperty(ref docVehiculoOriginal, value); }
         }
 
+        private List<string> marcas;
+        public List<string> Marcas
+        {
+            get { return marcas; }
+            set { SetProperty(ref marcas, value); }
+        }
+
         public EditarVehiculoVM()
         {
-            servicioCustomVision = new CustomVisionService();
-            servicioComputerVision = new ComputerVisionService();
-            servicioAlmacenamiento = new AzureBlobStorage();
+            Marcas = CargarMarcas();
+
             VehiculoSeleccionado = new Vehiculo();
 
             VehiculoSeleccionado = WeakReferenceMessenger.Default.Send<VehiculoSeleccionadoRequestMessage>();
             MatVehiculoOriginal = VehiculoSeleccionado.Matricula.ToString();
 
             EditarVehiculoButton = new RelayCommand(EditarVehiculo);
-        }
-
-        public BitmapImage imagenPorDefecto()
-        {
-            BitmapImage bi = new BitmapImage();
-
-            bi.BeginInit();
-            //TODO Descomentar cuando la BD tenga el campo foto y borrar la que acaba en relative.
-            //bi.UriSource = new Uri(VehiculoSeleccionado.Foto, UriKind.Absolute); 
-            bi.UriSource = new Uri(VehiculoSeleccionado.Foto, UriKind.Relative);
-            bi.EndInit();
-
-            return bi;
         }
 
         public string AbrirDialogo()
@@ -79,49 +64,33 @@ namespace ParkingInteligente.mvvm
             return nombreArchivo;
         }
 
-        public BitmapImage CargarImagen()
+        public void EditarVehiculo()
         {
-            string UrlImagenInterna;
-
-            UrlImagenInterna = AbrirDialogo();
-            if (UrlImagenInterna != "")
+            if (VehiculoSeleccionado.Matricula != "" && !ServicioDB.IsExistsVehicle(MatVehiculoOriginal))
             {
-                VehiculoSeleccionado.Foto = servicioAlmacenamiento.SubirImagen(UrlImagenInterna);
-                VehiculoSeleccionado.Matricula = servicioComputerVision.GetMatricula(VehiculoSeleccionado.Foto);
-                VehiculoSeleccionado.Tipo = servicioCustomVision.ComprobarVehiculo(VehiculoSeleccionado.Foto);
-                BitmapImage bi = new BitmapImage();
-
-                bi.BeginInit();
-                bi.UriSource = new Uri(UrlImagenInterna, UriKind.Absolute);
-                bi.EndInit();
-
-                return bi;
+                ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
+                WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
             }
             else
             {
-                return imagenPorDefecto();
+                ServicioDialogos.ErrorMensaje("La matricula está vacía o no existe ningún vehículo con la matricula: " + MatVehiculoOriginal);
             }
         }
 
-        public void EditarVehiculo()
+        private List<string> CargarMarcas()
         {
-            if(!ServicioDB.IsExistsVehicle(VehiculoSeleccionado.Matricula) && VehiculoSeleccionado.Matricula != "")
+            List<MarcaVehiculo> listaObjetosMarca = ServicioDB.GetListVehicleBrands();
+            List<string> listaMarcas = new List<string>();
+
+            // La primera entrada esta en blanco, que es la opción por defecto
+            listaMarcas.Add("");
+
+            foreach (MarcaVehiculo m in listaObjetosMarca)
             {
-                ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
-            }
-            else
-            {
-                if(vehiculoSeleccionado.Matricula == MatVehiculoOriginal)
-                {
-                    ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
-                }
-                else
-                {
-                    MessageBox.Show("El campo matricula esta vacio o la matricula es igual a la de otro coche", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                listaMarcas.Add(m.Marca);
             }
 
-            WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
+            return listaMarcas;
         }
     }
 }

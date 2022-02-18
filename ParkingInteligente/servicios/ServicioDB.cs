@@ -1004,6 +1004,16 @@ namespace ParkingInteligente.servicios
          *******************************************************/
         private static void CreateTablesIfNotExists()
         {
+            /*
+             * TODO: 
+             * 
+             * Antes de crear las tablas comprobar si existes. Si no existen, crearlas y añadir los datos genericos:
+             * Cliente No registrado, Marca No Registrada, Vehiculo No registrado y Eliminado.
+             * Los datos Genericos se necesitan para poder guardar historial de los estacionamientos de vehiculos no registrados
+             * y que tampoco se borren los estacionamientos al eliminar un cliente y sus vehiculos
+             * 
+             */
+
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
                 // Se conecta a la BBDD

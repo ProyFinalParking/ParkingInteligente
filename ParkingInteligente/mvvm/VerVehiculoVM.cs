@@ -20,10 +20,34 @@ namespace ParkingInteligente.mvvm
             set { SetProperty(ref vehiculoSeleccionado, value); }
         }
 
+        private List<string> marcas;
+        public List<string> Marcas
+        {
+            get { return marcas; }
+            set { SetProperty(ref marcas, value); }
+        }
+
         public VerVehiculoVM()
         {
+            Marcas = CargarMarcas();
             VehiculoSeleccionado = new Vehiculo();
             VehiculoSeleccionado = WeakReferenceMessenger.Default.Send<VehiculoSeleccionadoRequestMessage>();
+        }
+
+        private List<string> CargarMarcas()
+        {
+            List<MarcaVehiculo> listaObjetosMarca = ServicioDB.GetListVehicleBrands();
+            List<string> listaMarcas = new List<string>();
+
+            // La primera entrada esta en blanco, que es la opción por defecto
+            listaMarcas.Add("");
+
+            foreach (MarcaVehiculo m in listaObjetosMarca)
+            {
+                listaMarcas.Add(m.Marca);
+            }
+
+            return listaMarcas;
         }
     }
 }
