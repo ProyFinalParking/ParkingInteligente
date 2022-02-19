@@ -50,9 +50,11 @@ namespace ParkingInteligente.mvvm
         {
             Marcas = CargarMarcas();
 
-            Tipos = new List<string>();
-            Tipos.Add("Coche");
-            Tipos.Add("Moto");
+            Tipos = new List<string>
+            {
+                "Coche",
+                "Moto"
+            };
 
             VehiculoSeleccionado = new Vehiculo();
 

@@ -255,14 +255,16 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            Cliente c = new Cliente();
-                            c.Id = Convert.ToInt32(lector["id_cliente"]);
-                            c.Nombre = (string)lector["nombre"];
-                            c.Documento = (string)lector["documento"];
-                            c.Foto = (string)lector["foto"];
-                            c.Edad = Convert.ToInt32(lector["edad"]);
-                            c.Genero = (string)lector["genero"];
-                            c.Telefono = (string)lector["telefono"];
+                            Cliente c = new Cliente
+                            {
+                                Id = Convert.ToInt32(lector["id_cliente"]),
+                                Nombre = (string)lector["nombre"],
+                                Documento = (string)lector["documento"],
+                                Foto = (string)lector["foto"],
+                                Edad = Convert.ToInt32(lector["edad"]),
+                                Genero = (string)lector["genero"],
+                                Telefono = (string)lector["telefono"]
+                            };
 
                             lista.Add(c);
                         }
@@ -543,9 +545,11 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            MarcaVehiculo m = new MarcaVehiculo();
-                            m.Id = Convert.ToInt32(lector["id_marca"]);
-                            m.Marca = (string)lector["marca"];
+                            MarcaVehiculo m = new MarcaVehiculo
+                            {
+                                Id = Convert.ToInt32(lector["id_marca"]),
+                                Marca = (string)lector["marca"]
+                            };
 
                             lista.Add(m);
                         }
@@ -746,13 +750,15 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            Vehiculo v = new Vehiculo();
-                            v.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                            v.IdCliente = Convert.ToInt32(lector["id_cliente"]);
-                            v.Matricula = (string)lector["matricula"];
-                            v.IdMarca = Convert.ToInt32(lector["id_marca"]);
-                            v.Modelo = (string)lector["modelo"];
-                            v.Tipo = (string)lector["tipo"];
+                            Vehiculo v = new Vehiculo
+                            {
+                                IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]),
+                                IdCliente = Convert.ToInt32(lector["id_cliente"]),
+                                Matricula = (string)lector["matricula"],
+                                IdMarca = Convert.ToInt32(lector["id_marca"]),
+                                Modelo = (string)lector["modelo"],
+                                Tipo = (string)lector["tipo"]
+                            };
 
                             lista.Add(v);
                         }
@@ -787,13 +793,15 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            Vehiculo v = new Vehiculo();
-                            v.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                            v.IdCliente = Convert.ToInt32(lector["id_cliente"]);
-                            v.Matricula = (string)lector["matricula"];
-                            v.IdMarca = Convert.ToInt32(lector["id_marca"]);
-                            v.Modelo = (string)lector["modelo"];
-                            v.Tipo = (string)lector["tipo"];
+                            Vehiculo v = new Vehiculo
+                            {
+                                IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]),
+                                IdCliente = Convert.ToInt32(lector["id_cliente"]),
+                                Matricula = (string)lector["matricula"],
+                                IdMarca = Convert.ToInt32(lector["id_marca"]),
+                                Modelo = (string)lector["modelo"],
+                                Tipo = (string)lector["tipo"]
+                            };
 
                             lista.Add(v);
                         }
@@ -982,14 +990,16 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            Estacionamiento e = new Estacionamiento();
-                            e.IdEstacionamiento = Convert.ToInt32(lector["id_estacionamiento"]);
-                            e.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                            e.Matricula = (string)lector["matricula"];
-                            e.Entrada = (string)lector["entrada"];
-                            e.Salida = (string)lector["salida"];
-                            e.Importe = Convert.ToInt32(lector["importe"]);
-                            e.Tipo = (string)lector["tipo"];
+                            Estacionamiento e = new Estacionamiento
+                            {
+                                IdEstacionamiento = Convert.ToInt32(lector["id_estacionamiento"]),
+                                IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]),
+                                Matricula = (string)lector["matricula"],
+                                Entrada = (string)lector["entrada"],
+                                Salida = (string)lector["salida"],
+                                Importe = Convert.ToInt32(lector["importe"]),
+                                Tipo = (string)lector["tipo"]
+                            };
 
                             lista.Add(e);
                         }
@@ -1019,14 +1029,16 @@ namespace ParkingInteligente.servicios
                     {
                         while (lector.Read())
                         {
-                            Estacionamiento e = new Estacionamiento();
-                            e.IdEstacionamiento = Convert.ToInt32(lector["id_estacionamiento"]);
-                            e.IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]);
-                            e.Matricula = (string)lector["matricula"];
-                            e.Entrada = (string)lector["entrada"];
-                            e.Salida = (string)lector["salida"];
-                            e.Importe = Convert.ToInt32(lector["importe"]);
-                            e.Tipo = (string)lector["tipo"];
+                            Estacionamiento e = new Estacionamiento
+                            {
+                                IdEstacionamiento = Convert.ToInt32(lector["id_estacionamiento"]),
+                                IdVehiculo = Convert.ToInt32(lector["id_vehiculo"]),
+                                Matricula = (string)lector["matricula"],
+                                Entrada = (string)lector["entrada"],
+                                Salida = (string)lector["salida"],
+                                Importe = Convert.ToInt32(lector["importe"]),
+                                Tipo = (string)lector["tipo"]
+                            };
 
                             lista.Add(e);
                         }

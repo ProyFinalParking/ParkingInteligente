@@ -81,9 +81,11 @@ namespace ParkingInteligente.mvvm
             DatosCliente = "";
             Marca = "";
 
-            Tipos = new List<string>();
-            Tipos.Add("Coche");
-            Tipos.Add("Moto");
+            Tipos = new List<string>
+            {
+                "Coche",
+                "Moto"
+            };
 
             GuardarMarcaCommand = new RelayCommand(AddMarca);
             AddMarcaBtn = new RelayCommand(ActivarAddMarca);
