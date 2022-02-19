@@ -26,4 +26,5 @@ namespace ParkingInteligente.servicios
     {
         public ActualizarGridEstacionamientosMessage(List<Estacionamiento> valor) : base(valor) { }
     }
+
 }

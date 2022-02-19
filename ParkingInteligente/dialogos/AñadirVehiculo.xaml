@@ -7,7 +7,7 @@
         xmlns:inputLayout="clr-namespace:Syncfusion.UI.Xaml.TextInputLayout;assembly=Syncfusion.SfTextInputLayout.WPF"
         mc:Ignorable="d"
         Title="AñadirVehiculo"
-        Height="590"
+        Height="630"
         Width="800"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
@@ -129,6 +129,18 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        <Style x:Key="AddMarcaVisibilidad" TargetType="DockPanel">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ActivadoAddMarca}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=ActivadoAddMarca}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
 
     <StackPanel VerticalAlignment="Center">
@@ -166,20 +178,39 @@
         <TextBlock TextAlignment="Right" Margin="10,-18,10,10" Text="{Binding Path=DatosCliente}" FontWeight="Bold"></TextBlock>
 
         <!-- Marca -->
-        <StackPanel Orientation="Vertical"
-                        Margin="0,0,0,20">
-            <TextBlock Text="Marca"
-                           FontSize="14"
-                           Margin="15,0,0,5" Foreground="#FFF4F3F3"/>
+        <TextBlock Text="Marca" FontSize="14" Margin="15,0,0,5" Foreground="#FFF4F3F3"/>
+
+        <DockPanel Margin="5,0,5,20">
+
+            <Button DockPanel.Dock="Right" Width="100" Content="Añadir Marca" Command="{Binding Path=AddMarcaBtn}"></Button>
 
             <ComboBox x:Name="MarcaTextBox"
                           ItemsSource="{Binding Path=Marcas}"
                           SelectedIndex="{Binding Path=NuevoVehiculo.IdMarca}"
                           FontSize="16"
                           FontFamily="Source Code Pro"
-                          Margin="5,0"/>
-        </StackPanel>
+                          Margin="0,0,10,0"/>
+        </DockPanel>
 
+        <!-- Add Marca -->
+        <DockPanel Margin="5,0,5,20" Style="{StaticResource AddMarcaVisibilidad}">
+
+            <Button DockPanel.Dock="Right" Width="100" Height="25" Content="Guardar Marca" Margin="0,0,0,15"
+                    Command="{Binding Path=GuardarMarcaCommand}"></Button>
+
+            <inputLayout:SfTextInputLayout Hint="Añadir Marca"
+                                               HintFloatMode="Float"
+                                               BorderBrush="White"
+                                               Foreground="AliceBlue"
+                                               Margin="0,0,10,0">
+
+                <TextBox x:Name="AddMarcaTextBox"
+                             Text="{Binding Path=Marca}"
+                             FontSize="16"
+                             FontFamily="Source Code Pro"
+                             Template="{DynamicResource TextBoxControlTemplate1}" />
+            </inputLayout:SfTextInputLayout>
+        </DockPanel>
 
         <!-- Modelo -->
         <inputLayout:SfTextInputLayout Hint="Modelo"
@@ -205,7 +236,7 @@
 
             <ComboBox x:Name="TipoComboBox"
                           ItemsSource="{Binding Path=Tipos}"
-                          SelectedIndex="{Binding Path=NuevoVehiculo.Tipo}"
+                          SelectedItem="{Binding Path=NuevoVehiculo.Tipo}"
                           FontSize="16"
                           FontFamily="Source Code Pro"
                           Margin="5,0"/>

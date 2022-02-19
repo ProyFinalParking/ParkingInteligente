@@ -133,6 +133,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

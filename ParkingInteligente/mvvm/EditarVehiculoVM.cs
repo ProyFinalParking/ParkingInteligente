@@ -39,9 +39,20 @@ namespace ParkingInteligente.mvvm
             set { SetProperty(ref marcas, value); }
         }
 
+        private List<string> tipoVehiculos;
+        public List<string> Tipos
+        {
+            get { return tipoVehiculos; }
+            set { SetProperty(ref tipoVehiculos, value); }
+        }
+
         public EditarVehiculoVM()
         {
             Marcas = CargarMarcas();
+
+            Tipos = new List<string>();
+            Tipos.Add("Coche");
+            Tipos.Add("Moto");
 
             VehiculoSeleccionado = new Vehiculo();
 
@@ -66,7 +77,7 @@ namespace ParkingInteligente.mvvm
 
         public void EditarVehiculo()
         {
-            if (VehiculoSeleccionado.Matricula != "" && !ServicioDB.IsExistsVehicle(MatVehiculoOriginal))
+            if (VehiculoSeleccionado.Matricula != "" && ServicioDB.IsExistsVehicle(MatVehiculoOriginal))
             {
                 ServicioDB.UpdateVehicle(VehiculoSeleccionado, MatVehiculoOriginal);
                 WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
