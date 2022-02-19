@@ -17,12 +17,6 @@ namespace ParkingInteligente.mvvm
     class AñadirVehiculoVM : ObservableObject
     {
 
-        public RelayCommand AñadirVehiculoButton { get; }
-
-        private readonly CustomVisionService servicioCustomVision;
-        private readonly ComputerVisionService servicioComputerVision;
-        private readonly AzureBlobStorage servicioAlmacenamiento;
-
         private List<string> marcas;
         public List<string> Marcas
         {
@@ -31,34 +25,47 @@ namespace ParkingInteligente.mvvm
         }
 
         private Vehiculo nuevoVehiculo;
-
         public Vehiculo NuevoVehiculo
         {
             get { return nuevoVehiculo; }
             set { SetProperty(ref nuevoVehiculo, value); }
         }
 
+        private List<string> tipoVehiculos;
+        public List<string> Tipos
+        {
+            get { return tipoVehiculos; }
+            set { SetProperty(ref tipoVehiculos, value); }
+        }
+
+        private string documentoCliente;
+        public string DocumentoCliente
+        {
+            get { return documentoCliente; }
+            set
+            {
+                SetProperty(ref documentoCliente, value);
+                DatosCliente = ConsultarDatosCliente();
+            }
+        }
+
+        private string datosCliente;
+        public string DatosCliente
+        {
+            get { return datosCliente; }
+            set { SetProperty(ref datosCliente, value); }
+        }
+
         public AñadirVehiculoVM()
         {
             NuevoVehiculo = new Vehiculo();
             Marcas = CargarMarcas();
+            DocumentoCliente = "";
+            DatosCliente = "";
 
-            servicioCustomVision = new CustomVisionService();
-            servicioComputerVision = new ComputerVisionService();
-            servicioAlmacenamiento = new AzureBlobStorage();
-
-            AñadirVehiculoButton = new RelayCommand(AñadirVehiculo);
-        }
-
-        public BitmapImage imagenPorDefecto()
-        {
-            BitmapImage bi = new BitmapImage();
-
-            bi.BeginInit();
-            bi.UriSource = new Uri("/assets/IconoEmpresa.jpg", UriKind.Relative);
-            bi.EndInit();
-
-            return bi;
+            Tipos = new List<string>();
+            Tipos.Add("Coche");
+            Tipos.Add("Moto");
         }
 
         public string AbrirDialogo()
@@ -74,42 +81,39 @@ namespace ParkingInteligente.mvvm
             return nombreArchivo;
         }
 
-        public BitmapImage CargarImagen()
+        public bool AddVehiculo()
         {
-            string UrlImagenInterna;
+            bool anyadido = false;
 
-            UrlImagenInterna = AbrirDialogo();
-            if (UrlImagenInterna != "")
+            // Obtiene la ID del cliente segun su Documento de Identidad
+            NuevoVehiculo.IdCliente = ServicioDB.GetIdClient(DocumentoCliente);
+
+            if (nuevoVehiculo.Matricula != "")
             {
-                NuevoVehiculo.Foto = servicioAlmacenamiento.SubirImagen(UrlImagenInterna);
-                NuevoVehiculo.Matricula = servicioComputerVision.GetMatricula(NuevoVehiculo.Foto);
-                NuevoVehiculo.Tipo = servicioCustomVision.ComprobarVehiculo(NuevoVehiculo.Foto);
-
-                BitmapImage bi = new BitmapImage();
-
-                bi.BeginInit();
-                bi.UriSource = new Uri(UrlImagenInterna, UriKind.Absolute);
-                bi.EndInit();
-
-                return bi;
+                if (!ServicioDB.IsExistsVehicle(NuevoVehiculo.Matricula))
+                {
+                    if (ServicioDB.IsExistsClientId(NuevoVehiculo.IdCliente) && NuevoVehiculo.IdCliente != 0)
+                    {
+                        ServicioDB.InsertVehicle(NuevoVehiculo);
+                        WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
+                        anyadido = true;
+                    }
+                    else
+                    {
+                        ServicioDialogos.ErrorMensaje("No existe el usario con el documento indicado.");
+                    }
+                }
+                else
+                {
+                    ServicioDialogos.ErrorMensaje("Ya existe un coche registrado con esta matrícula.");
+                }
             }
             else
             {
-                return imagenPorDefecto();
+                ServicioDialogos.ErrorMensaje("Debes introducir la matrícula del coche");
             }
-        }
 
-        public void AñadirVehiculo()
-        {
-            if (!ServicioDB.IsExistsVehicle(NuevoVehiculo.Matricula) && nuevoVehiculo.Matricula != "")
-            {
-                ServicioDB.InsertVehicle(NuevoVehiculo);
-                WeakReferenceMessenger.Default.Send(new ActualizarGridVehiculosMessage(ServicioDB.GetListVehicles()));
-            }
-            else
-            {
-                ServicioDialogos.ErrorMensaje("Debes insertar una foto para poder añadir un vehiculo");
-            }
+            return anyadido;
         }
 
         private List<string> CargarMarcas()
@@ -126,6 +130,27 @@ namespace ParkingInteligente.mvvm
             }
 
             return listaMarcas;
+        }
+
+        private string ConsultarDatosCliente()
+        {
+            string datos = "";
+
+            if (DocumentoCliente != "")
+            {
+                Cliente c = ServicioDB.GetClientByDocument(DocumentoCliente);
+
+                if (c.Nombre != "")
+                {
+                    datos = c.GetDataString();
+                }
+                else
+                {
+                    datos = "Cliente no encontrado";
+                }
+            }
+
+            return datos;
         }
     }
 }

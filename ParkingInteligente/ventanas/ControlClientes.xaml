@@ -9,6 +9,7 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800">
+
     <UserControl.Resources>
         <ControlTemplate x:Key="TextBoxControlTemplate1"
                          TargetType="{x:Type TextBox}">
@@ -117,16 +118,19 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        <Style TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HaySeleccion}" Value="False">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=HaySeleccion}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
-    <UserControl.Background>
-        <LinearGradientBrush EndPoint="0.5,1"
-                             StartPoint="0.5,0">
-            <GradientStop Color="#FFC5C5C5"
-                          Offset="0" />
-            <GradientStop Color="#FFBBB9B9"
-                          Offset="1" />
-        </LinearGradientBrush>
-    </UserControl.Background>
 
     <UserControl.DataContext>
         <local1:ControlClientesVM />
@@ -155,7 +159,7 @@
             </syncfusion:SfDataGrid.Effect>
         </syncfusion:SfDataGrid>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Background="#FFC5C5C5">
 
             <Button x:Name="DeleteClientButton"
                     Margin="5"
@@ -180,11 +184,36 @@
                     Content="Ver Cliente"
                     Command="{Binding Path=VerClienteCommand}"
                     Template="{DynamicResource ButtonControlTemplate1}" />
-            
+
             <Image VerticalAlignment="Center"
                    x:Name="ClientImage"
                    Margin="5"
                    Source="{Binding Path=ClienteSeleccionado.Foto}" />
+
+
+            <!-- Vehiculo Registrados -->
+            <Viewbox>
+                <TextBlock FontWeight="Bold" Margin="5,10,5,15">
+                    <!-- Texto 'invisible' para igualar el tamaño de texto adaptable entre Vehiculos y Estacionamientos -->
+                <Run Text="Estacionamientos" Foreground="#FFC5C5C5"/>
+                    <LineBreak/>
+                <Run Text="Vehículos"/>
+                <LineBreak/>
+                <Run Text="Registrados: " />
+                <Run Text="{Binding Path=NumVehiculosRegistrados}"></Run>
+                </TextBlock>
+            </Viewbox>
+
+            <!-- Estacionamientos Activos -->
+            <Viewbox>
+                <TextBlock FontWeight="Bold" Margin="5,0,5,15">
+                <Run Text="Estacionamientos"/>
+                <LineBreak/>
+                <Run Text="Activos: "/>
+                <Run Text="{Binding Path=NumEstacionamientosActivos}"></Run>
+                </TextBlock>
+            </Viewbox>
+
         </StackPanel>
     </Grid>
 </UserControl>

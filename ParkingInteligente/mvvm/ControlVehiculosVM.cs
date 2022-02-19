@@ -52,6 +52,9 @@ namespace ParkingInteligente.mvvm
             WeakReferenceMessenger.Default.Register<ActualizarGridVehiculosMessage>(this, (r, m) =>
             {
                 Vehiculos = m.Value;
+
+                // Se resetea el vehiculo seleccionado para evitar errores
+                VehiculoSeleccionado = new Vehiculo();
             });
 
             AñadirNuevoVehiculoCommand = new RelayCommand(AbrirDialogoNuevoVehiculo);

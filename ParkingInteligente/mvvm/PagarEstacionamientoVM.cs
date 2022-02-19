@@ -12,7 +12,6 @@ namespace ParkingInteligente.mvvm
         public RelayCommand PagarFinalizarButton { get; }
 
         private Estacionamiento estacionamientoSeleccionado;
-
         public Estacionamiento EstacionamientoSeleccionado
         {
             get { return estacionamientoSeleccionado; }

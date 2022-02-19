@@ -83,5 +83,10 @@ namespace ParkingInteligente.modelo
             return "Cliente{" + "nombre=" + Nombre + ", documento=" + Documento + ", edad="
                 + Edad + ", genero=" + Genero + ", telefono=" + Telefono + '}';
         }
+
+        public string GetDataString()
+        {
+            return Nombre + " (" + Genero + ", " + Edad + ")";
+        }
     }
 }

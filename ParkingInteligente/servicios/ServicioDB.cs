@@ -182,23 +182,51 @@ namespace ParkingInteligente.servicios
             return existe;
         }
 
-        // Devuelve la ID del Cliente (0 en caso de que no exista)
-        public static int GetIdClient(string documento)
+        // Comprueba si existe el documento en la tabla Clientes
+        public static bool IsExistsClientId(int id)
         {
-            int idCliente = 0;
+            bool existe = false;
 
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
             {
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT id_cliente FROM clientes WHERE docomento = @docomento";
+                command.CommandText = "SELECT COUNT(*) FROM clientes WHERE id_cliente = @id";
 
                 // Se Configura el tipo de valores
-                command.Parameters.Add("@docomento", SqliteType.Text);
+                command.Parameters.Add("@id", SqliteType.Text);
 
                 // Se asignan los valores
-                command.Parameters["@docomento"].Value = documento;
+                command.Parameters["@id"].Value = id;
+
+                // Se ejecuta el SELECT
+                if (Convert.ToInt32(command.ExecuteScalar()) > 0)
+                {
+                    existe = true;
+                }
+            }
+
+            return existe;
+        }
+
+        // Devuelve la ID del Cliente (0 en caso de que no exista)
+        public static int GetIdClient(string documento)
+        {
+            int idCliente;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT id_cliente FROM clientes WHERE documento = @documento";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@documento", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@documento"].Value = documento;
 
                 // Se ejecuta el SELECT
                 idCliente = Convert.ToInt32(command.ExecuteScalar());
@@ -246,10 +274,11 @@ namespace ParkingInteligente.servicios
             return lista;
         }
 
-        // Devuelve El cliente segun la ID
+        // Devuelve El cliente segun el documento
         // En caso de que no exista, devolvera el objeto vacio (string "" y int 0)
-        public static Cliente GetClientById(int id)
+        public static Cliente GetClientByDocument(string doc)
         {
+            // Se instancia cliente vacio para evitar errores de nulos
             Cliente cliente = new Cliente();
 
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
@@ -257,13 +286,13 @@ namespace ParkingInteligente.servicios
                 connection.Open();
 
                 SqliteCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM clientes WHERE id_cliente = @idCliente";
+                command.CommandText = "SELECT * FROM clientes WHERE documento = @doc";
 
                 // Se Configura el tipo de valores
-                command.Parameters.Add("@idCliente", SqliteType.Text);
+                command.Parameters.Add("@doc", SqliteType.Text);
 
                 // Se asignan los valores
-                command.Parameters["@idCliente"].Value = id;
+                command.Parameters["@doc"].Value = doc;
 
                 // Se ejecuta el SELECT
                 using (SqliteDataReader lector = command.ExecuteReader())
@@ -315,6 +344,57 @@ namespace ParkingInteligente.servicios
             }
 
             return existe;
+        }
+
+        public static int GetNumClientVehicles(int idCliente)
+        {
+            int numVehiculos;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = @"Select COUNT(*) FROM vehiculos 
+                                        WHERE id_cliente = @id";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@id", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@id"].Value = idCliente;
+
+                // Se ejecuta el SELECT
+                numVehiculos = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return numVehiculos;
+        }
+
+        public static int GetNumClientParkedVehicles(int idCliente)
+        {
+            int numVehiculos;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + nombreBD))
+            {
+                connection.Open();
+
+                SqliteCommand command = connection.CreateCommand();
+                command.CommandText = @"Select COUNT(*) FROM estacionamientos 
+                    WHERE id_vehiculo IN (SELECT id_vehiculo FROM vehiculos 
+                        WHERE id_cliente = @id) AND salida = ''";
+
+                // Se Configura el tipo de valores
+                command.Parameters.Add("@id", SqliteType.Text);
+
+                // Se asignan los valores
+                command.Parameters["@id"].Value = idCliente;
+
+                // Se ejecuta el SELECT
+                numVehiculos = Convert.ToInt32(command.ExecuteScalar());
+            }
+
+            return numVehiculos;
         }
 
         /*******************************************************
@@ -751,8 +831,6 @@ namespace ParkingInteligente.servicios
 
             return ispArked;
         }
-
-
 
         /*******************************************************
             METODOS RELACIONADOS CON EL ESTACIONAMIENTO

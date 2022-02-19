@@ -20,29 +20,53 @@ namespace ParkingInteligente.mvvm
         public Cliente ClienteSeleccionado
         {
             get { return clienteSeleccionado; }
-            set { SetProperty(ref clienteSeleccionado, value); }
+            set
+            {
+                SetProperty(ref clienteSeleccionado, value);
+
+                if (ClienteSeleccionado != null)
+                {
+                    NumVehiculosRegistrados = ServicioDB.GetNumClientVehicles(ClienteSeleccionado.Id);
+                    NumEstacionamientosActivos = ServicioDB.GetNumClientParkedVehicles(ClienteSeleccionado.Id);
+
+                    HaySeleccion = true;
+                }
+            }
         }
 
         private Cliente nuevoCliente;
-
         public Cliente NuevoCliente
         {
             get { return nuevoCliente; }
             set { SetProperty(ref nuevoCliente, value); }
         }
 
-
         private List<Cliente> clientes;
         public List<Cliente> Clientes
         {
-            get
-            {
-                return clientes;
-            }
-            set
-            {
-                SetProperty(ref clientes, value);
-            }
+            get { return clientes; }
+            set { SetProperty(ref clientes, value); }
+        }
+
+        private bool haySeleccion;
+        public bool HaySeleccion
+        {
+            get { return haySeleccion; }
+            set { SetProperty(ref haySeleccion, value); }
+        }
+
+        private int numVehiculosRegistrados;
+        public int NumVehiculosRegistrados
+        {
+            get { return numVehiculosRegistrados; }
+            set { SetProperty(ref numVehiculosRegistrados, value); }
+        }
+
+        private int numEstacionamientosActivos;
+        public int NumEstacionamientosActivos
+        {
+            get { return numEstacionamientosActivos; }
+            set { SetProperty(ref numEstacionamientosActivos, value); }
         }
 
         public RelayCommand AñadirNuevoClienteCommand { get; }
@@ -55,6 +79,7 @@ namespace ParkingInteligente.mvvm
             Clientes = ServicioDB.GetListClients();
             servicio = new NavigationService();
             ClienteSeleccionado = new Cliente();
+            HaySeleccion = false;
 
             WeakReferenceMessenger.Default.Register<ControlClientesVM, ClienteSeleccionadoRequestMessage>(this, (r, m) =>
             {
@@ -116,6 +141,7 @@ namespace ParkingInteligente.mvvm
                 {
                     servicio.CargarDialogoEliminarCliente();
                     ClienteSeleccionado = new Cliente();
+                    HaySeleccion = false;
                 }
                 else
                 {
